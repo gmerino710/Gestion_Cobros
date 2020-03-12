@@ -1,0 +1,88 @@
+ <hr>
+    <h3>Selecion de Permisos</h3>
+    <?php foreach($menu as $item):?>
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="<?=$item['id_menu'];?>" name="<?=$item['id_menu'];?>">
+      <label class="custom-control-label" for="<?=$item['id_menu'];?>"><?=$item['nombre_menu'];?></label>
+    </div>
+    
+    <?php endforeach;?>
+
+    insertar Permisos<a href="<?=base_url();?>/roles/<?=$item['id_rol'];?>" >
+
+    <!-- Modal para persmisos-->
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear Rol</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <?= form_open('roles/permissions');?>
+        <?php echo form_error('usuario'); ?>
+   
+        <h3>Selecion de Permisos</h3>
+    <?php foreach($menu as $item):?>
+    <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="<?=$item['id_menu'];?>" name='id_menu[]' value="<?=$item['id_menu'];?>">
+        <label class="custom-control-label" for="<?=$item['id_menu'];?>"><?=$item['nombre_menu'];?></label>
+      </div>
+    <?php endforeach;?>
+      <div class="modal-footer">
+      <?php foreach($roles as $item):?>
+        <button type="submit" class="btn btn-primary" value="<?=$item['id_rol'];?>" name="save">Enviar</button>
+        <?php endforeach;?>
+      </div>
+    <?=form_close();?>  
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i  title="Usuario" class="fas fa-user-tie"></i>
+         
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+            <div class="media">
+                <div class="media-body">
+                    <?= img(array('src' => url_logo($this->usuario['logo']),
+                  'class'=> 'img-size-50 mr-3 img-circle',
+                  'alt'=> 'Imagen del Usuario'));
+                    ?>
+                <p>    
+               <?php if(isset($this->usuario['usuario_empresa'])):?> 
+                      <?=$this->usuario['usuario_empresa']['perfil']['nombre_perfil'];?>
+                    <?php else :?>
+                      <?=$this->usuario['rol']['nombre_rol'];?>
+                    <?php endif;?>
+                </p>
+               </div>
+               <div class="container">
+                    <!-- Validacion de Foto de usuario--->
+                  
+                      <!-- Validacion de Foto de la hora --->
+                    <?php if (!isset($this->usuario['usuario_empresa'])):?> 
+      
+                      <small>Ult. Acceso: <?=$this->usuario['ultimo_acceso']; ?></small>
+                    <?php endif;?>
+                  <!-- salida de Foto de la hora --->
+                    <?php if (isset($this->usuario['usuario_empresa'])):?> 
+                      <small> <?=anchor('empresa/salir', 'Salir'); ?></small>
+                    <?php else:?> 
+                <?= anchor('inicio/salir', 'Salir');?>
+                    <?php endif;?>
+
+                </div>  
+            </div>
+          </a>
+        </div>
+        </li>

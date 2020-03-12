@@ -27,7 +27,7 @@ class inicio extends CI_Controller
             if ($existe) {
                 $estado = $this->usuario_model->obtener_estado($existe['id_estado_usuario']);
                 if ($estado['id_estado_usuario'] == 1) {
-                    if ($existe['permiso_login'] == 'web' || $existe['permiso_login'] == 'ambos') {
+                    if ($existe['permiso_login'] == 'web') {
                         $existe['rol'] = $this->usuario_model->obtener_rol($existe['id_rol']);
                         $this->usuario_model->registrar_login($existe['usuario'], $existe['id_usuario']);
                         levantar_login($existe);

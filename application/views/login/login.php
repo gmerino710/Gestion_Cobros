@@ -31,16 +31,11 @@
 
 <body class="hold-transition login-page">
     <div class="login-box">
-        <div class="login-logo">
-            <!--<a href="../../index2.html"><b>Sistema</b> SMTAL</a>-->
-            <?php echo img(array('src' => 'asset/images/logo_empresa.jpg',
-    'width'                                => '100%')
-); ?>
-        </div>
-        <!-- /.login-logo -->
-        <div class="login-box-body">
-            <p class="login-box-msg">Ingreso al Sistema</p>
-            <?php echo form_open();?>
+     
+    <div class="card">
+        <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+            <?=form_open();?>
                 <?php if($error):  ?>
                     <div class="form-group has-error">
                     <?php echo $error; ?>
@@ -65,11 +60,8 @@
                             </div>
                             <!-- /.col -->
                         </div>
-                        <?php
-echo form_close();
-?>
-                            <!-- /.social-auth-links -->
-                            <!--<a href="#">I forgot my password</a><br>-->
+                        <?form_close();?>
+             </div>             
         </div>
         <!-- /.login-box-body -->
     </div>

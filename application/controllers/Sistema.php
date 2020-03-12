@@ -6,7 +6,7 @@ class sistema extends MY_Controller
 
     public function index()
     {
-        $this->titulo     = 'Hola perro';
+        $this->titulo     = 'Bienvenido';
         $this->sub_titulo = ' ' . $this->usuario['nombre'];
         //$this->js[]='dashboard.js';
         //$this->data['can_productos']=$this->productos_model->obtener_cantidad($this->usuario['id_usuario']);

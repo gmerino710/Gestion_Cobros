@@ -144,7 +144,8 @@ $autoload['language'] = array();
 $autoload['model'] = array('usuario_model',
     'param_model',
     'general_model',
-
     'mante_usuario_model',
+    'Model_general',
+    'Parametros_model'
 
 );
