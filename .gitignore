@@ -4,5 +4,7 @@ onu/*
 asset/tmp/*
 asset/images/perfiles/*
 listas_inter/*
+asset/plugins/*
+asset/build/*
 
 nana/*
