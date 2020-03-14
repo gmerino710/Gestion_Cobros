@@ -33,15 +33,22 @@ class Model_general extends CI_Model{
         }
 
         
-        
+      
         
     }
-
+ 
     public function insert_rol_menu ($id_rol,$id_menu)
     {
-        $query="insert into catag_menu_rol values($id_rol,$id_menu)";
+        $this->db->delete('catag_menu_rol', array('id_rol' => $id_rol));
 
-		$this->db->query($query);
+        foreach ($id_menu as $key => $value) {
+
+            
+            $query="insert into catag_menu_rol values($id_rol,$key)";
+            
+            $this->db->query($query);# code...
+        }
+       
     }
 
     public function insert_rol ($data)
@@ -122,6 +129,16 @@ public function Update_user ($data,$id)
     $this->db -> set ($data); 
     $this->db-> where ( 'id_usuario' ,  $id ); 
     $this->db-> update ( 'catag_usuarios' );
+}
+
+
+//---------------------------------Eliminar Elementos de y acutalizar------------------------------------------------------------------------------
+
+public function destroy_create_permisso ($id)
+{
+
+    $this->db->where($id);
+
 }
 
 

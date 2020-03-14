@@ -20,7 +20,7 @@
                         <div class="custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="<?=$item['id_menu'];?>" name='id_menu[]' value="<?=$item['id_menu'];?>"
                             
-                            <?=set_checkbox('id_menu[]', $item['id_menu'],true ); ?>
+                            
                             
                             >
                             <label class="custom-control-label" for="<?=$item['id_menu'];?>"><?=$item['nombre_menu'];?></label>

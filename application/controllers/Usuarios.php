@@ -27,21 +27,47 @@ class Usuarios extends MY_Controller
         {
           $usuario = $this->input->post("usuario");
           $contraseña=  $this->input->post("clave");
+          $confirmacion=  $this->input->post("conf");
           $Cargo= $this->input->post("nombre");
           $rol= $this->input->post("rol");
           $estado= $this->input->post("estados");
 
-          $data = array(
-            'usuario'=>$usuario,
-            'clave' =>encriptar( $contraseña),
-            'nombre'=>$Cargo,
-            'id_rol'=>$rol,
-            'id_estado_usuario' =>$estado,
-            'permiso_login'=>'web'
-          );
+          //------------------------------------------------------
+          //clave
+          $this->form_validation->set_rules('clave','Usuario','required');
+          //contras
+          $this->form_validation->set_rules('clave','Contraseña','required');
+          // valida sin son iguales
+          $this->form_validation->set_rules('conf',' Contraseña ','math[clave]',array(
+            'math' =>'Contraseña no coinciden'
 
-          $this->Model_general->Insert_user($data);
-          redirect('/usuarios');
+          ));
+
+          if ($this->form_validation->run()==True) {
+            $data = array(
+              'usuario'=>$usuario,
+              'clave' =>encriptar( $contraseña),
+              'nombre'=>$Cargo,
+              'id_rol'=>$rol,
+              'id_estado_usuario' =>$estado,
+              'permiso_login'=>'web'
+            );
+  
+            $this->Model_general->Insert_user($data);
+            $this->session->set_flashdata('item','Usuario Registrado');
+            redirect('/usuarios');
+          } else {
+            $data['roles']= $this->Model_general->get_rol();
+
+            $data['estados']= $this->Model_general->Get_estado_usuario();
+
+            $this->titulo     = 'Nuevo usuario';
+            $this->vista = 'formu/Perfiles/Nuevo_registro_view';
+            $this->load->view('plantilla/plantilla',$data);
+          }
+          
+
+        
         }
 
        
@@ -97,8 +123,12 @@ class Usuarios extends MY_Controller
             'id_rol'=>$rol,
             'id_estado_usuario' =>$estado
           );
+       
+           $this->session->set_flashdata('item','Usuario Actualizado');
           
-      $this->Model_general->Update_user($data,$id);
+            $this->Model_general->Update_user($data,$id);
+
+          redirect('Usuarios');
     
           /*
 

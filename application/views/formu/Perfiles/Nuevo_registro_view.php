@@ -1,8 +1,3 @@
-
-
-
-
-
     <!-- Main content -->
   <section class="content h-100 ">
       <div class="row  h-100 justify-content-center align-items-center">
@@ -27,16 +22,18 @@
                 </div>
 
                 <div class="form-group row mt-2">
+                   <?php echo form_error('clave'); ?>
                     <label for="Contraseña" class="col-sm-2 col-form-label">Contraseña</label>
                     <div class="col-sm-12">
                     <input type="password" class="form-control" id="Contraseña" name="clave" placeholder="Contraseña">
                     </div>
                 </div>
 
-                <div class="form-group row mt-1">
-                    <label for="Contraseña1" class="col-sm-2 col-form-label">Repetir contraseña</label>
-                    <div class="col-sm-12">
-                    <input type="password" class="form-control" id="Contraseña1" placeholder="Repetir contraseña">
+                <div class="form-group row mt-2">
+                <?php echo form_error('conf'); ?>
+                <label for="Contraseña1" class="col-sm-3 col-form-label">Repetir contraseña</label>              
+                <div class="col-sm-12">
+                    <input type="password" class="form-control" id="Contraseña1" name="conf" placeholder="Repetir contraseña">
                     </div>
                 </div>
 

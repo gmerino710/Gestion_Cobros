@@ -41,7 +41,16 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-         
+              <?php if($this->session->flashdata('item')):?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?php echo $this->session->flashdata('item'); ?>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>   
+              </div>
+              <?php endif;?> 
+          
+          
               <button class="btn btn-outline-primary " data-toggle="modal" data-target="#modal" data-whatever="@mdo">
               Añadir Rol <i class="fa fa-plus"></i> 
               </button>  

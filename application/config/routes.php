@@ -62,6 +62,17 @@ $route['usuarios/registrar'] = 'Usuarios/Register';
 $route['usuarios/delete/(:num)'] = 'Usuarios/delete/$1';
 $route['usuarios/user_edit/(:num)'] = 'Usuarios/edit_user/$1';
 $route['usuarios/actualizar'] = 'Usuarios/update';
+//---------------------------Admin--------------------------------------------------
+
+$route['gestores'] = 'Administracion/Gestores';
+$route['gestores/nuevo'] = 'Administracion/Gestores/new';
+$route['gestores/nuevo_elemento'] = 'Administracion/Gestores/new_element';
+$route['gestores/eliminar/(:num)'] = 'Administracion/Gestores/destroy/$1';
+$route['gestores/editar/(:num)'] = 'Administracion/edit_user/$1';
+$route['gestores/actualizar'] = 'Administracio/gestores/update';
+//-----------------------------------------------------------------------------------
+$route['acciones'] = 'Administracion/Acciones';
+$route['carteras'] = 'Administracion/Carteras';
 
 //-----------------------------------------------------------------------
 

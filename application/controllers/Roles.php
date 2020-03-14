@@ -40,6 +40,8 @@ public function Set_permissions ()
 {
     $values = $this->input->post('save');
 
+    print_r($values);
+
     if (isset($values)) {
         $checkbox = $this->input->post('id_menu[]');
         for($i=0;$i<count($checkbox);$i++){
@@ -47,7 +49,9 @@ public function Set_permissions ()
             
             $this->Model_general->insert_rol_menu($values,$category_id);
         }
-        echo 'se guardo';
+        $this->session->set_flashdata('item','Permiso asignados');
+
+        Redirect('Roles');
     }
   
 }
@@ -69,7 +73,8 @@ public function Set_permissions ()
                 );
               $this->Model_general->insert_rol($data);
 
-              echo 'entro';
+
+              Redirect('Roles');
 
             }else{
                 $memo = array( 
