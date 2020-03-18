@@ -73,46 +73,47 @@
 
       </span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-      <!-- User image -->
-      <li class="user-header bg-primary">
+  
+    <ul class="dropdown-menu dropdown-menu-lg  dropdown-menu-right" style="border-radius: 15px;">
+   
+    
+   
+      <li class="user-header" >
       <?= img(array('src' => url_logo($this->usuario['logo']),
                   'class'=> 'img-size-50 mr-3 img-circle',
                   'alt'=> 'Imagen del Usuario'));
                     ?>
 
-        <p>
+        <p id="usuario">
         <?php if(isset($this->usuario['usuario_empresa'])):?> 
                       <?=$this->usuario['usuario_empresa']['perfil']['nombre_perfil'];?>
                     <?php else :?>
                       <?=$this->usuario['rol']['nombre_rol'];?>
                     <?php endif;?>
         </p>
-      </li>
-      <!-- Menu Body -->
-      <li class="user-body">
-        <div class="row">
-           <!-- Validacion de Foto de la hora --->
-           <?php if (!isset($this->usuario['usuario_empresa'])):?> 
+        <?php if (!isset($this->usuario['usuario_empresa'])):?> 
       
-           <small>Ult. Acceso: <?=$this->usuario['ultimo_acceso']; ?></small>
-          <?php endif;?>
-          
-        </div>
-        <!-- /.row -->
+      <small class= 'text-secondary'>Ult. Acceso: <?=$this->usuario['ultimo_acceso']; ?></small>
+
+                    
+     <?php endif;?>
       </li>
+    
       <!-- Menu Footer-->
       <li class="user-footer">
-        <div class="pull-left">
+        <div class="pull-left text-center" >
         <?php if (isset($this->usuario['usuario_empresa'])):?> 
                   <small> <?=anchor('empresa/salir', 'Salir'); ?></small>
                     <?php else:?> 
-                <?= anchor('inicio/salir', 'Salir');?>
+                <?= anchor('inicio/salir', 'Salir',array('title' => 'Salir!'));?>
+                
                     <?php endif;?>
+                    
           <!--<a href="#" class="btn btn-default btn-flat">Profile</a>-->
         </div>
-       
+      </li>
     </ul>
+  
   </li>
    
      </ul>
@@ -210,14 +211,7 @@
                  </ul>
 
                 </li> 
-          </ul>
-
-                    
-                            
-           
-         
-           
-
+          
 
       </nav>
 

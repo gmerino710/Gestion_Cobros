@@ -79,7 +79,7 @@ class Usuarios extends MY_Controller
               redirect('Usuarios');
           } else {
             $this->Model_general->destroy_rol($id);
-            
+            $this->session->set_flashdata('item','Usuario Eliminado');
             redirect('Usuarios');
           }
           

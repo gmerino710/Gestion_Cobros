@@ -5,6 +5,7 @@ class MY_Controller extends CI_Controller {
 	public $usuario=array();
     public $data=array();
     public $vista="inicio";
+    public $tabla;
     public $titulo="Sin titulo";
     public $sub_titulo="Sin sub titulo";
     public $ruta_perfiles="";

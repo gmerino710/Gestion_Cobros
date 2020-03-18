@@ -40,7 +40,8 @@
                     <td><?=$item['Nombre'];?></td>
                     <td><?=$item['Apellido'];?></td>
                     <td><?=$item['estado'];?></td>
-                    <td><a  class="btn btn-danger" href="<?=base_url();?>gestores/eliminar/<?=$item['Cod_Gestores'];?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                    <td><a onclick="return confirm('¿Eliminar element?')" class="btn btn-danger" href="<?=base_url();?>gestores/eliminar/<?=$item['Cod_Gestores'];?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a class="btn btn-warning" href="<?=base_url()?>gestores/editar/<?=$item['Cod_Gestores']?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                     </tr>
                     <?php endforeach;?>
                     <?php else:?>

@@ -14,10 +14,9 @@
   }
 }
 
-.login-page,
-.register-page {
+.login-page{
   align-items: center;
-  background: $gray-200;
+  background: red;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -95,3 +94,5 @@
 .social-auth-links {
   margin: 10px 0;
 }
+
+login-page{}

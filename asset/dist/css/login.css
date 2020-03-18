@@ -1,0 +1,16 @@
+#lgn{
+
+    background-image: url('img/fondo.jpg');
+}
+
+.forms{
+
+    border-radius: 500px;
+}
+
+.inicio{
+
+    text-align: center;
+
+    font-size: large;
+}

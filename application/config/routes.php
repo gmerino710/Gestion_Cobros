@@ -68,11 +68,22 @@ $route['gestores'] = 'Administracion/Gestores';
 $route['gestores/nuevo'] = 'Administracion/Gestores/new';
 $route['gestores/nuevo_elemento'] = 'Administracion/Gestores/new_element';
 $route['gestores/eliminar/(:num)'] = 'Administracion/Gestores/destroy/$1';
-$route['gestores/editar/(:num)'] = 'Administracion/edit_user/$1';
-$route['gestores/actualizar'] = 'Administracio/gestores/update';
+$route['gestores/editar'] = 'Administracion/Gestores/edit_user/';
+$route['gestores/editar/(:num)'] = 'Administracion/Gestores/edit_user/$1';
+$route['gestores/actualizar'] = 'Administracion/Gestores/update';
 //-----------------------------------------------------------------------------------
 $route['acciones'] = 'Administracion/Acciones';
+
+
+//-----------------------------------------------------------------------------------------
 $route['carteras'] = 'Administracion/Carteras';
+$route['carteras/nuevo'] = 'Administracion/Carteras/new';
+$route['carteras/nuevo_elemento'] = 'Administracion/Carteras/new_element';
+// destruir
+$route['carteras/eliminar'] = 'Administracion/Carteras/destroy';
+$route['carteras/eliminar/(:num)'] = 'Administracion/Carteras/destroy/$1';
+//actualizar
+$route['carteras/editar/(:num)'] = 'Administracion/Carteras/edit_user/$1';
 
 //-----------------------------------------------------------------------
 
