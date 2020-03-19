@@ -46,7 +46,8 @@ class Carteras extends MY_Controller
             
             $estado= $this->input->post('estado');
             
-
+            $id =$this->input->post('id');
+            
             $this->form_validation->set_rules('cartera','Cartera','required|max_length[40]|min_length[4]|alpha');
             $this->form_validation->set_rules('estado','Estado','required');
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
@@ -60,7 +61,7 @@ class Carteras extends MY_Controller
                );
 
              if ($this->input->post('update')) {
-                 $id =$this->input->post('id');
+                 
                  $this->Administracion_model->Update_user($data,'Cod_Catera',$id,'catag_carteras');
                  $this->session->set_flashdata('item','Datos Actualizados');
                   redirect('carteras');
@@ -73,10 +74,10 @@ class Carteras extends MY_Controller
 
 
            } else {
-            $this->titulo = 'Nueva Cartera';
-            $data['estados']= $this->Administracion_model->get_estado_usuario();
-            $this->vista = 'admin/forms/Carteras_form_view';
-            $this->load->view('plantilla/plantilla',$data);
+            if ($id) {
+                $this->edit_user($id);
+              }
+               $this->new();
            }
            
           

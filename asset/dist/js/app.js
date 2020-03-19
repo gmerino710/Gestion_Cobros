@@ -6,5 +6,6 @@ $(document).ready(function() {
             scrollSpeed: 40
             });
 
+      $('#tb').DataTable();
    
 });

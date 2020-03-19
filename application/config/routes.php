@@ -71,9 +71,16 @@ $route['gestores/eliminar/(:num)'] = 'Administracion/Gestores/destroy/$1';
 $route['gestores/editar'] = 'Administracion/Gestores/edit_user/';
 $route['gestores/editar/(:num)'] = 'Administracion/Gestores/edit_user/$1';
 $route['gestores/actualizar'] = 'Administracion/Gestores/update';
-//-----------------------------------------------------------------------------------
+//---------------------------Acciones--------------------------------------------------------
 $route['acciones'] = 'Administracion/Acciones';
-
+$route['acciones/nuevo'] = 'Administracion/Acciones/new';
+$route['acciones/nuevo_elemento'] = 'Administracion/Acciones/new_element';
+// destruir
+$route['acciones/eliminar'] = 'Administracion/Acciones/destroy';
+$route['acciones/eliminar/(:num)'] = 'Administracion/Acciones/destroy/$1';
+//actualizar
+$route['acciones/editar/(:num)'] = 'Administracion/Acciones/edit_user/$1';
+$route['acciones/editar'] = 'Administracion/Acciones/edit_user/';
 
 //-----------------------------------------------------------------------------------------
 $route['carteras'] = 'Administracion/Carteras';
@@ -84,8 +91,9 @@ $route['carteras/eliminar'] = 'Administracion/Carteras/destroy';
 $route['carteras/eliminar/(:num)'] = 'Administracion/Carteras/destroy/$1';
 //actualizar
 $route['carteras/editar/(:num)'] = 'Administracion/Carteras/edit_user/$1';
+$route['carteras/editar'] = 'Administracion/Carteras/edit_user/';
 
-//-----------------------------------------------------------------------
+//--------------------------------------------------------------------------------
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
