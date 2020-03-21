@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-header">
+            <div class="card-header hd-white">
             <?php if($this->session->flashdata('item')):?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?php echo $this->session->flashdata('item'); ?>

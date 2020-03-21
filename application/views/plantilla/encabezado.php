@@ -31,7 +31,9 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!--Mis stilos--->
   <link rel="stylesheet" href="<?=base_url();?>asset/dist/css/estilos.css">
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet">
+  
 <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
@@ -125,7 +127,7 @@
   <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="<?=base_url();?>" class="brand-link">
-                <img src="https://i.pinimg.com/originals/7a/b0/2a/7ab02ae6078aea3ebcb59ab42836e4fa.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                <img  title="Inicio" src="https://i.pinimg.com/originals/7a/b0/2a/7ab02ae6078aea3ebcb59ab42836e4fa.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">Empresa</span>
               </a>
@@ -195,18 +197,17 @@
                                   </ul>
                                 
                                 <?php
-                                } else {
+                                } /*else {
                                         ?>
-                                            <li class="<?php echo ($this->controlador == $value['url']) ? 'active' : ''; ?>">
-                                              <a href="<?php echo site_url($value['url']); ?>">
-                                                <i class=" fa fa-<?php echo $value['fa']; ?>"></i> <span><?php echo $value['nombre_menu']; ?></span>
-                                                <span class="pull-right-container">
-                                                  <!-- <small class="label pull-right bg-green">new</small>-->
-                                                </span>
+                                            <li class="<?php echo ($this->controlador == $value['url']) ? 'active' : ''; ?> nav-item has-treeview ">
+                                              <a href="<?php echo site_url($value['url']); ?>" >
+                                                <i class=" fa fa-<?php echo $value['fa']; ?>"></i> 
+                                                <span><?php echo $value['nombre_menu']; ?></span>
+                                            
                                               </a>
                                               </li>
                                           <?php
-                             }
+                             }*/
           }
           
           ?>

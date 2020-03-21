@@ -69,4 +69,26 @@ class Administracion_model extends CI_Model
            
         }
 
+
+
+        // Subactividades
+
+        public function Sub_at()
+        {
+        
+            $query = $this->db->get('viw_sub_actividad');
+
+            return $query->result_array();
+        }
+        public function Items_actividad()
+        {
+            $this->db->select('Cod_act,Actividad');
+            
+            $this->db->from('catag_actividades');
+        
+            $query = $this->db->get();
+
+            return $query->result_array();
+        }
+
 }

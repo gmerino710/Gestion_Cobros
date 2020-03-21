@@ -13,15 +13,15 @@
             <!-- /.card-header -->
             <div class="card-body ">
        
-                <?=form_open('acciones/nuevo_elemento');?>
+                <?=form_open('actividades/nuevo_elemento');?>
              <?php foreach($old as $items):?>
 
                     <div class="form-group row mt-1">
-                    <label for="nombre" class="col-sm-2 col-form-label">Cartera</label>
+                    <label for="nombre" class="col-sm-2 col-form-label">Actividad</label>
                         <div class="col-sm-12">
-                        <?php echo form_error('accion'); ?>
+                        <?php echo form_error('actividad'); ?>
                     
-                        <input type="text" class="form-control" value="<?=$items['Accion'];?>" id="accion" name="accion" placeholder="Accion">
+                        <input type="text" class="form-control" value="<?=$items['Actividad'];?>" id="actividad" name="actividad" placeholder="Añadir Actividad">
                         </div>
                     </div>
 
@@ -41,13 +41,13 @@
                     <div class="row mt-4">
                         <div class="col col-md-6 col-sm-12">
                         <input type="submit" value="Actualizar"  name="update" id="update" class="btn btn-primary  btn-block"/>  
-                        <input type="hidden" value="<?=$items['Cod_accion'];?>" name="id" class="btn btn-primary  btn-block"/>
+                        <input type="hidden" value="<?=$items['Cod_act'];?>" name="id" class="btn btn-primary  btn-block"/>
                         
 
                         </div>
                         <div class="col col-md-6 col-sm-12">
 
-                    <a  class="btn btn-danger  btn-block" href="<?=base_url()?>acciones" >Cancelar </a>  
+                    <a  class="btn btn-danger  btn-block" href="<?=base_url()?>actividades" >Cancelar </a>  
 
                     </div>
                  </div>   
@@ -63,15 +63,15 @@
   
        </div>
        <div class="card-body ">     
-                <?=form_open('acciones/nuevo_elemento');?>
+                <?=form_open('actividades/nuevo_elemento');?>
 
 
                 <div class="form-group row mt-1">
-                <label for="nombre" class="col-sm-2 col-form-label">Cartera</label>
+                <label for="nombre" class="col-sm-2 col-form-label">Actividad</label>
                     <div class="col-sm-12">
-                    <?php echo form_error('accion'); ?>
+                    <?php echo form_error('actividad'); ?>
                  
-                    <input type="text" class="form-control"  value="<?=set_value('accion')?>" id="accion" name="accion" placeholder="Accion">
+                    <input type="text" class="form-control"  value="<?=set_value('actividad')?>" id="actividad" name="actividad" placeholder="Añadir actividad">
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@
                     </div>
                     <div class="col col-md-6 col-sm-12">
 
-                    <a  class="btn btn-danger  btn-block" href="<?=base_url()?>acciones" >Cancelar </a> 
+                    <a  class="btn btn-danger  btn-block" href="<?=base_url()?>actividades" >Cancelar </a> 
 
                    </div>
                 </div>   

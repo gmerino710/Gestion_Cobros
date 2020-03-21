@@ -24,10 +24,12 @@
                 </div>
 
                 
-                <div class="form-group row mt-2">          
+
+                
+                <div class="form-group row mt-1">          
                 <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>      
                     <div class="col-sm-12">
-                    <p> <?php echo form_error('apellido'); ?></p>  
+                    <?php echo form_error('apellido'); ?>
                    
                     <input type="text" class="form-control"  value="<?=$items['Apellido']?>" id="apellido" name="apellido" placeholder="Apellido">
                    
@@ -38,12 +40,14 @@
 
                 <div class="form-group row mt-1">
                 <?php echo form_error('estado'); ?>
-                        <label for="estado"  class="col-sm-2 col-form-label">Estado</label>    
+                        <label for="estado"  class="col-sm-2 col-form-label">Estado</label>  
+                        <div class="col-sm-12">   
                             <select id="estado" name="estado"  class="form-control">
                             <?php foreach($estados as $item):?>
                               <option value="<?=$item['Cod_estado'];?>"><?=$item['estado'];?></option>
                             <?php endforeach;?>   
                         </select>
+                        </div> 
                 </div>
 
           

@@ -6,6 +6,20 @@ $(document).ready(function() {
             scrollSpeed: 40
             });
 
+      $('.tb').DataTable();
+
       $('#tb').DataTable();
+
+    var esconder =  $('#timer');
+
+    console.log(esconder);
+    
+
+    setTimeout(() => {
+            
+      esconder.hide();
+
+      }, 2000);     
+
    
 });

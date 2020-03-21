@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -93,7 +94,27 @@ $route['carteras/eliminar/(:num)'] = 'Administracion/Carteras/destroy/$1';
 $route['carteras/editar/(:num)'] = 'Administracion/Carteras/edit_user/$1';
 $route['carteras/editar'] = 'Administracion/Carteras/edit_user/';
 
-//--------------------------------------------------------------------------------
+//----------------------------------Actividades----------------------------------------------
+$route['actividades'] = 'Administracion/Actividades';
+$route['actividades/nuevo'] = 'Administracion/Actividades/new';
+$route['actividades/nuevo_elemento'] = 'Administracion/Actividades/new_element';
+//actualizar
+$route['actividades/editar/(:num)'] = 'Administracion/Actividades/edit_user/$1';
+$route['actividades/editar'] = 'Administracion/actividades/edit_user/';
+//destruir
+$route['actividades/eliminar'] = 'Administracion/actividades/destroy';
+$route['actividades/eliminar/(:num)'] = 'Administracion/actividades/destroy/$1';
+//----------------------------------Sub actividades------------------------------------------------------------
+
+$route['actividades/subactividad/nuevo'] = 'Administracion/Actividades/new_sub';
+$route['actividades/subactividad'] = 'Administracion/Actividades/sub';
+// crear
+$route['actividades/subactividad/nuevo_elemento'] = 'Administracion/Actividades/new_element_sub';
+// borrar
+$route['actividades/subactividad/eliminar/(:num)'] = 'Administracion/Actividades/destroy_sub/$1';
+
+$route['actividades/subactividad/eliminar'] = 'Administracion/Actividades/destroy_sub';
+//--------------------------------------------------------------------------------------------
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

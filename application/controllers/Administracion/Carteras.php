@@ -48,7 +48,7 @@ class Carteras extends MY_Controller
             
             $id =$this->input->post('id');
             
-            $this->form_validation->set_rules('cartera','Cartera','required|max_length[40]|min_length[4]|alpha');
+            $this->form_validation->set_rules('cartera','Carteras','required|max_length[40]|min_length[4]|alpha|is_unique[catag_carteras.Nombre_Cartera]');
             $this->form_validation->set_rules('estado','Estado','required');
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 

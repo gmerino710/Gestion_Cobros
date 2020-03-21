@@ -3,6 +3,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Usuarios extends MY_Controller
 {
+  public $rules =array(
+    array(
+      'field' => 'usuario',
+      'label' => 'Usuario',
+      'rules' => 'required|alpha_dash|max_length[40]|min_length[3]|is_unique[catag_usuarios.usuario]'
+  ),
+  array(
+      'field' => 'clave',
+      'label' => 'Clave',
+      'rules' => 'required|max_length[40]|min_length[3]',
+  ),
+  array(
+      'field' => 'nombre',
+      'label' => 'Nombre',
+      'rules' => 'required|alpha_dash|max_length[40]|min_length[3]'
+  ),
+  array(
+      'field' => 'conf',
+      'label' => 'Confirmacion',
+      'rules' => 'required|matches[clave]'
+  )
+
+
+  );
         public function index ($id = null )
         {
           
@@ -25,23 +49,17 @@ class Usuarios extends MY_Controller
         
         public function Register()
         {
+          
           $usuario = $this->input->post("usuario");
           $contraseña=  $this->input->post("clave");
           $confirmacion=  $this->input->post("conf");
           $Cargo= $this->input->post("nombre");
           $rol= $this->input->post("rol");
           $estado= $this->input->post("estados");
-
-          //------------------------------------------------------
-          //clave
-          $this->form_validation->set_rules('clave','Usuario','required');
-          //contras
-          $this->form_validation->set_rules('clave','Contraseña','required');
-          // valida sin son iguales
-          $this->form_validation->set_rules('conf',' Contraseña ','math[clave]',array(
-            'math' =>'Contraseña no coinciden'
-
-          ));
+ 
+        
+          $this->form_validation->set_rules($this->rules);
+          $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
           if ($this->form_validation->run()==True) {
             $data = array(
@@ -115,20 +133,36 @@ class Usuarios extends MY_Controller
           $rol= $this->input->post("rol");
           $estado= $this->input->post("estados");
           //$id = $this->uri->segment(3);
+          $this->form_validation->set_rules($this->rules);
+          $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
-          $data = array(
-            'usuario'=>$usuario,
-            'clave' =>encriptar( $contraseña),
-            'nombre'=>$Cargo,
-            'id_rol'=>$rol,
-            'id_estado_usuario' =>$estado
-          );
-       
-           $this->session->set_flashdata('item','Usuario Actualizado');
+          if ($this->form_validation->run()==True) {
+            $data = array(
+              'usuario'=>$usuario,
+              'clave' =>encriptar( $contraseña),
+              'nombre'=>$Cargo,
+              'id_rol'=>$rol,
+              'id_estado_usuario' =>$estado
+            );
+            $this->session->set_flashdata('item','Usuario Actualizado');
           
             $this->Model_general->Update_user($data,$id);
 
           redirect('Usuarios');
+          } else {
+            $data['roles']= $this->Model_general->get_rol();
+
+            $data['estados']= $this->Model_general->Get_estado_usuario();
+
+            $this->titulo     = 'Nuevo usuario';
+            $this->vista = 'formu/Perfiles/Nuevo_registro_view';
+            $this->load->view('plantilla/plantilla',$data);
+          }
+          
+
+     
+       
+         
     
           /*
 

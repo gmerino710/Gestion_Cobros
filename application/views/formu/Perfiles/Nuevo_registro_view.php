@@ -15,53 +15,64 @@
         
 
                 <div class="form-group row mt-1">
+              
                     <label for="Usuario" class="col-sm-2 col-form-label">Usuario</label>
                     <div class="col-sm-12">
-                    <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Password">
+                    <?php echo form_error('usuario'); ?>
+                    <input type="text" class="form-control" value="<?= set_value('usuario'); ?>" id="usuario" name="usuario" placeholder="Ingresar usuario">
                     </div>
                 </div>
 
                 <div class="form-group row mt-2">
-                   <?php echo form_error('clave'); ?>
+                   
                     <label for="Contraseña" class="col-sm-2 col-form-label">Contraseña</label>
                     <div class="col-sm-12">
-                    <input type="password" class="form-control" id="Contraseña" name="clave" placeholder="Contraseña">
+                    <?php echo form_error('clave'); ?>
+                    <input type="password" value="<?= set_value('clave'); ?>"  class="form-control" id="Contraseña" name="clave" placeholder="Ingresar contraseña">
                     </div>
                 </div>
 
                 <div class="form-group row mt-2">
-                <?php echo form_error('conf'); ?>
                 <label for="Contraseña1" class="col-sm-3 col-form-label">Repetir contraseña</label>              
                 <div class="col-sm-12">
+                <?php echo form_error('conf'); ?>
+
                     <input type="password" class="form-control" id="Contraseña1" name="conf" placeholder="Repetir contraseña">
                     </div>
                 </div>
 
                 
                 <div class="form-group row mt-1">
-                    <label for="cargo" class="col-sm-2 col-form-label">Nombre del cargo</label>
+             
+                    <label for="cargo" class="col-sm-2 col-form-label">Nombre</label>
+                   
                     <div class="col-sm-12">
-                    <input type="text" class="form-control" id="cargo" name="nombre" placeholder="Nombre ">
+                    <?php echo form_error('nombre'); ?>
+                    <input type="text" class="form-control" value="<?= set_value('nombre'); ?>"   id="cargo" name="nombre" placeholder="Ingresar nombre ">
                     </div>
                 </div>
 
 
                 <div class="form-group row mt-1">
                         <label for="roles"  class="col-sm-2 col-form-label">Rol</label>    
-                            <select id="roles" name="rol"  class="form-control">
+                        <div class="col-sm-12">    
+                          <select id="roles" name="rol"  class="form-control">
                             <?php foreach($roles as $item):?>
                               <option   value="<?=$item['id_rol'];?>" ><?=$item['nombre_rol'];?></option>
                             <?php endforeach;?>   
                         </select>
+                      </div>  
                 </div>
                 
                 <div class="form-group row mt-1">
-                        <label for="estados" class="col-sm-2 col-form-label">Estados</label>    
+                        <label for="estados" class="col-sm-2 col-form-label">Estados</label>   
+                        <div class="col-sm-12"> 
                             <select id="estados" class="form-control" name="estados" >
                             <?php foreach($estados as $item):?>
                               <option value="<?=$item['id_estado_usuario'];?>" ><?=$item['nombre_estado'];?></option>
                             <?php endforeach;?>   
                         </select>
+                      </div> 
                 </div>
                 <div class="row mt-4">
                     <div class="col col-md-6 col-sm-12">
@@ -84,3 +95,5 @@
         </div>
       </div> 
     </section>   
+
+    

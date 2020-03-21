@@ -34,7 +34,8 @@ class Acciones extends MY_Controller
                 redirect('acciones');
             } else {
               $this->Administracion_model->destroy_element($this->table,$this->codigo_table,$id);
-              
+              $this->session->set_flashdata('item','Datos Eliminados');
+           
               redirect('acciones');
             }
         }
@@ -46,7 +47,7 @@ class Acciones extends MY_Controller
             $estado= $this->input->post('estado');
             $id =$this->input->post('id');
 
-            $this->form_validation->set_rules('accion','Acciones','required|max_length[40]|min_length[4]|alpha');
+            $this->form_validation->set_rules('accion','Acciones','required|max_length[40]|min_length[4]|alpha|is_unique[catag_acciones.Accion]');
             $this->form_validation->set_rules('estado','Estado','required');
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 

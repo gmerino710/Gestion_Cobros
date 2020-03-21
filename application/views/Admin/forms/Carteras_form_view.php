@@ -28,11 +28,14 @@
                     <div class="form-group row mt-1">
                     <?php echo form_error('estado'); ?>
                             <label for="estado"  class="col-sm-2 col-form-label">Estado</label>    
-                                <select id="estado" name="estado"  class="form-control">
+                          <div class="col col-sm-12">  
+                              <select id="estado" name="estado"  class="form-control">
                                 <?php foreach($estados as $item):?>
                                   <option value="<?=$item['Cod_estado'];?>"><?=$item['estado'];?></option>
                                 <?php endforeach;?>   
                             </select>
+                          
+                        </div>  
                     </div>
 
 
@@ -69,18 +72,21 @@
                     <div class="col-sm-12">
                     <?php echo form_error('cartera'); ?>
                  
-                    <input type="text" class="form-control"  value="<?=set_value('cartera')?>" id="cartera" name="cartera" placeholder="Cartera">
+                    <input type="text" class="form-control"  value="<?=set_value('cartera')?>" id="cartera" name="cartera" placeholder="Añadir cartera">
                     </div>
                 </div>
 
                 <div class="form-group row mt-1">
                 <?php echo form_error('estado'); ?>
                         <label for="estado"  class="col-sm-2 col-form-label">Estado</label>    
-                            <select id="estado" name="estado"  class="form-control">
-                            <?php foreach($estados as $item):?>
-                              <option value="<?=$item['Cod_estado'];?>"><?=$item['estado'];?></option>
-                            <?php endforeach;?>   
-                        </select>
+                        <div class="col col-sm-12">  
+                              <select id="estado" name="estado"  class="form-control">
+                                <?php foreach($estados as $item):?>
+                                  <option value="<?=$item['Cod_estado'];?>"><?=$item['estado'];?></option>
+                                <?php endforeach;?>   
+                            </select>
+                          
+                        </div>
                 </div>
 
               

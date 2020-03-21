@@ -11,30 +11,31 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body ">
-                <?=form_open('gestores/nuevo_elemento');?>
+                <?=form_open('actividades/subactividad/nuevo_elemento');?>
         
 
                 <div class="form-group row mt-1">
-                <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                <label for="nombre" class="col-sm-2 col-form-label">Subactividad</label>
                     <div class="col-sm-12">
                     <?php echo form_error('nombre'); ?>
                  
-                    <input type="text" class="form-control"  value="<?=set_value('Nombre')?>" id="nombre" name="nombre" placeholder="Nombre">
+                    <input type="text" class="form-control"  value="<?=set_value('Nombre')?>" id="nombre" name="nombre" placeholder="Ingrese la subactividad">
                     </div>
                 </div>
 
-                
-                <div class="form-group row mt-1">          
-                <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>      
-                    <div class="col-sm-12">
-                    <?php echo form_error('apellido'); ?>  
-                   
-                    <input type="text" class="form-control" value="<?=set_value('Apellido')?>"  id="apellido" name="apellido" placeholder="Apellido">
-                   
-                  </div>
-               
 
+                <div class="form-group row mt-1">
+                <?php echo form_error('actividad'); ?>
+                        <label for="actividad"  class="col-sm-2 col-form-label">Actividades</label>    
+                        <div class="col-sm-12">                        
+                        <select id="actividad" name="actividad"  class="form-control">
+                            <?php foreach($actvity as $item):?>
+                              <option value="<?=$item['Cod_act'];?>"><?=$item['Actividad'];?></option>
+                            <?php endforeach;?>   
+                        </select>
+                        </div> 
                 </div>
+
 
                 <div class="form-group row mt-1">
                 <?php echo form_error('estado'); ?>
@@ -48,20 +49,17 @@
                         </div> 
                 </div>
 
-          
-
-
               
                 <div class="row mt-4">
                     <div class="col col-md-6 col-sm-12">
                     <button type="submit" class="btn btn-primary  btn-block">Agregar</button>
 
                     </div>
-                    <div class="col col-md-6 col-sm-12">
+                        <div class="col col-md-6 col-sm-12">
 
-                  <a class="btn btn-danger  btn-block" href="<?=base_url()?>gestores" >Cancelar  </a>  
+                    <a class="btn btn-danger  btn-block" href="<?=base_url()?>actividades" >Cancelar  </a>  
 
-                </div>
+                        </div>
                 </div>   
                 
 
