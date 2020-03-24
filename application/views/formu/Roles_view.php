@@ -42,11 +42,20 @@
           <div class="card">
             <div class="card-header">
               <?php if($this->session->flashdata('item')):?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div id="timer" class="alert alert-success alert-dismissible fade show" role="alert">
             <?php echo $this->session->flashdata('item'); ?>
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>   
+              </div>
+
+
+              <?php elseif($this->session->flashdata('delete')):?>
+                <div id="timer"  class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo $this->session->flashdata('delete'); ?>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>   
               </div>
               <?php endif;?> 
           
@@ -57,13 +66,13 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="tb" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>Rol</th>
                   <th>Descripcion</th>
-                  <th>Permisos</th>
-              
+                  <th>Acciones</th>
+                  
                 </tr>
                 </thead>
                 <tbody>
@@ -71,8 +80,11 @@
                 <tr>
                 <td><?=$item['nombre_rol'];?></td>
                 <td><?=$item['descripcion'];?></td>
-                <td><a href="<?=base_url();?>roles/permissions/<?=$item['id_rol'];?>"><button class="btn btn-primary" > Asignar  </button>
-                </tr>
+                <td><a  title="Asignar permisos" class="btn btn-primary"  href="<?=base_url();?>roles/permissions/<?=$item['id_rol'];?>"><i class="fa fa-edit"></i></a>
+                <a  onclick="return confirm('¿Eliminar element?')" title="Eliminar" class="btn btn-danger"  href="<?=base_url();?>roles/eliminar/<?=$item['id_rol'];?>"><i class="fa fa-trash"></i></a>
+                  
+              </td>
+              </tr>
                 <?php endforeach;?>
                 </tbody>
                

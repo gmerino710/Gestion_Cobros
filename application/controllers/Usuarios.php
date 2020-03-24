@@ -3,6 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Usuarios extends MY_Controller
 {
+  public $table = 'catag_usuarios' ;
+
+  public $codigo_table ='id_usuario';
+
   public $rules =array(
     array(
       'field' => 'usuario',
@@ -93,7 +97,7 @@ class Usuarios extends MY_Controller
 
         public function delete($id=null)
         {
-          if ($id==null) {
+          if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {
               redirect('Usuarios');
           } else {
             $this->Model_general->destroy_rol($id);
@@ -107,9 +111,9 @@ class Usuarios extends MY_Controller
         }   
 
 
-        public function edit_user($id=null)
+        public function edit_user($id=null )
         {
-              if ($id==null) {
+              if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {
                 redirect('Usuarios');
             } else {
             $this->titulo  = 'Actualizar usuario';

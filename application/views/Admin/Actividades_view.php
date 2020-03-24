@@ -5,6 +5,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header hd-white">
+          
             <?php if($this->session->flashdata('item')):?>
                 <div id="timer"  class="alert alert-success alert-dismissible fade show" role="alert">
                 <?php echo $this->session->flashdata('item'); ?>
@@ -12,6 +13,14 @@
                             <span aria-hidden="true">&times;</span>
                           </button>   
               </div>
+              <?php elseif($this->session->flashdata('delete')):?>
+                <div id="timer"  class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo $this->session->flashdata('delete'); ?>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>   
+              </div>
+              
               <?php endif;?> 
             <a title="Nuevo cartera" href="<?=base_url()?>actividades/nuevo"><button class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
               Añadir Actividad <i class="fa fa-plus"></i> 

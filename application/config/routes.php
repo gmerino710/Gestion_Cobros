@@ -56,6 +56,9 @@ $route['roles']='Roles';
 $route['roles/permissions/(:num)'] = 'Roles/permissions/$1';
 $route['roles/permiso'] = 'Roles/Set_permissions/';
 $route['Register'] = 'Roles/Register';
+// destruir
+$route['roles/eliminar'] = 'Roles/destroy';
+$route['roles/eliminar/(:num)'] = 'Roles/destroy/$1';
 //--------------------Uusarios-----------------------------------------
 $route['usuarios'] = 'Usuarios';
 $route['usuarios/nuevo'] = 'Usuarios/Set_users';

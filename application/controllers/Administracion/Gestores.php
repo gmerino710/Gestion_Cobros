@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Gestores extends MY_Controller
 {
     private $table = 'catag_gestores';
-    private $campo = 'Cod_Gestores';
+    private $codigo_table = 'Cod_Gestores';
 
    
 
@@ -64,7 +64,7 @@ class Gestores extends MY_Controller
 
         public function destroy($id=null)
         {
-            if ($id==null) {
+            if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {
                 redirect('gestores');
             } else {
               $this->Administracion_model->destroy_element('catag_gestores','Cod_Gestores',$id);
@@ -75,7 +75,7 @@ class Gestores extends MY_Controller
 
         public function edit_user($id=null)
         {
-            if ($id==null) {
+            if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {
                 redirect('gestores');
             } else {
             $data = ['Cod_Gestores','Nombre', 'Apellido'];  

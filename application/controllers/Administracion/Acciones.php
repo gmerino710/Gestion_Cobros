@@ -30,7 +30,7 @@ class Acciones extends MY_Controller
 
         public function destroy($id=null)
         {
-            if ($id==null) {
+            if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {
                 redirect('acciones');
             } else {
               $this->Administracion_model->destroy_element($this->table,$this->codigo_table,$id);
@@ -83,7 +83,7 @@ class Acciones extends MY_Controller
 
         public function edit_user($id=null)
         {
-            if ($id==null) {
+            if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {
                 redirect('acciones');
             } else {
             $data = ['Cod_accion','Accion'];  

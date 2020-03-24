@@ -91,4 +91,42 @@ class Administracion_model extends CI_Model
             return $query->result_array();
         }
 
+                        // id de busqueda, campo => nombre del campos , tabla , nombre del campo es la info
+        public function search_dependencia($table,$id)
+        {
+           //$query = $this->db->where($tabla,array($campo=>$id));           
+           $this->db->select('Actividad');
+           $this->db->from($table);
+           $this->db-> where ('Actividad',$id );  
+
+          return  $this->db-> count_all_results ();
+        }
+// tabla , campo ,id
+        public function search_dependenciax($table,$campo,$id)
+        {
+           //$query = $this->db->where($tabla,array($campo=>$id));           
+           $this->db->select($campo);
+           $this->db->from($table);
+           $this->db-> where ($campo,$id );  
+
+          return  $this->db-> count_all_results ();
+        }
+
+        //campos a retornar , tabla , campo de bsuqueda, idd
+        public function validate_existencia_id ($campo,$table,$campo_id,$id)
+        {
+           //$query = $this->db->where($tabla,array($campo=>$id));           
+           $this->db->select($campo);
+           $this->db->from($table);
+           $this->db-> where ($campo_id,$id );  
+           $query = $this->db->get();
+           return $query->result_array();
+         
+
+        
+        }
+
+
+        
+
 }

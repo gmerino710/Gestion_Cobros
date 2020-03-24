@@ -39,15 +39,35 @@ class Model_general extends CI_Model{
  
     public function insert_rol_menu ($id_rol,$id_menu)
     {
-        $this->db->delete('catag_menu_rol', array('id_rol' => $id_rol));
 
-        foreach ($id_menu as $key => $value) {
+                // eleminar rol
+        $this->db->where('id_rol', $id_rol);
+         $this->db->delete('catag_menu_rol');
+
+        $query="insert into catag_menu_rol (id_rol,id_menu) values($id_rol,$id_menu)";
+
+        $this->db->query($query);
+
+        /*foreach ($id_menu as $key =>) {
 
             
-            $query="insert into catag_menu_rol values($id_rol,$key)";
+            
             
             $this->db->query($query);# code...
-        }
+        }*/
+       
+    }
+
+
+    public function get_rol_menu ($id_rol)
+    {
+
+                // eleminar rol
+        $this->db->where('id_rol', $id_rol);
+        $query = $this->db->get('catag_roles ');
+        return $query -> result_array();
+
+
        
     }
 

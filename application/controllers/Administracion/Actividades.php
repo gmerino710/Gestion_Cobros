@@ -9,6 +9,14 @@ class Actividades extends MY_Controller
 
     public $codigo_union = 'catag_actividades.Estado';
 
+    public $codigo_table2 = 'Cod_sub';
+
+    public $tb2 = 'catag_sub_actividades';
+
+    public $campo = 'Actividad' ;
+
+
+
         public function index()
         {
 
@@ -17,6 +25,7 @@ class Actividades extends MY_Controller
             // actividdad
             $data['administracion'] = $this->Administracion_model->obter_datos_adminitracion(null,null,null,$this->table,$this->codigo_union);
             //sub actividad
+           
 
             $data['sub']= $this->Administracion_model->Sub_at();
 
@@ -79,7 +88,7 @@ class Actividades extends MY_Controller
 
         public function edit_user($id=null)
         {
-            if ($id==null) {
+            if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null) {
                 redirect('actividades');
             } else {
             $data = [$this->codigo_table,'Actividad'];  
@@ -93,13 +102,23 @@ class Actividades extends MY_Controller
 
         public function destroy($id=null)
         {
-            if ($id==null) {
+            //$comprobacion = [$this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)];
+
+            if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null) {
                 redirect('actividades');
             } else {
-              $this->Administracion_model->destroy_element($this->table,$this->codigo_table,$id);
-              $this->session->set_flashdata('item','Datos Eliminados');
+                // cantidad de los campos q se repite
+            $contador =$this->Administracion_model->search_dependencia($this->tb2,$id);
+            if ($contador >=1) {
+                $this->session->set_flashdata('delete','No se a podido eliminar');
+                redirect('actividades');
+            }else {
+                $this->Administracion_model->destroy_element($this->table,$this->codigo_table,$id);
+                $this->session->set_flashdata('item','Datos Eliminados');
+             
+                redirect('actividades');
+            }
            
-              redirect('actividades');
             }
         }
 
@@ -158,7 +177,7 @@ class Actividades extends MY_Controller
 
         public function destroy_sub($id=null)
         {
-            if ($id==null) {
+            if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table2,$this->tb2,$this->codigo_table2,$id)==null) {
                 redirect('actividades');
             } else {
               $this->Administracion_model->destroy_element('catag_sub_actividades','Cod_sub',$id);
