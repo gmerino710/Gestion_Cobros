@@ -147,5 +147,8 @@ $autoload['model'] = array('usuario_model',
     'mante_usuario_model',
     'Model_general',
     'Administracion_model',
+    'Parametros_model',
 
 );
+
+

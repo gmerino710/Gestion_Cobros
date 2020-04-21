@@ -31,7 +31,7 @@
             <!-- /.card-header -->
             <div class="card-body">
             
-              <table  class="tb table table-striped table-bordered">
+              <table id="tb_actividad" class=" table table-striped table-bordered">
                 <thead>
                 <tr>
                     
@@ -104,10 +104,10 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table class="tb table table-striped table-bordered">
+                <table id="tb_sub" class="table table-striped table-bordered">
                     <thead>
                     <tr>
-                        
+                       <th>Actividad</th> 
                       <th>Id</th>
                       <th>Sub actividad</th>
                       <th>Estados</th>
@@ -118,6 +118,7 @@
                     <?php if($sub):?>    
                         <?php foreach($sub as $item):?>
                         <tr>
+                        <td><?=$item['actividad'];?></td>
                         <td><?=$item['Id'];?></td>
                         <td><?=$item['Subactividad'];?></td>
                         <td><?=$item['estado'];?></td>

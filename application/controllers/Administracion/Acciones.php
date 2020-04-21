@@ -28,6 +28,11 @@ class Acciones extends MY_Controller
 
         }
 
+        //actualizar la fech
+
+        //fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP  
+        //ON UPDATE CURRENT_TIMESTAMP
+
         public function destroy($id=null)
         {
             if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {

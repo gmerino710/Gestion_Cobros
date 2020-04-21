@@ -19,7 +19,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="tbt" class="table table-bordered table-responsive-sm ">
+              <table  class=" tb table table-bordered table-responsive-sm ">
                 <thead>
                 <tr>
                   <th>Usuario</th>

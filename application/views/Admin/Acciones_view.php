@@ -21,7 +21,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="tb" class="table table-striped table-bordered">
+              <table  class=" tb table table-striped table-bordered">
                 <thead>
                 <tr>
                     

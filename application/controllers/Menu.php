@@ -7,7 +7,7 @@ class Menu extends MY_Controller
    {
     $this->titulo     = 'Menus';
     $data['menu'] =$this->Parametros_model->obtener_menu();
-    $this->vista = 'Menu//Menu_view';
+    $this->vista = 'Menu/Menu_view';
     $this->load->view('plantilla/plantilla',$data);
    }
 

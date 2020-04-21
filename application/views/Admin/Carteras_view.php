@@ -23,7 +23,7 @@
             <div class="card-body">
              <div class="table-responsive-sm">
 
-             <table id="tb" class="table table-bordered table-hover">
+             <table  class="tb table table-bordered table-hover">
                 <thead>
                 <tr>
                     
