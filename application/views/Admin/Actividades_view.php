@@ -42,7 +42,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php if($administracion):?>    
+               
                     <?php foreach($administracion as $item):?>
                     <tr>
                     <td><?=$item['Cod_act'];?></td>
@@ -52,15 +52,7 @@
                     <a class="btn btn-warning" href="<?=base_url()?>actividades/editar/<?=$item['Cod_act']?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                     </tr>
                     <?php endforeach;?>
-                    <?php else:?>
-
-                       
-                           <tr>
-                           <td  colspan="4"><center><h1 class="display-4 center">Sin Data</h1></center></td>
-                           </tr> 
-                     
-
-              <?php endif;?> 
+                  
                 </tbody>
                
         
@@ -115,7 +107,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php if($sub):?>    
+                  
                         <?php foreach($sub as $item):?>
                         <tr>
                         <td><?=$item['actividad'];?></td>
@@ -126,15 +118,6 @@
                         
                         <?php endforeach;?>
 
-                        <?php else:?>
-
-                          
-                              <tr>
-                              <td  colspan="4"><center><h1 class="display-4 center">Sin Data</h1></center></td>
-                              </tr> 
-                        
-
-                  <?php endif;?> 
                     </tbody>
                
         

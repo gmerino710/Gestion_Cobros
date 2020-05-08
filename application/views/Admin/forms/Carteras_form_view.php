@@ -48,7 +48,7 @@
                         </div>
                         <div class="col col-md-6 col-sm-12">
 
-                    <a  href="<?=base_url()?>carteras" ><button type="button" class="btn btn-danger  btn-block">Cancelar</button>   </a>  
+                    <a  href="<?=base_url()?>carteras" class="btn btn-danger  btn-block">Cancelar</a>
 
                     </div>
                  </div>   
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col col-md-6 col-sm-12">
 
-                  <a  href="<?=base_url()?>carteras" ><button type="button" class="btn btn-danger  btn-block">Cancelar</button>   </a>  
+                  <a  href="<?=base_url()?>carteras" class="btn btn-danger  btn-block">Cancelar</a>
 
                    </div>
                 </div>   

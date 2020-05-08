@@ -21,14 +21,38 @@ class Usuarios extends MY_Controller
   array(
       'field' => 'nombre',
       'label' => 'Nombre',
-      'rules' => 'required|alpha_dash|max_length[40]|min_length[3]'
+      'rules' => 'required|regex_match[/^[][a-zA-Z-@# ,().]+$/]|max_length[40]|min_length[3]'
   ),
   array(
       'field' => 'conf',
       'label' => 'Confirmacion',
       'rules' => 'required|matches[clave]'
   )
+);
 
+
+  public $rules2 =array(
+    array(
+      'field' => 'usuario',
+      'label' => 'Usuario',
+      'rules' => 'alpha_dash|max_length[40]|min_length[3]'
+  ),
+  array(
+      'field' => 'clave',
+      'label' => 'Clave',
+      'rules' => 'max_length[40]|min_length[3]',
+  ),
+  array(
+      'field' => 'nombre',
+      'label' => 'Nombre',
+      'rules' => 'regex_match[/^[][a-zA-Z-@# ,().]+$/]|max_length[40]|min_length[3]'
+  ),
+ /* array(
+      'field' => 'conf',
+      'label' => 'Confirmacion',
+      'rules' => 'matches[clave]'
+  )
+*/
 
   );
         public function index ($id = null )
@@ -130,38 +154,67 @@ class Usuarios extends MY_Controller
 
         public function update()
         {
+         
+        $usuario = $this->input->post("usuario");
+  
+
+        if ($usuario==null) {
           $id = $this->input->post("id");
-          $usuario = $this->input->post("usuario");
           $contraseña=  $this->input->post("clave");
           $Cargo= $this->input->post("nombre");
           $rol= $this->input->post("rol");
           $estado= $this->input->post("estados");
-          //$id = $this->uri->segment(3);
-          $this->form_validation->set_rules($this->rules);
-          $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
-          if ($this->form_validation->run()==True) {
-            $data = array(
-              'usuario'=>$usuario,
-              'clave' =>encriptar( $contraseña),
-              'nombre'=>$Cargo,
-              'id_rol'=>$rol,
-              'id_estado_usuario' =>$estado
-            );
-            $this->session->set_flashdata('item','Usuario Actualizado');
-          
-            $this->Model_general->Update_user($data,$id);
+            //$id = $this->ri->segment(3);
+            $this->form_validation->set_rules($this->rules2);
+            $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
+            if ($this->form_validation->run()==True) {
+                if ($contraseña == null) {
+                  $data = array(
+
+                    'nombre'=>$Cargo,
+                    'id_rol'=>$rol,
+                    'id_estado_usuario' =>$estado
+                  );
+                  $this->session->set_flashdata('item','Usuario Actualizado');
+                
+                  $this->Model_general->Update_user($data,$id);
+                  redirect('Usuarios');
+
+
+                }else{
+                  $data = array(
+              
+                    'clave' =>encriptar( $contraseña),
+                    'nombre'=>$Cargo,
+                    'id_rol'=>$rol,
+                    'id_estado_usuario' =>$estado
+                  );
+                  $this->session->set_flashdata('item','Usuario Actualizado');
+                
+                  $this->Model_general->Update_user($data,$id);
+      
+                redirect('Usuarios');
+
+                }
+           
+            } else {
+              $this->titulo  = 'Actualizar usuario';
+              $data['roles']= $this->Model_general->get_rol();
+  
+              $data['estados']= $this->Model_general->Get_estado_usuario();
+              $data['old'] =$this->Model_general->Get_user_id($id);
+              $this->vista = 'formu/Perfiles/Update_registro_view';
+              $this->load->view('plantilla/plantilla',$data);
+            }
+         
+        }else{
           redirect('Usuarios');
-          } else {
-            $data['roles']= $this->Model_general->get_rol();
 
-            $data['estados']= $this->Model_general->Get_estado_usuario();
+        }
 
-            $this->titulo     = 'Nuevo usuario';
-            $this->vista = 'formu/Perfiles/Nuevo_registro_view';
-            $this->load->view('plantilla/plantilla',$data);
-          }
+        
           
 
      

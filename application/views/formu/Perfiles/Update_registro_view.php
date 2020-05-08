@@ -23,13 +23,15 @@
                 <div class="form-group row mt-1">
                     <label for="Usuario" class="col-sm-2 col-form-label">Usuario</label>
                     <div class="col-sm-12">
-                    <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" value="<?=$items['usuario'];?>">
+                    <?php echo form_error('usuario'); ?>
+                    <input type="text"  disabled class="form-control" id="usuario" name="usuario" placeholder="Usuario" value="<?=$items['usuario'];?>">
                     </div>
                 </div>
 
                 <div class="form-group row mt-1">
                     <label for="Contraseña" class="col-sm-2 col-form-label">Contraseña</label>
                     <div class="col-sm-12">
+                    <?php echo form_error('clave'); ?>
                     <input type="password" class="form-control" id="Contraseña" name="clave" placeholder="Contraseña">
                     </div>
                 </div>
@@ -37,6 +39,7 @@
                 <div class="form-group row mt-1">
                 <label for="Contraseña1" class="col-sm-3 col-form-label">Repetir contraseña</label>                    
                  <div class="col-sm-12">
+                 <?php echo form_error('conf'); ?>
                     <input type="password" class="form-control" id="Contraseña1" placeholder="Repetir contraseña">
                     </div>
                 </div>
@@ -45,6 +48,7 @@
                 <div class="form-group row mt-1">
                 <label for="cargo" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-12">
+                    <?php echo form_error('nombre'); ?>
                     <input type="text" class="form-control" id="cargo" name="nombre" placeholder="Nombre"  value="<?=$items['nombre'];?>" >
                     </div>
                 </div>
@@ -81,7 +85,7 @@
                     </div>
                     <div class="col col-md-6 col-sm-12">
 
-                    <a  href="<?=base_url()?>usuarios" ><button type="button" class="btn btn-danger  btn-block">Cancelar</button>   </a>  
+                    <a  href="<?=base_url()?>usuarios" class="btn btn-danger btn-block" >Cancelar</button>   </a>  
 
                      </div>
                 </div>   

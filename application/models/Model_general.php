@@ -147,7 +147,7 @@ public function Get_user_id($id)
 public function Update_user ($data,$id)
 {
     $this->db -> set ($data); 
-    $this->db-> where ( 'id_usuario' ,  $id ); 
+    $this->db-> where ('id_usuario', $id); 
     $this->db-> update ( 'catag_usuarios' );
 }
 

@@ -34,7 +34,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php if($administracion):?>    
+              
                     <?php foreach($administracion as $item):?>
                     <tr>
                     <td><?=$item['Cod_Catera'];?></td>
@@ -44,15 +44,7 @@
                     <a class="btn btn-warning" href="<?=base_url()?>carteras/editar/<?=$item['Cod_Catera']?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                     </tr>
                     <?php endforeach;?>
-                    <?php else:?>
-
-                       
-                           <tr>
-                           <td  colspan="4"><center><h1 class="display-4 center">Sin Data</h1></center></td>
-                           </tr> 
-                     
-
-                <?php endif;?>
+                 
                 </tbody>
                
                 

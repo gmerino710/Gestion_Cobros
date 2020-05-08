@@ -176,12 +176,21 @@ public function Set_permissions ()
       {
           if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table2,$this->codigo_table,$id)==null ) {
               redirect('roles');
-          } else {
-                     $contador =$this->Administracion_model->search_dependenciax($this->table,$this->codigo_table,$id);
+
+          } 
+          if ($this->Administracion_model->search_dependencia('catag_usuarios',$id,'id_rol')>=1) {
+            $this->session->set_flashdata('delete','No se a podido eliminar , usuarios vinculados');
+            redirect('roles');
+        }
+          else {
+                     $contador =$this->Administracion_model->search_dependenciax($this->table,$this->codigo_table,$id,'Actividad');
+                
                     if ($contador>=1) {
                         $this->session->set_flashdata('delete','No se a podido eliminar el Rol tiene permisos activos');
                         redirect('roles');
-                    }elseif(empty($contador)){
+                    }
+                    
+                    elseif(empty($contador)){
                         $this->Administracion_model->destroy_element($this->table2,$this->codigo_table,$id);
                         $this->session->set_flashdata('item','Datos Eliminados');
                      

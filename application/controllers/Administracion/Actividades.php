@@ -51,7 +51,7 @@ class Actividades extends MY_Controller
 
             $id =$this->input->post('id');
 
-            $this->form_validation->set_rules('actividad','Actividad','required|max_length[40]|min_length[4]|alpha_numeric_spaces|is_unique[catag_actividades.Actividad]');
+            $this->form_validation->set_rules('actividad','Actividad','required|max_length[40]|min_length[4]|regex_match[/^[][a-zA-Z-@# ,().]+$/]');
             $this->form_validation->set_rules('estado','Estado','required');
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
@@ -108,7 +108,7 @@ class Actividades extends MY_Controller
                 redirect('actividades');
             } else {
                 // cantidad de los campos q se repite
-            $contador =$this->Administracion_model->search_dependencia($this->tb2,$id);
+            $contador =$this->Administracion_model->search_dependencia($this->tb2,$id,'Actividad');
             if ($contador >=1) {
                 $this->session->set_flashdata('delete','No se a podido eliminar');
                 redirect('actividades');

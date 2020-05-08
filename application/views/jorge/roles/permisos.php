@@ -4,7 +4,7 @@
         <!-- general form elements -->
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Asignación de Accesos para el perfil <b><?php echo $dato['nombre_perfil'];?></b></h3>
+                <h3 class="box-title">Asignación de permisos para rol <?php echo $dato['nombre_rol'];?></h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->

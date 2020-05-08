@@ -36,8 +36,8 @@ class Gestores extends MY_Controller
             $estado= $this->input->post('estado');
             
 
-            $this->form_validation->set_rules('nombre','Nombre','required|max_length[40]|min_length[4]|alpha');
-            $this->form_validation->set_rules('apellido','Apellido','required|max_length[40]|min_length[4]1alpha');
+            $this->form_validation->set_rules('nombre','Nombre','required|max_length[40]|min_length[4]|regex_match[/^[][a-zA-Z-@# ,().]+$/]');
+            $this->form_validation->set_rules('apellido','Apellido','required|max_length[40]|min_length[4]regex_match[/^[][a-zA-Z-@# ,().]+$/]');
             $this->form_validation->set_rules('estado','Estado','required');
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
@@ -99,8 +99,8 @@ class Gestores extends MY_Controller
             $estado= $this->input->post('estado');
 
             //------------------------------------------------------
-            $this->form_validation->set_rules('nombre','Nombre','required|max_length[40]|min_length[4]|alpha');
-            $this->form_validation->set_rules('apellido','Apellido','required|max_length[40]|min_length[4]|alpha');
+            $this->form_validation->set_rules('nombre','Nombre','required|max_length[40]|min_length[4]|regex_match[/^[][a-zA-Z-@# ,().]+$/]');
+            $this->form_validation->set_rules('apellido','Apellido','required|max_length[40]|min_length[4]|regex_match[/^[][a-zA-Z-@# ,().]+$/]');
             $this->form_validation->set_rules('estado','Estado','required');
             $this->form_validation->set_error_delimiters('<ul class="text-danger">', '</ul>');
         

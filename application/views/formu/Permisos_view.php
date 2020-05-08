@@ -1,9 +1,9 @@
-<section class="content">
-            <div class="container-fluid">
+<section class="content ">
+<div class="container-fluid">
 
 <div class="row">
     <!-- left column -->
-    <div class="col-12">
+    <div class="col-10 col-sm12 mx-auto">
         <!-- general form elements -->
         <div class="card">
              <div class="card-header">
@@ -58,16 +58,39 @@
                 //alert($('#'+cheque).val());
             }
             </script>
-            <div class="modal-footer ">
-                
+            <div class="card-footer ">
+            <div class="row mt-4 mx-auto">
+                    <div class="col col-md-6 col-sm-12">
+              
+                    <input type="submit" class="btn btn-primary name  btn-block" value="Guardar" name="guardar" />
+
+                    </div>
+                    <div class="col col-md-6 col-sm-12">
+
+                 
+                    <a href="<?php echo site_url($this->controlador);?>" class="btn btn-danger  btn-block">Cancelar </a>
+
+                   </div>
+                </div>   
+                <!--
+            <div class="row mt-4">
+                    <div class="col col-md-6 col-sm-12">
+                    <input type="submit" class="btn btn-success" value="Guardar" name="guardar" />
+
+                    </div>
+                    <div class="col col-md-6 col-sm-12">
+
+                  
+
+                   </div>
+                </div>   
+        -->
                     
-                        <input type="submit" class="btn btn-success" value="Guardar" name="guardar" />
-                    
-                    
-                        <a href="<?php echo site_url($this->controlador);?>" class="btn btn-danger">Cancelar </a>
                    
                     
                 </div>
+
+                
             </div>
             <?php
     echo form_close();

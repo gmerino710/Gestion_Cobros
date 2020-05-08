@@ -31,6 +31,7 @@
                             <div class="col-sm-12">
                                 <select id="estado" name="estado"  class="form-control">
                                 <?php foreach($estados as $item):?>
+                                  
                                   <option value="<?=$item['Cod_estado'];?>"><?=$item['estado'];?></option>
                                 <?php endforeach;?>   
                                 </select>

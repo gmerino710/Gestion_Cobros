@@ -61,7 +61,7 @@
                     </div>
                     <div class="col col-md-6 col-sm-12">
 
-                  <a  href="<?=base_url()?>gestores" ><button type="button" class="btn btn-danger  btn-block">Cancelar</button>   </a>  
+                  <a  href="<?=base_url()?>gestores" class="btn btn-danger  btn-block">Cancelar</a>
 
                 </div>
                 </div>   

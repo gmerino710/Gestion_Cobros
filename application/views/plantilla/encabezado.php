@@ -39,6 +39,10 @@
 <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -82,32 +86,41 @@
     </a>
   
     <ul class="dropdown-menu dropdown-menu-lg  dropdown-menu-right" style="border-radius: 15px;">
+
+
+      <!-- Notifications Dropdown Menu -->
+      
    
     
    
       <li class="user-header" >
-      <?= img(array('src' => url_logo($this->usuario['logo']),
-                  'class'=> 'img-size-50 mr-3 img-circle',
-                  'alt'=> 'Imagen del Usuario'));
-                    ?>
+          <?= img(array('src' => url_logo($this->usuario['logo']),
+                      'class'=> 'img-size-50 mr-3 img-circle',
+                      'alt'=> 'Imagen del Usuario'));
+                        ?>
 
-        <p id="usuario">
-        <?php if(isset($this->usuario['usuario_empresa'])):?> 
-                      <?=$this->usuario['usuario_empresa']['perfil']['nombre_perfil'];?>
-                    <?php else :?>
-                      <?=$this->usuario['rol']['nombre_rol'];?>
-                    <?php endif;?>
-        </p>
-        <?php if (!isset($this->usuario['usuario_empresa'])):?> 
-      
-      <small class= 'text-secondary'>Ult. Acceso: <?=$this->usuario['ultimo_acceso']; ?></small>
+            <p id="usuario">
+            <?php if(isset($this->usuario['usuario_empresa'])):?> 
+                          <?=$this->usuario['usuario_empresa']['perfil']['nombre_perfil'];?>
+                        <?php else :?>
+                          <?=$this->usuario['rol']['nombre_rol'];?>
+                        <?php endif;?>
+            </p>
+            <?php if (!isset($this->usuario['usuario_empresa'])):?> 
+        
+        
+              <small class= 'dropdown-item dropdown-header text-secondary'><a href="<?=base_url();?>perfil">ver perfil</a></small>
+              <br>
 
-                    
-     <?php endif;?>
+          
+              <br>
+                        
+        <?php endif;?>
+       
       </li>
     
       <!-- Menu Footer-->
-      <li class="user-footer">
+      <li class="user-footer mt-3">
         <div class="pull-left text-center" >
         <?php if (isset($this->usuario['usuario_empresa'])):?> 
                   <small> <?=anchor('empresa/salir', 'Salir'); ?></small>
@@ -249,7 +262,13 @@ if ($mensaje) {
     ?>
             <div class="panel box box-<?php echo $mensaje['tipo']; ?>">
                 <div class="box-header with-border">
-                  <?php echo $mensaje['mensaje']; ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                     <?php echo $mensaje['mensaje']; ?>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>   
+                </div>
+                  
 
                 </div>
             </div>

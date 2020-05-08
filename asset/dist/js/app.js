@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+
+      
       // definir tipo de cambiod
             $.extend( $.fn.dataTable.defaults, {
                   ordering:  false,
@@ -14,7 +17,7 @@ $(document).ready(function() {
       $('.tb').DataTable({
             language :{
                   lengthMenu: "Total _MENU_ ",
-                  zeroRecords: "Ningu dato dispone",
+                  zeroRecords: "Ningu dato disponel",
                   info: "Mostrando pagina _PAGE_ de _PAGES_",
                   infoEmpty: "Vacio",
                   infoFiltered: "(filtered from _MAX_ total records)"
@@ -44,7 +47,7 @@ $(document).ready(function() {
         lengthMenu: [[5,10],[5,10]],
         language :{
             lengthMenu: "Total _MENU_ ",
-            zeroRecords: "Ningu dato dispone",
+            zeroRecords: "Ningu dato disponel",
             info: "Mostrando pagina _PAGE_ de _PAGES_",
             infoEmpty: "Vacio",
             infoFiltered: "(filtered from _MAX_ total records)"
@@ -84,5 +87,11 @@ $(document).ready(function() {
 
       $('#tb_sub_filter').css('display','none');
   
+      $custom-file-text ({
+            en: "Browse",
+            es: "Elegir"
+      }
+          );
+          
    
 });

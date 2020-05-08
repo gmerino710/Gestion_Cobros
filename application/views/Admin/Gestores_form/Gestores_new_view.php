@@ -6,8 +6,7 @@
           <div class="card">
             <div class="card-header">
 
-            <h4>Nuevo <i class="fa fa-plus"></i>  </h4>
-              
+            <h4>Añadir <i class="fa fa-edit"></i>  </h4>              
             </div>
             <!-- /.card-header -->
             <div class="card-body ">

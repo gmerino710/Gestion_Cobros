@@ -117,7 +117,11 @@ $route['actividades/subactividad/nuevo_elemento'] = 'Administracion/Actividades/
 $route['actividades/subactividad/eliminar/(:num)'] = 'Administracion/Actividades/destroy_sub/$1';
 
 $route['actividades/subactividad/eliminar'] = 'Administracion/Actividades/destroy_sub';
-//--------------------------------------------------------------------------------------------
+//---------------------------------------Ruta de usuarios-----------------------------------------------------
 
-$route['404_override'] = '';
+$route['perfil'] = 'Perfil';
+
+$route['perfil/subirt']='Perfil/subir';
+///---------------------------------------------------------------------------------------------------
+$route['404_override'] = 'Errors404';
 $route['translate_uri_dashes'] = FALSE;

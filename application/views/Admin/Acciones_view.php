@@ -11,7 +11,7 @@
                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>   
-              </div>
+                </div>
               <?php endif;?> 
             <a title="Nuevo cartera" href="<?=base_url()?>acciones/nuevo"><button class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
               Añadir Cartera <i class="fa fa-plus"></i> 
@@ -32,7 +32,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php if($administracion):?>    
+                
                     <?php foreach($administracion as $item):?>
                     <tr>
                     <td><?=$item['Cod_accion'];?></td>
@@ -42,15 +42,7 @@
                     <a class="btn btn-warning" href="<?=base_url()?>acciones/editar/<?=$item['Cod_accion']?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                     </tr>
                     <?php endforeach;?>
-                    <?php else:?>
-
-                       
-                           <tr>
-                           <td  colspan="4"><center><h1 class="display-4 center">Sin Data</h1></center></td>
-                           </tr> 
-                     
-
-                <?php endif;?>
+                  
                 </tbody>
                
                 
