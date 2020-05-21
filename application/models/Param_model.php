@@ -14,26 +14,9 @@ class param_model extends CI_Model
         }
 
     }
-    public function actualiza_proceso_ofac($estado = true)
-    {
-        if ($estado) {
-            $this->db->update('catag_parametros', array('valor' => 'SI'), array('id' => 7));
-            $this->db->update('catag_parametros', array('valor' => date('d/m/Y')), array('id' => 11));
-        } else {
-            $this->db->update('catag_parametros', array('valor' => 'NO'), array('id' => 7));
-        }
 
-    }
-    public function actualiza_proceso_onu($estado = true)
-    {
-        if ($estado) {
-            $this->db->update('catag_parametros', array('valor' => 'SI'), array('id' => 10));
-            $this->db->update('catag_parametros', array('valor' => date('d/m/Y')), array('id' => 12));
-        } else {
-            $this->db->update('catag_parametros', array('valor' => 'NO'), array('id' => 10));
-        }
+    
 
-    }
 
     public function obtiene_iconos($nombre)
     {
@@ -63,7 +46,7 @@ class param_model extends CI_Model
             'id_perfil'  => $id_perfil,
         ))->result_array();
     }
-
+/*
     public function actualizar_contadores_perfiles($contadores, $id_perfil = 0)
     {
         $this->db->delete('contadores_x_perfiles', array('id_perfil' => $id_perfil,
@@ -75,4 +58,38 @@ class param_model extends CI_Model
         }
     }
 
+*/
+            public function Get_options()
+            {
+                return $this->db->get('catag_parametros')->result_array();
+
+            }
+
+         public function Get_options_id($id)
+            {
+                        $this->db->select('id,nombre_parametro,descripcion,valor');
+                        $this->db->where('id', $id);
+                        $query = $this->db->get('catag_parametros');
+                        
+                    return $query->result_array();
+            }
+
+
+
+            public function Update_options ($data,$id)
+                {
+                    $this->db -> set ($data); 
+                    $this->db-> where ('id', $id); 
+                    $this->db-> update ('catag_parametros' );
+                }
+
+
+
+           public function Get_logo()
+           {
+            $this->db->select('Logo_empresa');
+            $query = $this->db->get('Logo_empresa');
+
+            return $query->row_array();
+           }     
 }

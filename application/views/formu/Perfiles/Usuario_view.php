@@ -12,6 +12,17 @@
                       </button>   
               </div>
               <?php endif;?> 
+
+              <?php if($this->session->flashdata('err')):?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 <?php echo $this->session->flashdata('err'); ?>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>   
+              </div>
+              <?php endif;?> 
+
+
               <a title="Nuevo Uusario" href="<?=base_url()?>usuarios/nuevo"><button class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
               Añadir Usuario <i class="fa fa-plus"></i> 
               </button>  

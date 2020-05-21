@@ -142,9 +142,13 @@
   <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="<?=base_url();?>" class="brand-link">
-                <img  title="Inicio" src="https://i.pinimg.com/originals/7a/b0/2a/7ab02ae6078aea3ebcb59ab42836e4fa.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
-                <span class="brand-text font-weight-light">Empresa</span>
+
+            <?php  $var = $this->param_model->Get_logo();?>
+
+            <?php echo img(array('src'=>Logo_empresa($var['Logo_empresa']),'class'=>'brand-image img-circle elevation-3"'));?>
+
+                
+                <span class="brand-text font-weight-light"><?= $this->abrev_empresa; ?></span>
               </a>
               <!-- sidebar: style can be found in sidebar.less -->
   <div class="sidebar">

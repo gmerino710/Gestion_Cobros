@@ -36,8 +36,12 @@ class Gestores extends MY_Controller
             $estado= $this->input->post('estado');
             
 
-            $this->form_validation->set_rules('nombre','Nombre','required|max_length[40]|min_length[4]|regex_match[/^[][a-zA-Z-@# ,().]+$/]');
-            $this->form_validation->set_rules('apellido','Apellido','required|max_length[40]|min_length[4]regex_match[/^[][a-zA-Z-@# ,().]+$/]');
+            $this->form_validation->set_rules('nombre','Nombre','required|max_length[40]|min_length[4]|regex_match[/^([a-zA-Z]|\s)+$/]',
+            array( 'regex_match' => 'Debe tener minimo 4 caracteres y contener letras sin caracteres especiales'
+        ));
+            $this->form_validation->set_rules('apellido','Apellido','required|max_length[40]|min_length[4]|regex_match[/^([a-zA-Z]|\s)+$/]',
+            array( 'regex_match' => 'Debe tener minimo 4 caracteres y contener letras sin caracteres especiales'
+        ));
             $this->form_validation->set_rules('estado','Estado','required');
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
@@ -46,7 +50,8 @@ class Gestores extends MY_Controller
             $data = array(
                 'Nombre'=>$name,
                 'Apellido'=>$apellido,
-                'Estado'=>$estado
+                'Estado'=>$estado,
+                'creado_por'=>obtener_usuario()['usuario']
                );
     
                $this->Administracion_model->new_insert('catag_gestores',$data);
@@ -78,7 +83,7 @@ class Gestores extends MY_Controller
             if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {
                 redirect('gestores');
             } else {
-            $data = ['Cod_Gestores','Nombre', 'Apellido'];  
+                $data = ['Cod_Gestores','Nombre', 'Apellido','Estado'];  
 
             $data['old'] =  $this->Administracion_model->obter_datos_adminitracion($id,'Cod_Gestores',$data,'catag_gestores');
            
@@ -109,13 +114,14 @@ class Gestores extends MY_Controller
             $data = array(
                 'Nombre'=>$name,
                 'Apellido'=>$apellido,
-                'Estado'=>$estado
+                'Estado'=>$estado,
+                'modificado_por'=>obtener_usuario()['usuario']
                );
             $this->Administracion_model->Update_user($data,'Cod_Gestores',$id,$table);
             $this->session->set_flashdata('item','Datos Actualizados');
             redirect('gestores');
           } else {
-            $data = ['Cod_Gestores','Nombre', 'Apellido'];
+            $data = ['Cod_Gestores','Nombre', 'Apellido','Estado'];
             $data['old'] =  $this->Administracion_model->obter_datos_adminitracion($id,'Cod_Gestores',$data,'catag_gestores');
            
             $data['estados']= $this->Administracion_model->get_estado_usuario();

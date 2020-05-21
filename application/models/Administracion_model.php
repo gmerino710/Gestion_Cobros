@@ -40,13 +40,31 @@ class Administracion_model extends CI_Model
                   
             }
 
+            public function get_estad($id)
+            {
+                // select ctu.id_estado_usuario from catag_usuarios ctu inner join catag_estados ctes on ctes.Cod_estado = ctu.id_estado_usuario where id_usuario
+              /*  $this->db->select('id_estado_usuario');
+                $this->db->from('catag_usuarios');
+                $this->db->join('catag_estados',' catag_usuarios.id_usuario  = catag_estados.Cod_estado');
+                $this->db->where('id_usuario', $id);
+                $query = $this->db->get();
+                */
+                $query = $this->db->get_where('catag_usuarios', array('id_usuario' => $id));
+               return $query->result_array();
 
+            }
+
+
+            //
+
+            
             public function get_estado_usuario()
             {
                $query = $this->db->get('catag_estados');
                return $query -> result_array();
             }
 
+            
             public function new_insert($table ,$data)
             {
                 $this->db->insert($table,$data);
@@ -69,7 +87,7 @@ class Administracion_model extends CI_Model
            
         }
 
-
+////
 
         // Subactividades
 
@@ -127,6 +145,10 @@ class Administracion_model extends CI_Model
         }
 
 
+
+
         
 
 }
+
+

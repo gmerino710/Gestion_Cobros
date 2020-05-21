@@ -120,11 +120,21 @@ class usuario_model extends CI_Model
         $this->db->update('catag_usuarios', array('logo' => $logo), array('id_usuario' => $id));
     }
 
+       // Actualizar logo de la empresa
+
+    public function actualiza_logo_empresa($id, $logo)
+    {
+        $this->db->update('Logo_empresa', array('Logo_empresa' => $logo), array('id' => $id));
+    }
+
+ 
+
     public function actualiza_clave($id, $clave)
     {
         $this->db->update('catag_usuarios', array('clave' => $clave), array('id_usuario' => $id));
     }
 
+    //
     public function obtiene_por_id($id)
     {
         return $this->db->get_where('catag_usuarios', array('id_usuario' => $id))->row_array();

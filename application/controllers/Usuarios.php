@@ -11,7 +11,7 @@ class Usuarios extends MY_Controller
     array(
       'field' => 'usuario',
       'label' => 'Usuario',
-      'rules' => 'required|alpha_dash|max_length[40]|min_length[3]|is_unique[catag_usuarios.usuario]'
+      'rules' => 'required|regex_match[/^([a-zA-Z]|\s)+$/]|max_length[10]|min_length[4]|is_unique[catag_usuarios.usuario]'
   ),
   array(
       'field' => 'clave',
@@ -30,12 +30,15 @@ class Usuarios extends MY_Controller
   )
 );
 
+/*  |required|regex_match[/^([a-zA-Z]|\s)+$/]',
+            array( 'regex_match' => 'Debe tener minimo 4 caracteres y contener letras sin caracteres especiales',
+        ));   */
 
   public $rules2 =array(
     array(
       'field' => 'usuario',
       'label' => 'Usuario',
-      'rules' => 'alpha_dash|max_length[40]|min_length[3]'
+      'rules' => 'regex_match[/^([a-zA-Z]|\s)+$/]|max_length[40]|min_length[3]'
   ),
   array(
       'field' => 'clave',
@@ -62,9 +65,14 @@ class Usuarios extends MY_Controller
             $this->titulo     = 'Usuarios';
             $this->vista = 'formu/Perfiles/Usuario_view';
             $this->load->view('plantilla/plantilla',$data);
+
+        
+        
+
         }
 
         public function Set_users ()
+
         {
             $data['roles']= $this->Model_general->get_rol();
 
@@ -121,15 +129,22 @@ class Usuarios extends MY_Controller
 
         public function delete($id=null)
         {
-          if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {
+
+          $row =$this->Administracion_model->get_estad($id);
+
+          foreach ($row as $s) {
+
+            if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null or $s['id_estado_usuario'] ==1 ){
+              $this->session->set_flashdata('err','No se puede eliminar'); 
               redirect('Usuarios');
-          } else {
-            $this->Model_general->destroy_rol($id);
-            $this->session->set_flashdata('item','Usuario Eliminado');
-            redirect('Usuarios');
+                  
+              } else {
+                $this->Model_general->destroy_rol($id);
+                $this->session->set_flashdata('item','Usuario Eliminado');
+                redirect('Usuarios');
+              }
+               
           }
-          
-        
           
             
         }   
@@ -144,7 +159,9 @@ class Usuarios extends MY_Controller
             $data['roles']= $this->Model_general->get_rol();
 
             $data['estados']= $this->Model_general->Get_estado_usuario();
+
             $data['old'] =$this->Model_general->Get_user_id($id);
+            
             $this->vista = 'formu/Perfiles/Update_registro_view';
             $this->load->view('plantilla/plantilla',$data);
            
@@ -164,6 +181,7 @@ class Usuarios extends MY_Controller
           $Cargo= $this->input->post("nombre");
           $rol= $this->input->post("rol");
           $estado= $this->input->post("estados");
+          
 
             //$id = $this->ri->segment(3);
             $this->form_validation->set_rules($this->rules2);
@@ -183,7 +201,9 @@ class Usuarios extends MY_Controller
                   redirect('Usuarios');
 
 
-                }else{
+                }
+                
+                else{
                   $data = array(
               
                     'clave' =>encriptar( $contraseña),

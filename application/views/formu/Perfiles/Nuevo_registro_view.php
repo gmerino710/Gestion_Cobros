@@ -1,7 +1,7 @@
     <!-- Main content -->
   <section class="content h-100 ">
       <div class="row  h-100 justify-content-center align-items-center">
-        <div class="col-10">
+        <div class="col-md-10 col-sm-12 ">
           <div class="card">
             <div class="card-header">
 
@@ -75,11 +75,11 @@
                       </div> 
                 </div>
                 <div class="row mt-4">
-                    <div class="col col-md-6 col-sm-12">
+                    <div class="col col-md-6 col-sm-6">
                     <button type="submit" class="btn btn-primary  btn-block">Agregar</button>
 
                     </div>
-                    <div class="col col-md-6 col-sm-12">
+                    <div class="col col-md-6 col-sm-6">
 
                   <a  href="<?=base_url()?>usuarios" class="btn btn-danger  btn-block">Cancelar</a>
 

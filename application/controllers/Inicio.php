@@ -19,8 +19,8 @@ class inicio extends CI_Controller
 
         $data['error'] = '';
         $this->form_validation->set_rules('usuario', 'Usuario', 'required');
-        $this->form_validation->set_rules('clave', 'Clave', 'required');
-        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+       // $this->form_validation->set_rules('clave', 'Clave', 'required');
+        $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
         if ($this->form_validation->run() == true) {
             $post   = $this->input->post();
             $existe = $this->usuario_model->obtener_por_usuario_clave($post['usuario'], $post['clave']);
@@ -40,7 +40,7 @@ class inicio extends CI_Controller
                     $data['error'] = '<label class="control-label"><i class="fa fa-times-circle-o"></i> El usuario tiene estado ' . $estado['nombre_estado'] . '</label>';
                 }
             } else {
-                $data['error'] = '<label class="control-label"><i class="fa fa-times-circle-o"></i> Usuario o clave no son correctas</label>';
+                $data['error'] = '<label class="control-label text-danger"><i class="fa fa-times-circle-o"></i> Usuario o clave no son correctas</label>';
             }
         } 
 

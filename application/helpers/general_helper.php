@@ -78,6 +78,22 @@ if (!function_exists('url_logo')) {
     }
 }
 
+if (!function_exists('Logo_empresa')) {
+    function Logo_empresa($logo_empresa)
+    {
+        $CI          = &get_instance();
+        $ruta_logos = $CI->param_model->obtener_por_id(5);
+        if (file_exists($ruta_logos . $logo_empresa)) {
+            return $ruta_logos . $logo_empresa;
+        } else {
+            return $ruta_logos . "no.png";
+        }
+
+    }
+}
+
+
+
 if (!function_exists('formateo_error_tabla')) {
     function formateo_error_tabla($errores)
     {

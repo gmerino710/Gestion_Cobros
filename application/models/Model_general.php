@@ -137,7 +137,7 @@ public function Get_user_state($id)
 
 public function Get_user_id($id)
 {
-            $this->db->select('id_usuario,usuario,nombre');
+            $this->db->select('id_usuario,usuario,nombre,id_estado_usuario,id_rol');
             $this->db->where('id_usuario', $id);
             $query = $this->db->get('catag_usuarios');
             

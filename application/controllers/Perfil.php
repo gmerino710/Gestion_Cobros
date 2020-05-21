@@ -16,6 +16,7 @@ class perfil extends MY_Controller
     public function datos_admin()
     {
         if ($this->input->post('guardar')) {
+
             $post = $this->input->post();
 
             $logo = $this->input->post('archivo_logo');
@@ -67,7 +68,7 @@ class perfil extends MY_Controller
             if ($post['clave'] == null and $this->usuario['logo']!=null ) {
                
                 
-                $logo       = $this->usuario['logo'];
+                $logo   = $this->usuario['logo'];
              
 
                 if (($_FILES['archivo_logo']['size']) > 0) {
@@ -116,5 +117,62 @@ class perfil extends MY_Controller
         $this->load->view('plantilla/plantilla');
         }
     }
+
+        public function Logo_empresa()
+        {
+
+            if ($this->input->post('guardar')) {
+                
+
+                $logo = $this->logos;
+    
+                if (($_FILES['archivo_logo']['size']) > 0) {
+                    @unlink($this->ruta_logos . $logo);
+                    $config['upload_path']   = './' . $this->ruta_logos;
+                    $config['allowed_types'] = 'gif|jpg|png';
+                    $config['file_name']     = 'Logo-empresa';
+                    $config['overwrite'] = true;
+    
+                    $this->load->library('upload', $config);
+    
+                    if ($this->upload->do_upload('archivo_logo')) {
+                        $data        = array('upload_data' => $this->upload->data());
+                        $dato_imagen = $this->upload->data();
+                        $logo        = $dato_imagen['file_name'];
+                        $this->usuario_model->actualiza_logo_empresa($this->usuario['id_usuario'], $logo);
+    
+                        $this->session->set_flashdata('mensaje', array('tipo' => 'success', 'mensaje' => 'Datos actualizados correctamente.'));
+                        $existe        = $this->usuario_model->obtiene_por_id($this->usuario['id_usuario']);
+                        $existe['rol'] = $this->usuario_model->obtener_rol($existe['id_rol']);
+                        levantar_login($existe);
+    
+                        redirect('/parametros', 'refresh');
+
+                    } else {
+                        $error_logo = true;
+                        $this->session->set_flashdata('mensaje', array('tipo' => 'danger',
+                            'mensaje'                                             => $this->upload->display_errors('<p class="text-red" >', '</p>')));
+
+                            redirect('/parametros', 'refresh');
+                        
+                    }
+                }
+                else {
+                    $error_logo = false;
+
+            
+                    redirect('/parametros', 'refresh');
+                }
+
+
+
+            }
+
+         
+
+
+        }
+
+
 
 }

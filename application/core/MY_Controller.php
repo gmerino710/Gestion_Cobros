@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller {
-	public $usuario=array();
+    public $usuario=array();
+    public $logos=array();
     public $data=array();
     public $vista="inicio";
     public $tabla;
@@ -18,12 +19,14 @@ class MY_Controller extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        $this->logos= ['Logo_empresa'];
         $this->usuario=obtener_usuario();
         if(!$this->usuario)
         {
         	redirect('inicio');
         }
         $this->ruta_perfiles=$this->param_model->obtener_por_id(4);
+        $this->ruta_logos=$this->param_model->obtener_por_id(5);
         $this->nombre_empresa=$this->param_model->obtener_por_id(1);
         $this->abrev_empresa=$this->param_model->obtener_por_id(3);
         $this->controlador=get_class($this);

@@ -96,7 +96,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="tb_sub" class="table table-striped table-bordered">
+                <table id="tb_sub" class="table table-bordered table-responsive-sm">
                     <thead>
                     <tr>
                        <th>Actividad</th> 

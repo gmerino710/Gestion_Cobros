@@ -32,9 +32,17 @@
     <div class="login-box">
 
         <div class="card">
+                
+                <?php  $var = $this->param_model->Get_logo();?>
+
+                <?php echo img(array('src'=>Logo_empresa($var['Logo_empresa']),'class'=>'img-fluid'));?>
+        
+
+             
+
                 <div class="card-body login-card-body forms">
                 
-                <h2 class="inicio">Inicio</h2>
+                <h2 class="inicio">Iniciar sesión</h2>
                
                 <?=form_open();?>
                         <?php if($error):  ?>
@@ -42,14 +50,15 @@
                             <?php echo $error; ?>
                             </div>
                         <?php endif;?>
+                        <?php echo form_error('usuario'); ?>
                         <div class="input-group mb-3">
-                             <?php echo form_error('usuario'); ?>
+                            
                             <input type="text" class="form-control" placeholder="Usuario" name="usuario" value="<?php echo set_value('usuario'); ?>" id="usuario" />
                            
                          </div>
-                        
+                         <?php echo form_error('clave'); ?> 
                          <div class="input-group mb-3">
-                         <?php echo form_error('clave'); ?>
+                       
                             <input type="password" class="form-control" placeholder="Clave" name="clave">
                            
                          </div>

@@ -2,7 +2,7 @@
     <!-- Main content -->
     <section class="content h-100 ">
       <div class="row  h-100 justify-content-center align-items-center">
-        <div class="col-10">
+        <div class="col-md-10 col-sm-12">
           <div class="card">
             <div class="card-header">
 
@@ -44,7 +44,12 @@
                         <div class="col-sm-12">   
                             <select id="estado" name="estado"  class="form-control">
                             <?php foreach($estados as $item):?>
-                              <option value="<?=$item['Cod_estado'];?>"><?=$item['estado'];?></option>
+                              <option value="<?=$item['Cod_estado'];?>"
+                              <?php if($item['Cod_estado']==$items['Estado'] ):?> selected <?php endif;?>
+  >
+                                <?= $item['estado'];?>
+
+                            </option>
                             <?php endforeach;?>   
                         </select>
                         </div> 
@@ -55,11 +60,11 @@
 
               
                 <div class="row mt-4">
-                    <div class="col col-md-6 col-sm-12">
+                    <div class="col col-md-6 col-sm-6">
                     <button type="submit" value="<?= $items['Cod_Gestores'];?>" name="id" class="btn btn-primary  btn-block">Agregar</button>
 
                     </div>
-                    <div class="col col-md-6 col-sm-12">
+                    <div class="col col-md-6 col-sm-6">
 
                   <a  href="<?=base_url()?>gestores" class="btn btn-danger  btn-block">Cancelar</a>
 

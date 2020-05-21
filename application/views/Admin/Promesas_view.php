@@ -13,22 +13,21 @@
                           </button>   
               </div>
               <?php endif;?> 
-            <a title="Nuevo cartera" href="<?=base_url()?>carteras/nuevo"><button class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-              Añadir Cartera <i class="fa fa-plus"></i> 
+            <a title="Nuevo Uusario" href="<?=base_url()?>Promesas/nuevo"><button class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+              Añadir Usuario <i class="fa fa-plus"></i> 
               </button>  
             </a>
             </button>  
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-             <div class="table-responsive-sm">
-
-             <table  class="tb table table-bordered table-responsive-sm"S>
+              <table  class="tb table table-bordered table-responsive-sm">
                 <thead>
                 <tr>
                     
                   <th>Id</th>
-                  <th>Nombre de la cartera</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
                   <th>Estados</th>
                   <th>Acciones</th>
                 </tr>
@@ -37,11 +36,12 @@
               
                     <?php foreach($administracion as $item):?>
                     <tr>
-                    <td><?=$item['Cod_Catera'];?></td>
-                    <td><?=$item['Nombre_Cartera'];?></td>
+                    <td><?=$item['id'];?></td>
+                    <td><?=$item['Nombre'];?></td>
+                    <td><?=$item['descripcion'];?></td>
                     <td><?=$item['estado'];?></td>
-                    <td><a onclick="return confirm('¿Eliminar element?')" class="btn btn-danger" href="<?=base_url();?>carteras/eliminar/<?=$item['Cod_Catera'];?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                    <a class="btn btn-warning" href="<?=base_url()?>carteras/editar/<?=$item['Cod_Catera']?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                    <td><a onclick="return confirm('¿Eliminar element?')" class="btn btn-danger" href="<?=base_url();?>Promesas/eliminar/<?=$item['id'];?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a class="btn btn-warning" href="<?=base_url()?>Promesas/editar/<?=$item['id']?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                     </tr>
                     <?php endforeach;?>
                  
@@ -49,15 +49,9 @@
                
                 
               </table>
-
-             </div> 
-              
             </div>
             <!-- /.card-body -->
           </div>
         </div>
       </div> 
     </section>  
-
-
-    <!--Model -->

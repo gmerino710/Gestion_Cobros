@@ -117,11 +117,36 @@ $route['actividades/subactividad/nuevo_elemento'] = 'Administracion/Actividades/
 $route['actividades/subactividad/eliminar/(:num)'] = 'Administracion/Actividades/destroy_sub/$1';
 
 $route['actividades/subactividad/eliminar'] = 'Administracion/Actividades/destroy_sub';
+
+//------------------------------------------Rutas de cosas generales------------------------------------------------------------------
+$route['parametros']='parametros';
+
+$route['parametros/editar/(:num)']='parametros/Edit/$1';
+$route['parametros/nuevo'] = 'parametros/new_element';
+
+//--------------------------------Edit menu-------------------------------------------------------------------
+$route['Menu/editar/(:num)'] = 'Menu/editar/$1';
+
+
+$route['logo-empresa'] = 'Perfil/Logo_empresa';
+
+
 //---------------------------------------Ruta de usuarios-----------------------------------------------------
 
 $route['perfil'] = 'Perfil';
 
 $route['perfil/subirt']='Perfil/subir';
-///---------------------------------------------------------------------------------------------------
+///-----------------------------------------------------------------------------------------------------------
+$route['Promesas'] ='Administracion/Promesas';
+$route['Promesas/nuevo'] = 'Administracion/Promesas/new';
+$route['Promesas/nuevo_elemento'] = 'Administracion/Promesas/new_element';
+//borrar
+$route['Promesas/eliminar'] = 'Administracion/Promesas/destroy';
+$route['Promesas/eliminar/(:num)'] = 'Administracion/Promesas/destroy/$1';
+// editar
+$route['Promesas/editar/(:num)'] = 'Administracion/Promesas/edit/$1';
+
+
+//---------------------------------------------------------------------------------------------------------
 $route['404_override'] = 'Errors404';
 $route['translate_uri_dashes'] = FALSE;

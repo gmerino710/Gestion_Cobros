@@ -21,7 +21,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table  class="tb table table-bordered table-hover">
+              <table  class="tb table table-bordered table-responsive-sm">
                 <thead>
                 <tr>
                     

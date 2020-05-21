@@ -10,7 +10,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="example2" class="tb table table-bordered table-responsive-sm">
                 <thead>
                 <tr>
                   <th>Id_meu</th>
@@ -18,6 +18,7 @@
                   <th>url</th>
                   <th> Icono </th>
                   <th>id_padre</th>
+                  <th>Editar</th>
               
                 </tr>
                 </thead>
@@ -29,6 +30,7 @@
                 <td><?=$item['url'];?></td>
                 <td><?=$item['fa'];?></td>
                 <td><?=$item['id_padre'];?></td>
+                <td><a  title="Asignar permisos" class="btn btn-primary"  href="<?=base_url();?>Menu/editar/<?=$item['id_menu'];?>"><i class="fa fa-edit"></i></a></td>
                 
                 </tr>
                 <?php endforeach;?>

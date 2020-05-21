@@ -52,25 +52,37 @@ class Acciones extends MY_Controller
             $estado= $this->input->post('estado');
             $id =$this->input->post('id');
 
-            $this->form_validation->set_rules('accion','Acciones','required|max_length[40]|min_length[4]|regex_match[/^[][a-zA-Z-@# ,().]+$/]');
+            $this->form_validation->set_rules('accion', 'Acciones', 'required|regex_match[/^([a-zA-Z]|\s)+$/]',
+            array( 'regex_match' => 'Debe tener minimo 4 caracteres y contener letras sin caracteres especiales',
+        ));
+
             $this->form_validation->set_rules('estado','Estado','required');
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
             //si entra
            if ($this->form_validation->run()==true) {
-           
-            $data = array(
-                'Accion'=>$name,
-                'Estado'=>$estado
-               );
+        
 
              if ($this->input->post('update')) {
+                $data = array(
+                    'Accion'=>$name,
+                    'Estado'=>$estado,
+                    'modificado_por'=>obtener_usuario()['usuario']
+                   );
+
+                  
+                  
                  $this->Administracion_model->Update_user($data,'Cod_accion',$id,'catag_acciones');
                  $this->session->set_flashdata('item','Datos Actualizados');
                   redirect('acciones');
              }
              else{
-                $this->Administracion_model->new_insert('catag_acciones',$data);
+                $data1 = array(
+                    'Accion'=>$name,
+                    'Estado'=>$estado,
+                    'creado_por'=>obtener_usuario()['usuario']
+                   );
+                $this->Administracion_model->new_insert('catag_acciones',$data1);
                 $this->session->set_flashdata('item','Elemento Añadido');
                 redirect('acciones');
              }
@@ -91,7 +103,7 @@ class Acciones extends MY_Controller
             if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {
                 redirect('acciones');
             } else {
-            $data = ['Cod_accion','Accion'];  
+            $data = ['Cod_accion','Accion','Estado'];  
             $data['old'] =  $this->Administracion_model->obter_datos_adminitracion($id,'Cod_accion',$data,'catag_acciones');
             $data['estados']= $this->Administracion_model->get_estado_usuario();
             $this->titulo = 'Actualizacion de Accion';

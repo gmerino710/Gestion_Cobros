@@ -48,25 +48,32 @@ class Carteras extends MY_Controller
             
             $id =$this->input->post('id');
             
-            $this->form_validation->set_rules('cartera','Carteras','required|max_length[40]|min_length[4]|regex_match[/^[][a-zA-Z-@# ,().]+$/]');
+            $this->form_validation->set_rules('cartera','Carteras','required|max_length[40]|min_length[4]|regex_match[/^([a-zA-Z]|\s)+$/]',
+            array( 'regex_match' => 'Debe tener minimo 4 caracteres y contener letras sin caracteres especiales'));
             $this->form_validation->set_rules('estado','Estado','required');
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
             //si entra
            if ($this->form_validation->run()==true) {
            
-            $data = array(
-                'Nombre_Cartera'=>$name,
-                'Estado'=>$estado
-               );
 
              if ($this->input->post('update')) {
+                $data = array(
+                    'Nombre_Cartera'=>$name,
+                    'Estado'=>$estado,
+                    'modificado_por'=>obtener_usuario()['usuario']
+                   );
                  
                  $this->Administracion_model->Update_user($data,'Cod_Catera',$id,'catag_carteras');
                  $this->session->set_flashdata('item','Datos Actualizados');
                   redirect('carteras');
              }
              else{
+                $data = array(
+                    'Nombre_Cartera'=>$name,
+                    'Estado'=>$estado,
+                    'creado_por'=>obtener_usuario()['usuario']
+                   );
                 $this->Administracion_model->new_insert('catag_carteras',$data);
                 $this->session->set_flashdata('item','Elemento Añadido');
                 redirect('carteras');
@@ -88,7 +95,7 @@ class Carteras extends MY_Controller
             if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null) {
                 redirect('carteras');
             } else {
-            $data = ['Cod_Catera','Nombre_Cartera'];  
+            $data = ['Cod_Catera','Nombre_Cartera','Estado'];  
             $data['old'] =  $this->Administracion_model->obter_datos_adminitracion($id,'Cod_Catera',$data,'catag_carteras');
             $data['estados']= $this->Administracion_model->get_estado_usuario();
             $this->titulo = 'Actualizacion de Gestor';

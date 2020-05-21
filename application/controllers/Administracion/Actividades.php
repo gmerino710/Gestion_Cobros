@@ -51,25 +51,38 @@ class Actividades extends MY_Controller
 
             $id =$this->input->post('id');
 
-            $this->form_validation->set_rules('actividad','Actividad','required|max_length[40]|min_length[4]|regex_match[/^[][a-zA-Z-@# ,().]+$/]');
+            $this->form_validation->set_rules('actividad','Actividad','required|max_length[40]|min_length[4]|required|regex_match[/^([a-zA-Z]|\s)+$/]',
+            array( 'regex_match' => 'Debe tener minimo 4 caracteres y contener letras sin caracteres especiales',
+        ));
             $this->form_validation->set_rules('estado','Estado','required');
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
             //si entra
            if ($this->form_validation->run()==true) {
            
-            $data = array(
-                'Actividad'=>$name,
-                'Estado'=>$estado
-               );
+         
+
 
              if ($this->input->post('update')) {
+                $data = array(
+                    'Actividad'=>$name,
+                    'Estado'=>$estado,
+                    'modificado_por'=>obtener_usuario()['usuario']
+                   );
+    
                  $this->Administracion_model->Update_user($data,$this->codigo_table,$id,$this->table);
                  $this->session->set_flashdata('item','Datos Actualizados');
                   redirect('actividades');
              }
              else{
-                $this->Administracion_model->new_insert($this->table,$data);
+
+                $data1 = array(
+                    'Actividad'=>$name,
+                    'Estado'=>$estado,
+                    'creado_por'=>obtener_usuario()['usuario']
+                   );
+                   
+                $this->Administracion_model->new_insert($this->table,$data1);
                 $this->session->set_flashdata('item','Elemento Añadido');
                 redirect('actividades');
              }
@@ -91,7 +104,7 @@ class Actividades extends MY_Controller
             if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null) {
                 redirect('actividades');
             } else {
-            $data = [$this->codigo_table,'Actividad'];  
+            $data = [$this->codigo_table,'Actividad','Estado'];  
             $data['old'] =  $this->Administracion_model->obter_datos_adminitracion($id,$this->codigo_table,$data,$this->table);
             $data['estados']= $this->Administracion_model->get_estado_usuario();
             $this->titulo = 'Actualizacion de actividad';
@@ -160,7 +173,8 @@ class Actividades extends MY_Controller
             $data = array(
                 'Subactividad'=>$name,
                 'Actividad'=>$actividad,
-                'Estado'=>$estado
+                'Estado'=>$estado,
+                'creado_por'=>obtener_usuario()['usuario']
                );
     
                $this->Administracion_model->new_insert('catag_sub_actividades',$data);
