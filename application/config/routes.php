@@ -145,6 +145,27 @@ $route['Promesas/eliminar'] = 'Administracion/Promesas/destroy';
 $route['Promesas/eliminar/(:num)'] = 'Administracion/Promesas/destroy/$1';
 // editar
 $route['Promesas/editar/(:num)'] = 'Administracion/Promesas/edit/$1';
+//-----------------------------------Ruta empresa-----------------------------------------------------------------------
+$route['Empresa'] ='Procesos/Empresa';
+
+$route['Empresa/nuevo'] = 'Procesos/Empresa/new';
+
+
+$route['Empresa/nuevo_elemento'] = 'Procesos/Empresa/new_element';
+
+//borrar
+$route['Empresa/eliminar'] = 'Procesos/Empresa/destroy';
+$route['Empresa/eliminar/(:num)'] = 'Procesos/Empresa/destroy/$1';
+
+// editar
+$route['Empresa/editar/(:num)'] = 'Procesos/Empresa/edit/$1';
+
+//---------------------------------------------------------------------------------------------------------------------
+//IMPORTACION 
+
+$route['import'] ='Procesos/Import';
+
+$route['import/subir'] ='Procesos/Import/Importar';
 
 
 //---------------------------------------------------------------------------------------------------------
