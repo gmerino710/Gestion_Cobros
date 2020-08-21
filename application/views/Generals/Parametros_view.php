@@ -18,48 +18,48 @@
                 <div class="tab-content" id="custom-tabs-two-tabContent">
                   <div class="tab-pane fade active show" id="custom-tabs-two-home" role="tabpanel" aria-labelledby="custom-tabs-two-home-tab">
 
-                      <!-- Main content -->
-            <section class="content ">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="card">
-                    
-                      <!-- /.card-header -->
-                      <div class="card-body">
-                        <table class=" tb  table table-bordered table-responsive-sm">
-                          <thead>
-                          <tr>
-                              
-                            <th>Id</th>
-                            <th>Parametro</th>
-                            <th>Descripcion</th>
-                            <th>Valor</th>
-                            <th>Editar</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          
-                              <?php foreach($params as $item):?>
-                              <tr>
-                              <td><?=$item['id'];?></td>
-                              <td><?=$item['nombre_parametro'];?></td>
-                              <td><?=$item['descripcion'];?></td>
-                              <td><?=$item['valor'];?></td>
-                              <td>
-                              <a class="btn btn-warning" href="<?=base_url()?>parametros/editar/<?=$item['id']?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
-                              </tr>
-                              <?php endforeach;?>
+                              <!-- Main content -->
+                    <section class="content ">
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="card">
                             
-                          </tbody>
-                        
-                          
-                        </table>
-                      </div>
-                      <!-- /.card-body -->
-                    </div>
-                  </div>
-                </div> 
-                </section>
+                              <!-- /.card-header -->
+                              <div class="card-body">
+                                <table class=" tb  table table-bordered table-responsive-sm">
+                                  <thead>
+                                  <tr>
+                                      
+                                    <th>Id</th>
+                                    <th>Parametro</th>
+                                    <th>Descripcion</th>
+                                    <th>Valor</th>
+                                    <th>Editar</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  
+                                      <?php foreach($params as $item):?>
+                                      <tr>
+                                      <td><?=$item['id'];?></td>
+                                      <td><?=$item['nombre_parametro'];?></td>
+                                      <td><?=$item['descripcion'];?></td>
+                                      <td><?=$item['valor'];?></td>
+                                      <td>
+                                      <a class="btn btn-warning" href="<?=base_url()?>parametros/editar/<?=$item['id']?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                                      </tr>
+                                      <?php endforeach;?>
+                                    
+                                  </tbody>
+                                
+                                  
+                                </table>
+                              </div>
+                              <!-- /.card-body -->
+                            </div>
+                          </div>
+                        </div> 
+                        </section>
 
 
                 </div>

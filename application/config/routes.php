@@ -92,9 +92,9 @@ $route['carteras/nuevo'] = 'Administracion/Carteras/new';
 $route['carteras/nuevo_elemento'] = 'Administracion/Carteras/new_element';
 // destruir
 $route['carteras/eliminar'] = 'Administracion/Carteras/destroy';
-$route['carteras/eliminar/(:num)'] = 'Administracion/Carteras/destroy/$1';
+$route['carteras/eliminar/(:any)'] = 'Administracion/Carteras/destroy/$1';
 //actualizar
-$route['carteras/editar/(:num)'] = 'Administracion/Carteras/edit_user/$1';
+$route['carteras/editar/(:any)'] = 'Administracion/Carteras/edit_user/$1';
 $route['carteras/editar'] = 'Administracion/Carteras/edit_user/';
 
 //----------------------------------Actividades----------------------------------------------
@@ -167,7 +167,25 @@ $route['import'] ='Procesos/Import';
 
 $route['import/subir'] ='Procesos/Import/Importar';
 
+// importar saldos
 
+$route['import/subir_sl'] ='Procesos/Import/Importar';
+
+$route['exportar_err'] = 'Procesos/Import/Exportar';
+
+//pagos
+
+$route['exp_err_pagos/(:any)/ctn/(:num)'] = 'Procesos/Import/Exp_pagos/$1/$2';
+
+
+//$route['exp/(:any)'] = 'Procesos/Import/Exp/$1';
+
+// procesos de carteras
+
+$route['distribucion'] ='Procesos/Distribucion';
+$route['distribucion/api'] ='Procesos/Process_api/index_get';
+
+//$route['import/error']='Procesos/Import/generate_err';
 //---------------------------------------------------------------------------------------------------------
 $route['404_override'] = 'Errors404';
 $route['translate_uri_dashes'] = FALSE;

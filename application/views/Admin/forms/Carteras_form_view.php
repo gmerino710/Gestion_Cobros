@@ -16,6 +16,16 @@
                 <?=form_open('carteras/nuevo_elemento');?>
              <?php foreach($old as $items):?>
 
+              <div class="form-group row mt-1">
+                    <label for="nombre" class="col-sm-2 col-form-label">Cartera</label>
+                        <div class="col-sm-12">
+                        <?php echo form_error('cod_cartera'); ?>
+                    
+                        <input type="text" class="form-control" value="<?=$items['Cod_catera'];?>" id="cod_cartera" name="cod_cartera" placeholder="Modificar codigo cartera">
+                        </div>
+                    </div>
+
+
                     <div class="form-group row mt-1">
                     <label for="nombre" class="col-sm-2 col-form-label">Cartera</label>
                         <div class="col-sm-12">
@@ -47,7 +57,7 @@
                     <div class="row mt-4">
                         <div class="col col-md-6 col-sm-6">
                         <input type="submit" value="Actualizar"  name="update" id="update" class="btn btn-primary  btn-block"/>  
-                        <input type="hidden" value="<?=$items['Cod_Catera'];?>" name="id" class="btn btn-primary  btn-block"/>
+                        <input type="hidden" value="<?=$items['Cod_catera'];?>" name="id" class="btn btn-primary  btn-block"/>
                         
 
                         </div>
@@ -70,6 +80,15 @@
        </div>
        <div class="card-body ">     
                 <?=form_open('carteras/nuevo_elemento');?>
+                
+                <div class="form-group row mt-1">
+                <label for="nombre" class="col-sm-2 col-form-label"> Codigo Cartera</label>
+                    <div class="col-sm-12">
+                    <?php echo form_error('cod_cartera'); ?>
+                 
+                    <input type="text" class="form-control"  value="<?=set_value('cod_cartera')?>" id="cartera" name="cod_cartera" placeholder="Añadir  codigo de cartera">
+                    </div>
+                </div>
 
 
                 <div class="form-group row mt-1">
@@ -81,6 +100,8 @@
                     </div>
                 </div>
 
+
+               
                 <div class="form-group row mt-1">
                 <?php echo form_error('estado'); ?>
                         <label for="estado"  class="col-sm-2 col-form-label">Estado</label>    

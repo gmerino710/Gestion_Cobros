@@ -64,6 +64,23 @@ class Administracion_model extends CI_Model
                return $query -> result_array();
             }
 
+
+
+            public function get_carteras()
+            {
+               $query = $this->db->get('catag_carteras');
+               return $query -> result_array();
+            }
+
+            public function get_carteras_js()
+            {
+               $query = $this->db->get('catag_carteras');
+               return $query -> result_array();
+            
+
+            }
+
+
             
             public function new_insert($table ,$data)
             {
@@ -119,6 +136,25 @@ class Administracion_model extends CI_Model
 
           return  $this->db-> count_all_results ();
         }
+
+
+                       // id de busqueda, campo => nombre del campos , tabla , nombre del campo del campo
+                       public function Dependency($table,$id,$campo)
+                       {
+                          //$query = $this->db->where($tabla,array($campo=>$id));           
+                          $this->db->select($campo);
+                          $this->db->from($table);
+                          $this->db-> where ($campo,$id );  
+                          if ($this->db-> count_all_results ()>0) {
+                            return  True;
+                          }  else{
+                              return false;
+                          }
+                         
+                       }
+
+
+
 // tabla , campo ,id
         public function search_dependenciax($table,$campo,$id)
         {

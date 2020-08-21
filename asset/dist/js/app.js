@@ -1,6 +1,22 @@
 $(document).ready(function() {
 
 
+      $('#tb_disc').DataTable({  // pagincion
+            pagingType: "simple_numbers",
+            bFilter: false,
+            pagination:true,
+            language :{
+                  lengthMenu: "Total _MENU_ ",
+                  zeroRecords: "Ningu dato dispone",
+                  info: "Mostrando pagina _PAGE_ de _PAGES_",
+                  infoEmpty: "Vacio",
+                  infoFiltered: "(filtered from _MAX_ total records)"
+              },
+              "searching": true,
+              "dom": 'tipr',
+             
+             
+            lengthMenu: [[5,10],[5,10]]});
       
       // definir tipo de cambiod
             $.extend( $.fn.dataTable.defaults, {
@@ -22,6 +38,8 @@ $(document).ready(function() {
                   infoEmpty: "Vacio",
                   infoFiltered: "(filtered from _MAX_ total records)"
               }
+             
+            
       });
 
 
@@ -87,11 +105,8 @@ $(document).ready(function() {
 
       $('#tb_sub_filter').css('display','none');
   
-      $custom-file-text ({
-            en: "Browse",
-            es: "Elegir"
-      }
-          );
+    
           
-   
+
+
 });

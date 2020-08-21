@@ -37,11 +37,11 @@
               
                     <?php foreach($administracion as $item):?>
                     <tr>
-                    <td><?=$item['Cod_Catera'];?></td>
+                    <td><?=$item['Cod_catera'];?></td>
                     <td><?=$item['Nombre_Cartera'];?></td>
                     <td><?=$item['estado'];?></td>
-                    <td><a onclick="return confirm('¿Eliminar element?')" class="btn btn-danger" href="<?=base_url();?>carteras/eliminar/<?=$item['Cod_Catera'];?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                    <a class="btn btn-warning" href="<?=base_url()?>carteras/editar/<?=$item['Cod_Catera']?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                    <td><a onclick="return confirm('¿Eliminar element?')" class="btn btn-danger" href="<?=base_url();?>carteras/eliminar/<?=$item['Cod_catera'];?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a class="btn btn-warning" href="<?=base_url()?>carteras/editar/<?=$item['Cod_catera']?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                     </tr>
                     <?php endforeach;?>
                  
