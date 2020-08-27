@@ -34,7 +34,11 @@ class Gestores extends MY_Controller
             $name =$this->input->post('nombre');
             $apellido=$this->input->post('apellido');
             $estado= $this->input->post('estado');
-            
+            $gestor= $this->input->post('gestor');
+
+            $this->form_validation->set_rules('gestor','Gestor','required|max_length[40]|min_length[4]|regex_match[/^([a-zA-Z]|\s)+$/]',
+            array( 'regex_match' => 'Debe tener minimo 4 caracteres y contener letras sin caracteres especiales'
+        ));
 
             $this->form_validation->set_rules('nombre','Nombre','required|max_length[40]|min_length[4]|regex_match[/^([a-zA-Z]|\s)+$/]',
             array( 'regex_match' => 'Debe tener minimo 4 caracteres y contener letras sin caracteres especiales'
@@ -48,6 +52,7 @@ class Gestores extends MY_Controller
             //si entra
            if ($this->form_validation->run()==true) {
             $data = array(
+                'Cod_Gestores'=>$gestor,
                 'Nombre'=>$name,
                 'Apellido'=>$apellido,
                 'Estado'=>$estado,
@@ -102,8 +107,13 @@ class Gestores extends MY_Controller
             $name =$this->input->post('nombre');
             $apellido=$this->input->post('apellido');
             $estado= $this->input->post('estado');
+            $gestor= $this->input->post('gestor');
 
+       
             //------------------------------------------------------
+            $this->form_validation->set_rules('gestor','Gestor','required|max_length[40]|min_length[4]|regex_match[/^([a-zA-Z]|\s)+$/]',
+            array( 'regex_match' => 'Debe tener minimo 4 caracteres y contener letras sin caracteres especiales'
+        ));
             $this->form_validation->set_rules('nombre','Nombre','required|max_length[40]|min_length[4]|regex_match[/^[][a-zA-Z-@# ,().]+$/]');
             $this->form_validation->set_rules('apellido','Apellido','required|max_length[40]|min_length[4]|regex_match[/^[][a-zA-Z-@# ,().]+$/]');
             $this->form_validation->set_rules('estado','Estado','required');
@@ -112,6 +122,7 @@ class Gestores extends MY_Controller
 
           if ($this->form_validation->run()==True) {
             $data = array(
+                'Cod_Gestores'=>$gestor,
                 'Nombre'=>$name,
                 'Apellido'=>$apellido,
                 'Estado'=>$estado,

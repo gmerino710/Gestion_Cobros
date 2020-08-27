@@ -14,6 +14,18 @@
                 <?=form_open('gestores/actualizar');?>
         
       <?php foreach($old as $items):?>
+        <div class="form-group row mt-1">
+                <label for="nombre" class="col-sm-2 col-form-label">Codigo gestor</label>
+                    <div class="col-sm-12">
+                    <?php echo form_error('Gestor'); ?>
+                 
+                    <input type="text" class="form-control"  value="<?=$items['Cod_Gestores']?>" id="gestor" name="gestor" placeholder="Gestor">
+                    </div>
+                </div>
+
+
+
+
                 <div class="form-group row mt-1">
                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-12">

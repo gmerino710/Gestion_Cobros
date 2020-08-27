@@ -26,7 +26,7 @@
     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Importacion de clientes</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Importacion de saldos</a>
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Importacion de Colas de Trabajo</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" id="pago-tab" data-toggle="tab" href="#pago" role="tab" aria-controls="pago" aria-selected="false">Importacion de Pagos</a>
@@ -114,7 +114,7 @@
 
                           <div class="card-body ">     
                       <!-- method="post" enctype="multipart/form-data"-->
-                                <?=form_open_multipart('import/subir_sl');?>
+                                <?=form_open_multipart('import/subir');?>
 
 
                                 <div class="form-group row mt-1">
@@ -131,7 +131,7 @@
                               
                                 <div class="row mt-4">
                                     <div class="col col-md-6 col-sm-6">
-                                    <input type="submit" class="btn btn-block btn-primary" name="importSal" value="Importar"/>
+                                    <input type="submit" class="btn btn-block btn-primary" name="importCol" value="Importar"/>
 
                                     </div>
                                     <div class="col col-md-6 col-sm-6">
@@ -274,6 +274,68 @@
                     
 
           </div>
+
+
+
+           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <!-- Main content -->
+                   
+                  <section class="content h-100 mt-4 ">
+                      <div class="row  h-100 justify-content-center align-items-center">
+                        <div class=" col-md-7 col-sm-12 ">
+                          <div class="card">
+                      
+                        <div class="card-header">
+
+                        <h4>Cargar archivo <i class="fas fa-upload"></i>  </h4>
+                  
+                      </div>
+
+                    
+
+                          <div class="card-body ">     
+                      <!-- method="post" enctype="multipart/form-data"-->
+                                <?=form_open_multipart('import/subir');?>
+
+
+                                <div class="form-group row mt-1">
+                                <label for="nombre" class="col-sm-4 col-form-label">Selecionar Archivo</label>
+                                    <div class="col-sm-12">
+                                  
+                                
+                                    <input type="file" name="file" />
+
+
+                                    </div>
+                                </div>
+
+                              
+                                <div class="row mt-4">
+                                    <div class="col col-md-6 col-sm-6">
+                                    <input type="submit" class="btn btn-block btn-primary" name="importCol" value="Importar"/>
+
+                                    </div>
+                                    <div class="col col-md-6 col-sm-6">
+
+                                    <a  class="btn btn-danger  btn-block" href="<?=base_url()?>" >Cancelar </a> 
+
+                                  </div>
+                                </div>   
+                              
+                              
+                                <?= form_close();?>    
+
+
+                            </div>
+                            <!-- /.card-body -->
+                          </div>
+                        </div>
+                      </div> 
+                    </section>   
+
+
+          
+        </div>
 
  
 </div>

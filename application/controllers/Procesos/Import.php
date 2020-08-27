@@ -2,7 +2,8 @@
 
 use function PHPSTORM_META\type;
  // revisar la idetenacion
-
+ //ver relaciones
+//select * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE TABLE_SCHEMA="proyecto_vacio" AND CONSTRAINT_TYPE="FOREIGN KEY" 
 
 
 defined('BASEPATH') or exit('No direct script access allowed');
@@ -11,10 +12,15 @@ class Import extends MY_Controller
 {
     public $table = 'catag_empresa';
 
+    public $cartera ='catag_carteras';
+    public $gestor = 'catag_gestores';
+    public $operacion ='catag_operacion';
+
     public $codigo_table = 'Cod_empresa';
     public $clientes = 'Clientes';
     public $pagos = 'Pagos';
     public $tb_bitacora_clientes = 'bitacora_cliente';
+    public $tb_bitacora_colas = 'bitacora_colas_trabajo'; 
     public $tb_bitacora_gestion = 'bitacora_gestion';
     public $tb_bitacora_pagos = 'bitacora_pagos';
     public $direccion = 'php://output';
@@ -24,10 +30,12 @@ class Import extends MY_Controller
     public $error_text_pago = 'error_pago';
     public $error_text_cliente = 'error_cliente';
     public $error_text_gestion = 'error_gestion';
+    public $error_text_colas = 'error_colas_trabajo';
     // url de error
     public $error_pagos = 'exp_err_pagos/error_pago/ctn/';
     public $error_gestion = 'exp_err_pagos/error_gestion/ctn/';
-    public $url_error = 'exp_err_pagos/error_cliente/ctn/';
+    public $error_colas = 'exp_err_pagos/error_colas_trabajo/ctn/';
+    public $error_cliente = 'exp_err_pagos/error_cliente/ctn/';
     //******************************* */
     public $campo = 'fecha_de_creacion ';
     public $not =0;
@@ -80,7 +88,7 @@ class Import extends MY_Controller
 
         $memData = array();
 
-        $subir =$this->input->post( array ( 'importSubmit',  'importSal','importPago','importGest'));
+        $subir =$this->input->post( array ( 'importSubmit',  'importCol','importPago','importGest'));
 
         if ($subir['importSubmit']) {
             
@@ -103,8 +111,7 @@ class Import extends MY_Controller
                         }
 
                         //print_r($encabezados);
-
-                        $cabezera_csv =['Cod_cliente','Cod_empresa','Nombre_cliente','tel1','tel2','tel3','Direccion_domicilio'];
+                        $cabezera_csv =['IDCLIENTE','SEXO','FECHA DE NACIMIENTO','NOMBRE','DUI','E-MAIL','CARTERA','GESTOR','DOMICILIO','REFERENCIA OPERACION','SALDO CAPITAL','SALDO INTERES','SALDO VENCIDO','SALDO TOTAL','DIAS MORA','DESCRIPCION DE PRODUCTO','TRABAJO','DIRECCION DE TRABAJO','TEL CASA','TEL TRABAJO','TEL CELULAR','TEL FAMILIAR','NOMBRE FAMILIAR','TEL FIADOR','NOMBRE FIADOR','TEL REF 1','NOMBRE REF 1','TEL REF 2','NOMBRE REF 2','COMENTARIO DE CUENTA','FACTURA','SUCURSAL','ASESOR','DIA ASIGNACION','MES ASIGNACION','AÑO ASIGNACION','MONTO OTORGADO','PLAZO','DIA APERTURA','MES APERTURA','AÑO APERTURA','DIA VENCIMIENTO','MES VENCIMIENTO','AÑO VENCIMIENTO','CUOTA','DIA ULTIMO PAGO','MES ULTIMO PAGO','AÑO ULTIMO PAGO','MONTO ULTIMO PAGO','CUOTAS PAGADAS','GARANTIA','TIPO DE CARTERA','DIA SEPARACION','MES SEPARACION','AÑO SEPARACION','SALARIO CLIENTE'];
 
                         $comparacion = array_diff($encabezados,$cabezera_csv);
 
@@ -117,7 +124,7 @@ class Import extends MY_Controller
                                     
                                             $con = array(
                                                 'where' => array(
-                                                    'Cod_cliente' => $row['Cod_cliente']
+                                                    'Cod_cliente' => $row['IDCLIENTE']
                                                 ),
                                                 'returnType' => 'count'
                                             );
@@ -126,37 +133,149 @@ class Import extends MY_Controller
                                         {
                                         
                                             $memData1 = array(
-                                                'Cod_cliente' => $row['Cod_cliente'],
-                                                'Cod_empresa' => $row['Cod_empresa'],
-                                                'Nombre_cliente' => $row['Nombre_cliente'],
-                                                'tel1' => $row['tel1'],
-                                                'tel2' => $row['tel2'],
-                                                'tel3' => $row['tel3'],
-                                                'Direccion_domicilio' => $row['Direccion_domicilio'],
+                                                'Cod_cliente' => $row['IDCLIENTE'],
+                                                'Sexo' => $row['SEXO'],
+                                                'f_nacimiento' => $row['FECHA DE NACIMIENTO'],
+                                                'Nombre_cliente' => $row['NOMBRE'],
+                                                'Dui' => $row['DUI'],
+                                                'email' => $row['E-MAIL'],
+                                                'Cartera' => $row['CARTERA'],
+                                                'Gestor' => $row['GESTOR'],
+                                                'domicilio' => $row['DOMICILIO'],
+                                                'id_operacion' => $row['REFERENCIA OPERACION'],
+                                                'saldo_capital' => $row['SALDO CAPITAL'],
+                                                'saldo_interes' => $row['SALDO INTERES'],
+                                                'saldo_vencido' => $row['SALDO VENCIDO'],
+                                                'saldo_total' => $row['SALDO TOTAL'],
+                                                'dias_mora' => $row['DIAS MORA'],
+                                                'descripcion_producto' => $row['DESCRIPCION DE PRODUCTO'],
+                                                'trabajo' => $row['TRABAJO'],
+                                                'direccion_trabajo' => $row['DIRECCION DE TRABAJO'],
+                                                'tel_casa' => $row['TEL CASA'],
+                                                'tel_trabajo' => $row['TEL TRABAJO'],
+                                                'tel_celular' => $row['TEL CELULAR'],
+                                                'tel_familiar' => $row['TEL FAMILIAR'],
+                                                'nombre_familiar' => $row['NOMBRE FAMILIAR'],
+                                                'tel_fiador' => $row['TEL FIADOR'], 
+                                                'nombre_fiador' => $row['NOMBRE FIADOR'],
+                                                'tel_ref1' => $row['TEL REF 1'],
+                                                'nombre_ref1' => $row['NOMBRE REF 1'],
+                                                'tel_ref2'=> $row['TEL REF 2'], 
+                                                'nombre_ref2' => $row['NOMBRE REF 2'],
+                                                'Comentario_cuenta' => $row['COMENTARIO DE CUENTA'],
+                                                'Factura' => $row['FACTURA'],
+                                                'Sucursal' => $row['SUCURSAL'], 
+                                                'Asesor' => $row['ASESOR'],
+                                                'dia_asignacion' => $row['DIA ASIGNACION'],
+                                                'mes_asignacion' => $row['MES ASIGNACION'],
+                                                'año_asignacion' => $row['AÑO ASIGNACION'], 
+                                                'monto_otorgado' => $row['MONTO OTORGADO'],
+                                                'plazo' => $row['PLAZO'],
+                                                'dia_apertura' => $row['DIA APERTURA'],
+                                                'mes_apertura' => $row['MES APERTURA'], 
+                                                'año_apertura' => $row['AÑO APERTURA'],
+                                                'dia_vencimiento' => $row['DIA VENCIMIENTO'],
+                                                'mes_vencimiento' => $row['MES VENCIMIENTO'], 
+                                                'año_vencimiento' => $row['AÑO VENCIMIENTO'],
+                                                'cuota' => $row['CUOTA'],
+                                                'dia_ultimo_pago' => $row['DIA ULTIMO PAGO'], 
+                                                'mes_ultimo_pago' => $row['MES ULTIMO PAGO'],
+                                                'año_ultimo_pago' => $row['AÑO ULTIMO PAGO'],
+                                                'monto_ultimo_pago' => $row['MONTO ULTIMO PAGO'], 
+                                                'cuotas_pagadas' => $row['CUOTAS PAGADAS'],
+                                                'garantia' => $row['GARANTIA'],
+                                                'tipo_cartera' => $row['TIPO DE CARTERA'],
+                                                'dia_separacion' => $row['DIA SEPARACION'],
+                                                'mes_separacion' => $row['MES SEPARACION'],
+                                                'año_separacion' => $row['AÑO SEPARACION'],
+                                                'salario_cliente' => $row['SALARIO CLIENTE'],
                                                 'modificado_por' =>obtener_usuario()['usuario']
                                             );
                                                 // Update member data
-                                                $condition = array('Cod_cliente' => $row['Cod_cliente']);
+                                                $condition = array('Cod_cliente' => $row['IDCLIENTE']);
+                                                if ($this->Administracion_model->Dependency($this->cartera,$row['CARTERA'],'Cod_catera') and
+                                        
+                                                $this->Administracion_model->Dependency($this->gestor,$row['GESTOR'],'Cod_Gestores') 
+                                            
+                                            ) {
                                                 $update = $this->Process_model->update($memData1, $condition);
                                                 if($update){
                                                     $updateCount++;
                                                 }
+                                            }else{
+                                                $insert = $this->Process_model->insert_bitacora($this->tb_bitacora_clientes,$memData1);
+
+                                            }
+                                               
 
                                         
                                      }else{    
                                             $memData1 = array(
-                                                'Cod_cliente' =>  $row['Cod_cliente'],
-                                                'Cod_empresa' => $row['Cod_empresa'],
-                                                'Nombre_cliente' => $row['Nombre_cliente'],
-                                                'tel1' => $row['tel1'],
-                                                'tel2' => $row['tel2'],
-                                                'tel3' => $row['tel3'],
-                                                'Direccion_domicilio' => $row['Direccion_domicilio'],
+                                                'Cod_cliente' => $row['IDCLIENTE'],
+                                                'Sexo' => $row['SEXO'],
+                                                'f_nacimiento' => $row['FECHA DE NACIMIENTO'],
+                                                'Nombre_cliente' => $row['NOMBRE'],
+                                                'Dui' => $row['DUI'],
+                                                'email' => $row['E-MAIL'],
+                                                'Cartera' => $row['CARTERA'],
+                                                'Gestor' => $row['GESTOR'],
+                                                'domicilio' => $row['DOMICILIO'],
+                                                'id_operacion' => $row['REFERENCIA OPERACION'],
+                                                'saldo_capital' => $row['SALDO CAPITAL'],
+                                                'saldo_interes' => $row['SALDO INTERES'],
+                                                'saldo_vencido' => $row['SALDO VENCIDO'],
+                                                'saldo_total' => $row['SALDO TOTAL'],
+                                                'dias_mora' => $row['DIAS MORA'],
+                                                'descripcion_producto' => $row['DESCRIPCION DE PRODUCTO'],
+                                                'trabajo' => $row['TRABAJO'],
+                                                'direccion_trabajo' => $row['DIRECCION DE TRABAJO'],
+                                                'tel_casa' => $row['TEL CASA'],
+                                                'tel_trabajo' => $row['TEL TRABAJO'],
+                                                'tel_celular' => $row['TEL CELULAR'],
+                                                'tel_familiar' => $row['TEL FAMILIAR'],
+                                                'nombre_familiar' => $row['NOMBRE FAMILIAR'],
+                                                'tel_fiador' => $row['TEL FIADOR'], 
+                                                'nombre_fiador' => $row['NOMBRE FIADOR'],
+                                                'tel_ref1' => $row['TEL REF 1'],
+                                                'nombre_ref1' => $row['NOMBRE REF 1'],
+                                                'tel_ref2'=> $row['TEL REF 2'], 
+                                                'nombre_ref2' => $row['NOMBRE REF 2'],
+                                                'Comentario_cuenta' => $row['COMENTARIO DE CUENTA'],
+                                                'Factura' => $row['FACTURA'],
+                                                'Sucursal' => $row['SUCURSAL'], 
+                                                'Asesor' => $row['ASESOR'],
+                                                'dia_asignacion' => $row['DIA ASIGNACION'],
+                                                'mes_asignacion' => $row['MES ASIGNACION'],
+                                                'año_asignacion' => $row['AÑO ASIGNACION'], 
+                                                'monto_otorgado' => $row['MONTO OTORGADO'],
+                                                'plazo' => $row['PLAZO'],
+                                                'dia_apertura' => $row['DIA APERTURA'],
+                                                'mes_apertura' => $row['MES APERTURA'], 
+                                                'año_apertura' => $row['AÑO APERTURA'],
+                                                'dia_vencimiento' => $row['DIA VENCIMIENTO'],
+                                                'mes_vencimiento' => $row['MES VENCIMIENTO'], 
+                                                'año_vencimiento' => $row['AÑO VENCIMIENTO'],
+                                                'cuota' => $row['CUOTA'],
+                                                'dia_ultimo_pago' => $row['DIA ULTIMO PAGO'], 
+                                                'mes_ultimo_pago' => $row['MES ULTIMO PAGO'],
+                                                'año_ultimo_pago' => $row['AÑO ULTIMO PAGO'],
+                                                'monto_ultimo_pago' => $row['MONTO ULTIMO PAGO'], 
+                                                'cuotas_pagadas' => $row['CUOTAS PAGADAS'],
+                                                'garantia' => $row['GARANTIA'],
+                                                'tipo_cartera' => $row['TIPO DE CARTERA'],
+                                                'dia_separacion' => $row['DIA SEPARACION'],
+                                                'mes_separacion' => $row['MES SEPARACION'],
+                                                'año_separacion' => $row['AÑO SEPARACION'],
+                                                'salario_cliente' => $row['SALARIO CLIENTE'],
                                                 'creado_por' =>obtener_usuario()['usuario']
                                             );  
 
                                         
-                                                if ($this->Administracion_model->Dependency($this->table,$row['Cod_empresa'],'Cod_empresa')) {
+                                                if ($this->Administracion_model->Dependency($this->cartera,$row['CARTERA'],'Cod_catera') and
+                                                   
+                                                    $this->Administracion_model->Dependency($this->gestor,$row['GESTOR'],'Cod_Gestores') 
+                                                
+                                                ) {
                                                     $insert = $this->Process_model->insert_saldos('catag_cliente',$memData1);
                                                     $insertCount++;
                                                 }
@@ -171,16 +290,16 @@ class Import extends MY_Controller
                                 
                     }
                       
-                    else{
-                            // si hay error en la estructura
-                    $this->session->set_userdata('error_msg', 'Error en la estructura.');
-                    redirect('import','refresh');
-                    }   
+                        else{
+                                // si hay error en la estructura
+                        $this->session->set_userdata('error_msg', 'Error en la estructura.');
+                        redirect('import','refresh');
+                        }   
                          // Status message with imported data count
                         
                          $notAddCount = ($rowCount - ($insertCount + $updateCount));
                         $this->not = $notAddCount;
-                         $successMsg = 'Datos del catalogo '. $this->clientes. ' importados correctamente. Total de registros ('.$rowCount.') | Correctos ('.$insertCount.') | Actualizados ('.$updateCount.') | No Insertado ('.$notAddCount.')|'.$retVal = ($notAddCount>0) ? anchor($this->url_error,$title='Ver Errores') : ''.'';
+                         $successMsg = 'Datos del catalogo '. $this->clientes. ' importados correctamente. Total de registros ('.$rowCount.') | Correctos ('.$insertCount.') | Actualizados ('.$updateCount.') | No Insertado ('.$notAddCount.')|'.$retVal = ($notAddCount>0) ? anchor($this->error_cliente.$notAddCount,$title='Ver Errores') : ''.'';
                          $this->session->set_userdata('success_msg',   $successMsg);
                         
 
@@ -197,71 +316,7 @@ class Import extends MY_Controller
             }
             redirect('/import','refresh');
         }
-        elseif($subir['importSal']){
-          
-                         // Form field validation rules
-            $this->form_validation->set_rules('file', 'file','callback_file_check');
-
-            if($this->form_validation->run() == true){
-             
-                $insertCount = $updateCount = $rowCount = $notAddCount = 0;
-                // verifica si esiste 
-                if(is_uploaded_file($_FILES['file']['tmp_name']))
-                {
-                    // analissis el nombre del csv
-                    $csvData = $this->csvreader->parse_csv($_FILES['file']['tmp_name']);
-                    if(!empty($csvData)){
-                        foreach($csvData as $row ){
-                            $rowCount++;
-                            if (array_key_exists('No_referecia',$row) ) {
-                                $con = array(
-                                    'where' => array(
-                                        'No_referecia' => $row['No_referecia']
-                                    ),
-                                    'returnType' => 'count'
-                                );
-                                $prevCount = $this->Process_model->getRows_saldo($con);
-                                    if ($prevCount>0) {
-                                        # code...
-                                    }else{
-                                        $memData1 = array(
-                                            'No_referecia' =>  $row['No_referecia'],
-                                            'Cod_empresa' => $row['Cod_empresa'],
-                                            'nombre' => $row['nombre'],
-                                            'Fecha_saldos',$row['Fecha_saldos'],
-                                            'Saldo_capital' => $row['Saldo_capital'],
-                                            'Saldo_interes' => $row['Saldo_interes'],
-                                            'Saldo_mora' => $row['Saldo_mora'],
-                                            'Saldo_seguros' => $row['Saldo_seguros'],
-                                            'Saldo_cargos' => $row['Saldo_cargos'],
-                                            'Saldo_al_dia' => $row['Saldo_al_dia'],
-                                            'Cancelacion_total' => $row['Cancelacion_tota'],
-                                            'Estado' => $row['Estado'],
-                                            'creado_por' =>obtener_usuario()['usuario']
-                                        );  
-
-                                        if ($this->Administracion_model->search_dependencia($this->table,$row['Cod_empresa'],'Cod_empresa') || $this->validate_empty($memData1) == true) {
-                                            $insert = $this->Process_model->insert($memData1);
-                                            $insertCount++;
-                                        }
-                                        else{
-                                            $insert = $this->Process_model->insert_bitacora($this->tb_bitacora,$memData1);
-                                           
-                                        }  
-
-                                    }
-
-                            }else{
-                                $this->session->set_userdata('error_msg', 'errores.');
-                                redirect('import','refresh');
-                            }
-                        }  
-
-                    }
-                 }
-
-            }
-         }
+      
     
     elseif($subir['importPago'])
     {
@@ -302,76 +357,30 @@ class Import extends MY_Controller
                                     // Prepare data for DB insertion
                                             
                                     // Insert member data
-                                            
-                                    // Check whether email already exists in the database
-                                    // if (array_key_exists('id_cliente'o,$row) ) {
-                                        $con = array('where' => array(
-                                                            'id_operacion'=> $row['ID OPERACION']
-                                                        ),
-                                                        'returnType' => 'count'
-                                                    );
-                                        $prevCount = $this->Process_model->get_columns('catag_pagos',$con,'id_operacion');
-                                        // va a servir para saber si en las vueltas es mayor que cero e ir actualizando
 
-                                                if ($prevCount >0) 
-                                                    {
-                                                        $memData1 = array(
-                                                            'id_cliente' =>  $row['ID CLIENTE'],
-                                                            'id_operacion' => $row['ID OPERACION'],
-                                                            'abono' => $row['ABONO'],
-                                                            'abono_dia'=>$row['DIA ABONO'],
-                                                            'abono_mes' => $row['MES ABONO'],
-                                                            'abono_año' => $row['AÑO ABONO'],
-                                                            'saldo_total' => $row['SALDO TOTAL'],
-                                                            'codigo' => $row['CARTERA'],
-                                                            'modificado_por' =>obtener_usuario()['usuario']
-                                                        );
-                                                        //validar que si hay error
-                                                        
-                                                        // Update member data
+                                        
+                                    $memData1 = array(
+                                        'id_cliente' =>  $row['ID CLIENTE'],
+                                        'id_operacion' => $row['ID OPERACION'],
+                                        'abono' => $row['ABONO'],
+                                        'abono_dia'=>$row['DIA ABONO'],
+                                        'abono_mes' => $row['MES ABONO'],
+                                        'abono_año' => $row['AÑO ABONO'],
+                                        'saldo_total' => $row['SALDO TOTAL'],
+                                        'codigo' => $row['CARTERA'],
+                                        'creado_por' =>obtener_usuario()['usuario']
+                                    );
+                                       if ($this->Administracion_model->Dependency('catag_carteras',$row['CARTERA'],'Cod_catera')) {
+                                            $insert = $this->Process_model->insert_saldos('catag_pagos',$memData1);
+                                            $insertCount++;
+                                        }
+                                       
+                                        else{
+                                            $insert = $this->Process_model->insert_bitacora($this->tb_bitacora_pagos,$memData1);
+                                        
+                                        } 
 
-                                                            $condition = array('id_cliente' => $row['ID CLIENTE']);
-                                                            if ($this->Administracion_model->Dependency('catag_carteras',$row['CARTERA'],'Cod_catera')) {
-                                                                $update = $this->Process_model->update_tb('catag_pagos',$memData1, $condition);
-                                                                    if($update){
-                                                                        $updateCount++;
-                                                                    }      
-                                                            }
-                                                               
-                                                            else{
-                                                                    $insert = $this->Process_model->insert_bitacora($this->tb_bitacora_pagos,$memData1);
-                                                                
-                                                             } 
-                                                                
-
-                                                        
-                                                    }
-
-                                                    else{
-
-                                                        $memData1 = array(
-                                                            'id_cliente' =>  $row['ID CLIENTE'],
-                                                            'id_operacion' => $row['ID OPERACION'],
-                                                            'abono' => $row['ABONO'],
-                                                            'abono_dia'=>$row['DIA ABONO'],
-                                                            'abono_mes' => $row['MES ABONO'],
-                                                            'abono_año' => $row['AÑO ABONO'],
-                                                            'saldo_total' => $row['SALDO TOTAL'],
-                                                            'codigo' => $row['CARTERA'],
-                                                            'creado_por' =>obtener_usuario()['usuario']
-                                                        );
-                                                           if ($this->Administracion_model->Dependency('catag_carteras',$row['CARTERA'],'Cod_catera')) {
-                                                                $insert = $this->Process_model->insert_saldos('catag_pagos',$memData1);
-                                                                $insertCount++;
-                                                            }
-                                                           
-                                                            else{
-                                                                $insert = $this->Process_model->insert_bitacora($this->tb_bitacora_pagos,$memData1);
-                                                            
-                                                            } 
-
-
-                                                    }
+                                                    
 
 
                                     }
@@ -384,7 +393,7 @@ class Import extends MY_Controller
                             
                             $notAddCount = ($rowCount - ($insertCount + $updateCount));
                             $this->not = $notAddCount;
-                            $successMsg = 'Datos del catalogo '. 'Pagos'. ' importados correctamente. Total de registros ('.$rowCount.') | Correctos ('.$insertCount.') | Actualizados ('.$updateCount.') | No Insertado ('.$notAddCount.')|'.$retVal = ($notAddCount>0) ? anchor($this->error_pagos.$notAddCount,$title='Ver Errores') : ''.'';
+                            $successMsg = 'Datos del catalogo '. 'Pagos'. ' importados correctamente. Total de registros ('.$rowCount.') | Correctos ('.$insertCount.')| No Insertado ('.$notAddCount.')|'.$retVal = ($notAddCount>0) ? anchor($this->error_pagos.$notAddCount,$title='Ver Errores') : ''.'';
                             $this->session->set_userdata('success_msg',   $successMsg);
 
                         }else{
@@ -431,7 +440,7 @@ class Import extends MY_Controller
  
                              //print_r($encabezados);
  
-                             $cabezera_csv =['IDCLIENTE','OPERACIÓN-REFERENCIA','GESTION','TELEFONO','DIA','MES','AÑO','HORA','MINUTO','SEGUNDOS'];
+                             $cabezera_csv =['IDCLIENTE','OPERACIÓN-REFERENCIA','GESTION','TELEFONO','DIA','MES','AÑO'];
  
                              $comparacion = array_diff($encabezados,$cabezera_csv);
                               
@@ -448,15 +457,15 @@ class Import extends MY_Controller
                                              
                                      // Check whether email already exists in the database
                                      // if (array_key_exists('id_cliente',$row) ) {
-                                         $con = array('where' => array(
+                                       /*  $con = array('where' => array(
                                                              'Operacion_ref'=> $row['OPERACIÓN-REFERENCIA']
                                                          ),
                                                          'returnType' => 'count'
                                                      );
-                                         $prevCount = $this->Process_model->get_columns('carga_gestion',$con,'Operacion_ref');
+                                         $prevCount = $this->Process_model->get_columns('carga_gestion',$con,'Operacion_ref');*/
                                          // va a servir para saber si en las vueltas es mayor que cero e ir actualizando
  
-                                                 if ($prevCount >0) 
+                                               /*  if ($prevCount >0) 
                                                      {
                                                          $memData1 = array(
                                                              'Operacion_ref' => $row['OPERACIÓN-REFERENCIA'],
@@ -466,9 +475,7 @@ class Import extends MY_Controller
                                                              'dia' => $row['DIA'],
                                                              'mes' => $row['MES'],
                                                              'año' => $row['AÑO'],
-                                                             'hora' => $row['HORA'],
-                                                             'minuto' => $row['MINUTO'],
-                                                             'segundos' => $row['SEGUNDOS'],
+                                                        
                                                              'modificado_por' =>obtener_usuario()['usuario']
                                                          );
                                                          //validar que si hay error
@@ -491,9 +498,9 @@ class Import extends MY_Controller
                                                                 } 
 
                                                          
-                                                     }
+                                                     }*/
  
-                                                     else{
+                                                     
  
                                                          $memData1 = array(
                                                             'Operacion_ref' => $row['OPERACIÓN-REFERENCIA'],
@@ -503,9 +510,7 @@ class Import extends MY_Controller
                                                             'dia' => $row['DIA'],
                                                             'mes' => $row['MES'],
                                                             'año' => $row['AÑO'],
-                                                            'hora' => $row['HORA'],
-                                                            'minuto' => $row['MINUTO'],
-                                                            'segundos' => $row['SEGUNDOS'],
+                                                            
                                                              'creado_por' =>obtener_usuario()['usuario']
                                                          );
                                                             if ($this->Administracion_model->Dependency('catag_cliente',$row['IDCLIENTE'],'Cod_cliente')) {
@@ -519,7 +524,7 @@ class Import extends MY_Controller
                                                              } 
  
  
-                                                     }
+                                                     
  
  
                                      }
@@ -532,7 +537,7 @@ class Import extends MY_Controller
                              
                              $notAddCount = ($rowCount - ($insertCount + $updateCount));
                              $this->not = $notAddCount;
-                             $successMsg = 'Datos del catalogo '. 'Gestion'. ' importados correctamente. Total de registros ('.$rowCount.') | Correctos ('.$insertCount.') | Actualizados ('.$updateCount.') | No Insertado ('.$notAddCount.')|'.$retVal = ($notAddCount>0) ? anchor($this->error_gestion.$notAddCount
+                             $successMsg = 'Datos del catalogo '. 'Gestion'. ' importados correctamente. Total de registros ('.$rowCount.') | Correctos ('.$insertCount.')  | No Insertado ('.$notAddCount.')|'.$retVal = ($notAddCount>0) ? anchor($this->error_gestion.$notAddCount
                              ,$title='Ver Errores') : ''.'';
                              $this->session->set_userdata('success_msg',   $successMsg);
  
@@ -558,13 +563,123 @@ class Import extends MY_Controller
             
 
         }
+
+        elseif($subir['importCol'])
+        {
+            // Form field validation rules
+            $this->form_validation->set_rules('file', 'file','callback_file_check');
+
+            if($this->form_validation->run() == true){ 
+                
+                $insertCount = $updateCount = $rowCount = $notAddCount = 0;
+                if(is_uploaded_file($_FILES['file']['tmp_name']))
+                {
+                    //echo 'dssdfsf';
+                    $csvData = $this->csvreader->parse_csv($_FILES['file']['tmp_name']);         
+                            
+                    if(!empty($csvData))
+                    {
+                       
+
+                        $encabezados = [];
+                        foreach ($csvData[1] as $key => $value)
+                        {
+                            array_push($encabezados,$key);
+                        }
+
+                        //print_r($encabezados);
+
+                        $cabezera_csv =['ID CLIENTE','CARTERA','AÑO ALARMA','MES ALARMA','DIA ALARMA','HORA','COMENTARIO','USUARIO'];
+
+                        $comparacion = array_diff($encabezados,$cabezera_csv);
+                         
+                            // contas la comparacion
+                            if (count($comparacion)==0) 
+                            {
+                                foreach ($csvData as $row ) 
+                                {
+
+                                    $rowCount++;
+                                // Prepare data for DB insertion
+                                        
+                                // Insert member data
+                                        
+                                // Check whether email already exists in the database
+                                // if (array_key_exists('id_cliente',$row) ) {
+                                   
+                                   // $prevCount = $this->Process_model->get_columns('catag_colas_trabajo',$con,'Id');
+                                    // va a servir para saber si en las vueltas es mayor que cero e ir actualizan
+
+                                                    $memData1 = array(
+                            
+                                                        'cliente' =>  $row['ID CLIENTE'],
+                                                        'Cartera' => $row['CARTERA'],
+                                                        'año_alarma' => $row['AÑO ALARMA'],
+                                                        'mes_alarma' => $row['MES ALARMA'],
+                                                        'dia_alarma' => $row['DIA ALARMA'],
+                                                        'hora' => $row['HORA'],
+                                                        'Usuario' => $row['USUARIO'],
+                                                        'Comentario' => $row['COMENTARIO'],
+                                                        'creado_por' =>obtener_usuario()['usuario']
+                                                    );
+                                                       if ($this->Administracion_model->Dependency('catag_cliente',$row['ID CLIENTE'],'Cod_cliente') 
+                                                       and
+                                                       $this->Administracion_model->Dependency('catag_carteras',$row['CARTERA'],'Cod_catera')
+                                                       and
+                                                       $this->Administracion_model->Dependency('catag_usuarios',$row['USUARIO'],'usuario')
+                                                       ) {
+                                                            $insert = $this->Process_model->insert_saldos('catag_colas_trabajo',$memData1);
+                                                            $insertCount++;
+                                                        }
+                                                       
+                                                        else{
+                                                            $insert = $this->Process_model->insert_bitacora($this->tb_bitacora_colas,$memData1);
+                                                        
+                                                        } 
+
+
+                                                
+
+
+                                }
+
+                            }else{
+                                // si hay error en la estructura
+                                $this->session->set_userdata('error_msg', 'Error en la estructura.');
+                                redirect('import','refresh');
+                            }
+                        
+                        $notAddCount = ($rowCount - ($insertCount + $updateCount));
+                        $this->not = $notAddCount;
+                        $successMsg = 'Datos del catalogo '. 'Gestion'. ' importados correctamente. Total de registros ('.$rowCount.') | Correctos ('.$insertCount.')  | No Insertado ('.$notAddCount.')|'.$retVal = ($notAddCount>0) ? anchor($this->error_colas.$notAddCount
+                        ,$title='Ver Errores') : ''.'';
+                        $this->session->set_userdata('success_msg',   $successMsg);
+
+                    }else{
+                        // si el archivo viene bacio
+                        $this->session->set_userdata('error_msg', 'Archivo vacio.');
+                         redirect('import','refresh');
+                    }
+                
+            }
+                
+        }
         
         else{
-    
-            $this->session->set_userdata('error_msg', 'Campo incorrecto.');
-            redirect('import','refresh');
 
+            $this->session->set_userdata('error_msg', 'Selecciona una archivo CSV.');
+            redirect('import','refresh');
         }
+
+         redirect('/import','refresh');
+
+   }
+        
+   else{
+       $this->session->set_userdata('error_msg', 'Opcion invalida.');
+       redirect('import','refresh');
+
+    }
 
 
 
@@ -656,8 +771,14 @@ class Import extends MY_Controller
                         
                         // file creation t
                         $file = fopen($this->direccion, 'w');
+
+
+                        
                     
-                        $header = array("ID CLIENTE","ID OPERACION","ABONO","DIA ABONO","MES ABONO","AÑO ABONO","SALDO TOTAL","CARTERA"); 
+                        $header = array('IDCLIENTE','SEXO','FECHA DE NACIMIENTO','NOMBRE','DUI','E-MAIL','CARTERA','GESTOR','DOMICILIO','REFERENCIA OPERACION','SALDO CAPITAL',
+                        'SALDO INTERES','SALDO VENCIDO','SALDO TOTAL','DIAS MORA','DESCRIPCION DE PRODUCTO','TRABAJO','DIRECCION DE TRABAJO','TEL CASA','TEL TRABAJO','TEL CELULAR','TEL FAMILIAR','NOMBRE FAMILIAR'
+                        ,'TEL FIADOR','NOMBRE FIADOR','TEL REF 1','NOMBRE REF 1','TEL REF 2','NOMBRE REF 2','COMENTARIO DE CUENTA','FACTURA','SUCURSAL','ASESOR,DIA ASIGNACION','MES ASIGNACION','AÑO ASIGNACION','MONTO OTORGADO','PLAZO','DIA APERTURA','MES APERTURA','AÑO APERTURA','DIA VENCIMIENTO','MES VENCIMIENTO','AÑO VENCIMIENTO','CUOTA','DIA ULTIMO PAGO','MES ULTIMO PAGO','AÑO ULTIMO PAGO','MONTO ULTIMO PAGO','CUOTAS PAGADAS',
+                        'GARANTIA','TIPO DE CARTERA','DIA SEPARACION','MES SEPARACION','AÑO SEPARACION','SALARIO CLIENTE',"fecha_de_creacion","creado_por","fecha_de_modificacion","modificado_por"); 
                         fputcsv($file, $header);
                         foreach ($usersData as $key=>$line){ 
                         fputcsv($file,$line); 
@@ -675,7 +796,7 @@ class Import extends MY_Controller
                                 // file creation t
                                 $file = fopen($this->direccion, 'w');
                             
-                                $header = array('OPERACIÓN-REFERENCIA','IDCLIENTE','GESTION','TELEFONO','DIA','MES','AÑO','HORA','MINUTO','SEGUNDOS',"fecha_de_creacion","creado_por","fecha_de_modificacion","modificado_por"); 
+                                $header = array('OPERACIÓN-REFERENCIA','IDCLIENTE','GESTION','TELEFONO','DIA','MES','AÑO',"fecha_de_creacion","creado_por","fecha_de_modificacion","modificado_por"); 
                                 fputcsv($file, $header);
                                 foreach ($usersData as $key=>$line){ 
                                 fputcsv($file,$line); 
@@ -685,6 +806,24 @@ class Import extends MY_Controller
                                 redirect('/import','refresh');
                         }
 
+                        if($name==$this->error_text_colas)
+                        {
+                            // get data 
+                            $usersData = $this->Process_model->get_error_data($this->tb_bitacora_colas,$not,$this->campo);  
+                        
+                            
+                            // file creation t
+                            $file = fopen($this->direccion, 'w');
+                        
+                            $header = array('ID CLIENTE','CARTERA','AÑO ALARMA','MES ALARMA','DIA ALARMA','HORA','COMENTARIO','USUARIO',"fecha_de_creacion","creado_por","fecha_de_modificacion","modificado_por"); 
+                            fputcsv($file, $header);
+                            foreach ($usersData as $key=>$line){ 
+                            fputcsv($file,$line); 
+                            }
+                            fclose($file); 
+                            exit; 
+                            redirect('/import','refresh');
+                        }
 
                         if ($name == $this->error_text_pago) {
                             // get data 
@@ -694,7 +833,7 @@ class Import extends MY_Controller
                        // file creation t
                        $file = fopen($this->direccion, 'w');
                    
-                       $header = array("ID CLIENTE","ID OPERACION","ABONO","DIA ABONO","MES ABONO","AÑO ABONO","SALDO TOTAL","CARTERA"); 
+                       $header = array("ID CLIENTE","ID OPERACION","ABONO","DIA ABONO","MES ABONO","AÑO ABONO","SALDO TOTAL","CARTERA","fecha_de_creacion","creado_por","fecha_de_modificacion","modificado_por"); 
                        fputcsv($file, $header);
                        foreach ($usersData as $key=>$line){ 
                        fputcsv($file,$line); 

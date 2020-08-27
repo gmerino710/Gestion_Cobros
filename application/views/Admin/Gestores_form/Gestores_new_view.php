@@ -12,6 +12,15 @@
             <div class="card-body ">
                 <?=form_open('gestores/nuevo_elemento');?>
         
+                <div class="form-group row mt-1">
+                <label for="nombre" class="col-sm-2 col-form-label">Codigo gestor</label>
+                    <div class="col-sm-12">
+                    <?php echo form_error('Gestor'); ?>
+                 
+                    <input type="text" class="form-control"  value="<?=set_value('Nombre')?>" id="gestor" name="gestor" placeholder="Gestor">
+                    </div>
+                </div>
+
 
                 <div class="form-group row mt-1">
                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
