@@ -18,6 +18,7 @@
               
                     <label for="Usuario" class="col-sm-2 col-form-label">Usuario</label>
                     <div class="col-sm-12">
+                    
                     <?php echo form_error('usuario'); ?>
                     <input type="text" class="form-control" value="<?= set_value('usuario'); ?>" id="usuario" name="usuario" placeholder="Ingresar usuario">
                     </div>
@@ -27,8 +28,11 @@
                    
                     <label for="Contraseña" class="col-sm-2 col-form-label">Contraseña</label>
                     <div class="col-sm-12">
+                    <p id="msg"> </p>
                     <?php echo form_error('clave'); ?>
-                    <input type="password" value="<?= set_value('clave'); ?>"  class="form-control" id="Contraseña" name="clave" placeholder="Ingresar contraseña">
+                    <input type="password" value="<?= set_value('clave'); ?>"  
+                    onkeyup="charcountupdate(this.value)"
+                    class="form-control" id="Contraseña" name="clave" placeholder="Ingresar contraseña">
                     </div>
                 </div>
 

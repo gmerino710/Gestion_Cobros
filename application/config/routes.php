@@ -181,11 +181,20 @@ $route['exp_err_pagos/(:any)/ctn/(:num)'] = 'Procesos/Import/Exp_pagos/$1/$2';
 //$route['exp/(:any)'] = 'Procesos/Import/Exp/$1';
 
 // procesos de carteras
-
+//APIS
 $route['distribucion'] ='Procesos/Distribucion';
-$route['distribucion/api'] ='Procesos/Process_api/index_get';
+//$route['distribucion/api/carteras'] ='Procesos/Process_api/index_get';
+//obtener los usuarios de forma dinamica como es el index
+$route['criterios/cliente/(:any)/(:any)'] ='Procesos/Process_api/$1/$2';
+
+//$route['criterios'] ='Procesos/Process_api/index_get';
 
 //$route['import/error']='Procesos/Import/generate_err';
+//---------------------------BUSQUEDAD--------------------------------------------------
+$route["busqueda"] ='Busqueda';
+
+
+
 //---------------------------------------------------------------------------------------------------------
 $route['404_override'] = 'Errors404';
 $route['translate_uri_dashes'] = FALSE;

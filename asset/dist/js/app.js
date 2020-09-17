@@ -1,5 +1,38 @@
 $(document).ready(function() {
 
+      $('#tb_disc2').DataTable({  // pagincion
+            pagingType: "simple_numbers",
+            bFilter: false,
+            pagination:true,
+            language :{
+                  lengthMenu: "Total _MENU_ ",
+                  zeroRecords: "Ningu dato dispone",
+                  info: "Mostrando pagina _PAGE_ de _PAGES_",
+                  infoEmpty: "Vacio",
+                  infoFiltered: "(filtered from _MAX_ total records)"
+              },
+              "searching": true,
+              "dom": 'tipr',
+             
+             
+            lengthMenu: [[5,10],[5,10]]});
+        
+            /*ajax:{
+                  url:'http://localhost/app/criterios',
+                  dataSrc: ''
+            },
+            columns:[
+                {data:'criterio'},
+                {data:'nombre'}
+            ]
+    
+    
+    }
+        */  
+
+
+
+
 
       $('#tb_disc').DataTable({  // pagincion
             pagingType: "simple_numbers",
@@ -89,7 +122,12 @@ $(document).ready(function() {
         },
       lengthMenu: [[5,10],[5,10]]});
 
-   // evento de selccion
+
+
+
+
+
+      // evento de selccion
    tb_actividad.on('click', 'tr', function () {
 
       var rows = tb_actividad.rows(this).data();
@@ -107,6 +145,32 @@ $(document).ready(function() {
   
     
           
+    
+      
+      // definir tipo de cambiod
+            $.extend( $.fn.dataTable.defaults, {
+                  ordering:  false,
+            
+            } );
+     
+      $('#modal').draggable({
+            scroll: true,
+            scrollSensitivity: 40,
+            scrollSpeed: 40
+            });
+
+      $('.tb').DataTable({
+            language :{
+                  lengthMenu: "Total _MENU_ ",
+                  zeroRecords: "Ningu dato disponel",
+                  info: "Mostrando pagina _PAGE_ de _PAGES_",
+                  infoEmpty: "Vacio",
+                  infoFiltered: "(filtered from _MAX_ total records)"
+              }
+      
+             
+            
+      });
 
 
 });

@@ -65,6 +65,9 @@
 
 
 <script src="<?php echo base_url(); ?>asset/dist/js/app.js"></script>
+<script src="<?php echo base_url(); ?>asset/dist/js/validate.js"></script>
+<!-- ventanas -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 
 </body>

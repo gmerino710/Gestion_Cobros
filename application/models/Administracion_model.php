@@ -181,9 +181,32 @@ class Administracion_model extends CI_Model
         }
 
 
+//obtener los clienes por medio de api
+
+
+public function get_client($criterio,$id)
+{
+    $decoficado =rawurldecode($id);
+    $query = $this->db->get_where('catag_cliente', array($criterio => $decoficado));
+    if ($query == null) {
+        $respuesta  = array('data' =>'Informacion NO an encontrado');
+        return null;
+    } else {
+        return $query->result_array();
+    }
+    
+    
+}
 
 
         
+public function get_datas($tabla)
+{
+   $query = $this->db->get($tabla);
+   return $query -> result_array();
+}
+
+
 
 }
 
