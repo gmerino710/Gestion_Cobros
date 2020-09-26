@@ -26,9 +26,8 @@
                 <tr>
                     
                   <th>Id</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
                   <th>Estados</th>
+                  <th>Apellido</th>
                   <th>Acciones</th>
                 </tr>
                 </thead>
@@ -37,9 +36,8 @@
                     <?php foreach($administracion as $item):?>
                     <tr>
                     <td><?=$item['id'];?></td>
-                    <td><?=$item['Nombre'];?></td>
-                    <td><?=$item['descripcion'];?></td>
-                    <td><?=$item['estado'];?></td>
+                    <td><?=$item['Estado'];?></td>
+                    <td><?=$item['Descripcion'];?></td>
                     <td><a onclick="return confirm('¿Eliminar element?')" class="btn btn-danger" href="<?=base_url();?>Promesas/eliminar/<?=$item['id'];?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     <a class="btn btn-warning" href="<?=base_url()?>Promesas/editar/<?=$item['id']?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                     </tr>

@@ -20,7 +20,7 @@ class Actividades extends MY_Controller
         public function index()
         {
 
-            $this->titulo = 'Administración de Actividades';
+            $this->titulo = 'Administración de Estatus';
             $this->vista = 'admin/Actividades_view';
             // actividdad
             $data['administracion'] = $this->Administracion_model->obter_datos_adminitracion(null,null,null,$this->table,$this->codigo_union);
@@ -37,7 +37,7 @@ class Actividades extends MY_Controller
 
         public function new()
         {
-            $this->titulo = 'Nueva actividad';
+            $this->titulo = 'Nuevo Estatus';
             $data['estados']= $this->Administracion_model->get_estado_usuario();
             $this->vista = 'admin/forms/Actividades_form_view';
             $this->load->view('plantilla/plantilla',$data);
@@ -49,9 +49,10 @@ class Actividades extends MY_Controller
             
             $estado= $this->input->post('estado');
 
+            
             $id =$this->input->post('id');
 
-            $this->form_validation->set_rules('actividad','Actividad','required|max_length[40]|min_length[4]|required|regex_match[/^([a-zA-Z]|\s)+$/]',
+            $this->form_validation->set_rules('actividad','Actividad','required|max_length[40]|min_length[4]|regex_match[/^([a-zA-Z]|\s)+$/]',
             array( 'regex_match' => 'Debe tener minimo 4 caracteres y contener letras sin caracteres especiales',
         ));
             $this->form_validation->set_rules('estado','Estado','required');
@@ -163,7 +164,7 @@ class Actividades extends MY_Controller
             $estado= $this->input->post('estado');
             
 
-            $this->form_validation->set_rules('nombre','Subactividad','required|max_length[40]|min_length[4]|alpha');
+            $this->form_validation->set_rules('nombre','Subactividad','required|max_length[40]|min_length[4]|regex_match[/^([a-zA-Z]|\s)+$/]');
           //  $this->form_validation->set_rules('apellido','Apellido','required|max_length[40]|min_length[4]1alpha');
             //$this->form_validation->set_rules('estado','Estado','required');
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');

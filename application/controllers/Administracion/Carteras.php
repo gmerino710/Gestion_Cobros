@@ -21,10 +21,11 @@ class Carteras extends MY_Controller
         public function destroy($id=null)
         {
             if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {
+                $this->session->set_flashdata('err','No se puede eliminar'); 
                 redirect('carteras');
             } else {
               $this->Administracion_model->destroy_element($this->table,$this->codigo_table,$id);
-              
+              $this->session->set_flashdata('item','Usuario Eliminado');
               redirect('carteras');
             }
         }

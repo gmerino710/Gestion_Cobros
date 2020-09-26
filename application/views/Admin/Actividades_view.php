@@ -23,7 +23,7 @@
               
               <?php endif;?> 
             <a title="Nuevo cartera" href="<?=base_url()?>actividades/nuevo"><button class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-              Añadir Actividad <i class="fa fa-plus"></i> 
+              Añadir estatus <i class="fa fa-plus"></i> 
               </button>  
             </a>
             </button>  
@@ -36,7 +36,7 @@
                 <tr>
                     
                   <th>Id</th>
-                  <th>Nombre de la accion</th>
+                  <th>Nombre </th>
                   <th>Estados</th>
                   <th>Acciones</th>
                 </tr>
@@ -89,7 +89,7 @@
 
           
             <a title="Nuevo cartera" href="<?=base_url()?>actividades/subactividad/nuevo"><button class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-              Añadir Sub actividad <i class="fa fa-plus"></i> 
+              Añadir sub estatus <i class="fa fa-plus"></i> 
               </button>  
             </a>
             </button>  
@@ -99,9 +99,9 @@
                 <table id="tb_sub" class="table table-bordered table-responsive-sm">
                     <thead>
                     <tr>
-                       <th>Actividad</th> 
+                       <th>Estatus</th> 
                       <th>Id</th>
-                      <th>Sub actividad</th>
+                      <th>Sub estatus</th>
                       <th>Estados</th>
                       <th>Acciones</th>
                     </tr>

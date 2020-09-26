@@ -23,6 +23,8 @@ const $input_busqueda_select = document.querySelector('#busqueda');
 
 const $input_busqueda = document.querySelector('#input_busqueda');
 
+const $tb_validated =document.querySelector('clientes_bt'); 
+
 //onkeyup="charcountupdate(this.value)s
 
 function charcountupdate(str) {
@@ -46,25 +48,11 @@ function charcountupdate(str) {
         }
         
 }
-// funcion para los parametros de bus queda
-/*
-var url2 =`http://localhost/app/criterios/cliente/`
-/*
-$input_busqueda_select.addEventListener("change",(e)=>{
 
-    let $criterios = $input_busqueda_select.options[$input_busqueda_select.selectedIndex].value;
 
-    
-   // var objeto ={'data':url2 +=`${$criterios}`};    
-    
-        console.log($criterios);
 
-        console.log(url2+$criterios);
-        
-});
-*/
 
-//console.log('afuer '+url2+$criterios);
+
 
 $buscar.addEventListener('click',(e)=>{
 //$tabla.innerHTML = '';
@@ -74,8 +62,7 @@ let html = '';
 let criterio = $input_busqueda_select.value;
 let busqueda = $input_busqueda.value;
 let url2 =`http://localhost/app/criterios/cliente/${criterio}/${busqueda}`
-console.log(url2);
-alert(url2);
+
 const $hilera = document.createElement("tr");
 spinner.removeAttribute('hidden');
 fetch(url2)
@@ -124,4 +111,8 @@ fetch(url2)
         })
 
         })
+
+
+
+
 

@@ -1,5 +1,25 @@
 $(document).ready(function() {
 
+
+      $('input[name="birthday"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: false,
+            locale: {
+                  format: 'DD/MM/YYYY'
+            },
+            drops:'auto',
+            opens:'center',
+            minYear: 2020,
+            maxYear: parseInt(moment().format('YYYY'),10)
+          }, function(start, end, label) {
+          
+          })
+
+
+          
+  
+
+
       $('#tb_disc2').DataTable({  // pagincion
             pagingType: "simple_numbers",
             bFilter: false,
@@ -17,18 +37,6 @@ $(document).ready(function() {
              
             lengthMenu: [[5,10],[5,10]]});
         
-            /*ajax:{
-                  url:'http://localhost/app/criterios',
-                  dataSrc: ''
-            },
-            columns:[
-                {data:'criterio'},
-                {data:'nombre'}
-            ]
-    
-    
-    }
-        */  
 
 
 
@@ -113,14 +121,16 @@ $(document).ready(function() {
 
   var tb_sub_actividad = $('#tb_sub').DataTable({  // pagincion
       pagingType: "simple_numbers",
+      lengthMenu: [[5,10],[5,10]],
+      select: true,
+      bFilter: true,
       language :{
             lengthMenu: "Total _MENU_ ",
             zeroRecords: "Ningu dato dispone",
             info: "Mostrando pagina _PAGE_ de _PAGES_",
             infoEmpty: "Vacio",
             infoFiltered: "(filtered from _MAX_ total records)"
-        },
-      lengthMenu: [[5,10],[5,10]]});
+        }});
 
 
 
@@ -145,32 +155,5 @@ $(document).ready(function() {
   
     
           
-    
-      
-      // definir tipo de cambiod
-            $.extend( $.fn.dataTable.defaults, {
-                  ordering:  false,
-            
-            } );
-     
-      $('#modal').draggable({
-            scroll: true,
-            scrollSensitivity: 40,
-            scrollSpeed: 40
-            });
-
-      $('.tb').DataTable({
-            language :{
-                  lengthMenu: "Total _MENU_ ",
-                  zeroRecords: "Ningu dato disponel",
-                  info: "Mostrando pagina _PAGE_ de _PAGES_",
-                  infoEmpty: "Vacio",
-                  infoFiltered: "(filtered from _MAX_ total records)"
-              }
-      
-             
-            
-      });
-
 
 });

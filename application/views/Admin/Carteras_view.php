@@ -7,10 +7,19 @@
             <div class="card-header">
             <?php if($this->session->flashdata('item')):?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <?php echo $this->session->flashdata('item'); ?>
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>   
+                 <?php echo $this->session->flashdata('item'); ?>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>   
+              </div>
+              <?php endif;?> 
+
+              <?php if($this->session->flashdata('err')):?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 <?php echo $this->session->flashdata('err'); ?>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>   
               </div>
               <?php endif;?> 
             <a title="Nuevo cartera" href="<?=base_url()?>carteras/nuevo"><button class="btn btn-outline-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">

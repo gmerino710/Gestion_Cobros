@@ -33,31 +33,6 @@
                     <input type="text" class="form-control"  value="<?=$items['descripcion'];?>" id="descrip" name="descrip" placeholder="Descripcion de promesa de pago">
                     </div>
                 </div>
-
-                <div class="form-group row mt-1">
-             
-              
-                        <label for="estado"  class="col-sm-2 col-form-label">Estado</label> 
-                        <div class="col-sm-12">  
-                        
-                      
-
-                            <select id="estado" name="estado"  class="form-control">
-                            <?php echo form_error('estado'); ?>
-                            <?php foreach($estados as $item):?>
-                              
-                              <option value="<?=$item['Cod_estado'];?>"
-                              <?php if($item['Cod_estado']==$items['Estado'] ):?> selected <?php endif;?>
-  >
-                                <?= $item['estado'];?>
-
-                            </option>
-                            <?php endforeach;?>   
-                        </select>
-                        </div> 
-                   </div>
-
-
                     <div class="row mt-4">
                         <div class="col col-md-6 col-sm-6">
                         <input type="submit" value="Actualizar"  name="update" id="update" class="btn btn-primary  btn-block"/>  
@@ -87,38 +62,21 @@
 
 
                 <div class="form-group row mt-1">
-                <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                <label for="nombre" class="col-sm-2 col-form-label">Estado</label>
                     <div class="col-sm-12">
-                    <?php echo form_error('Nombre'); ?>
+                    <?php echo form_error('estado'); ?>
                  
-                    <input type="text" class="form-control"  value="<?=set_value('Nombre')?>" id="nombre" name="nombre" placeholder="Nombre de promesa pago">
+                    <input type="text" class="form-control"  value="<?=set_value('estado')?>" id="estado" name="estado" placeholder="Estado de promesa pago">
                     </div>
                 </div>
 
                 <div class="form-group row mt-1">
                 <label for="nombre" class="col-sm-2 col-form-label">Descripcion</label>
                     <div class="col-sm-12">
-                    <?php echo form_error('Descripcion'); ?>
+                    <?php echo form_error('descrip'); ?>
                  
-                    <input type="text" class="form-control"  value="<?=set_value('Descrip')?>" id="descrip" name="descrip" placeholder="Descripcion de promesa de pago">
+                    <input type="text" class="form-control"  value="<?=set_value('descrip')?>" id="descrip" name="descrip" placeholder="Descripcion de promesa de pago">
                     </div>
-                </div>
-
-                <div class="form-group row mt-1">
-             
-              
-                        <label for="estado"  class="col-sm-2 col-form-label">Estado</label> 
-                        <div class="col-sm-12">  
-                        
-                        <?php echo form_error('estado'); ?>
-                            <select id="estado" name="estado"  class="form-control">
-                            <option value="" selected></option>
-                            <?php foreach($estados as $item):?>
-                           
-                              <option value="<?=$item['Cod_estado'];?>"><?=$item['estado'];?></option>
-                            <?php endforeach;?>   
-                        </select>
-                        </div> 
                 </div>
 
               
@@ -129,7 +87,7 @@
                     </div>
                     <div class="col col-md-6 col-sm-6">
 
-                    <a  class="btn btn-danger  btn-block" href="<?=base_url()?>acciones" >Cancelar </a> 
+                    <a  class="btn btn-danger  btn-block" href="<?=base_url()?>promesas" >Cancelar </a> 
 
                    </div>
                 </div>   

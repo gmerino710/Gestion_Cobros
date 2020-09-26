@@ -42,13 +42,7 @@ class Administracion_model extends CI_Model
 
             public function get_estad($id)
             {
-                // select ctu.id_estado_usuario from catag_usuarios ctu inner join catag_estados ctes on ctes.Cod_estado = ctu.id_estado_usuario where id_usuario
-              /*  $this->db->select('id_estado_usuario');
-                $this->db->from('catag_usuarios');
-                $this->db->join('catag_estados',' catag_usuarios.id_usuario  = catag_estados.Cod_estado');
-                $this->db->where('id_usuario', $id);
-                $query = $this->db->get();
-                */
+            
                 $query = $this->db->get_where('catag_usuarios', array('id_usuario' => $id));
                return $query->result_array();
 
@@ -187,9 +181,10 @@ class Administracion_model extends CI_Model
 public function get_client($criterio,$id)
 {
     $decoficado =rawurldecode($id);
-    $query = $this->db->get_where('catag_cliente', array($criterio => $decoficado));
+   // $query = $this->db->get_where('catag_cliente', array($criterio => $decoficado));
+   $query =$this->db->query("SELECT * FROM catag_cliente WHERE $criterio LIKE '%$decoficado%'");  
+   //$query =  $this->db->like();
     if ($query == null) {
-        $respuesta  = array('data' =>'Informacion NO an encontrado');
         return null;
     } else {
         return $query->result_array();
@@ -199,15 +194,65 @@ public function get_client($criterio,$id)
 }
 
 
-        
-public function get_datas($tabla)
+public function get_client_espc($criterio,$id)
 {
-   $query = $this->db->get($tabla);
-   return $query -> result_array();
+    $decoficado =rawurldecode($id);
+   // $query = $this->db->get_where('catag_cliente', array($criterio => $decoficado));
+   $query =$this->db->query("SELECT * FROM catag_cliente WHERE $criterio = '$decoficado'");  
+   //$query =  $this->db->like();
+    if ($query == null) {
+        return null;
+    } else {
+        return $query->result_array();
+    }
+    
+    
+}
+
+//cebolla , papa y repollo
+
+        
+public function get_datas($codigo_cartea)
+{
+    $query =$this->db->query("SELECT * FROM catag_cliente WHERE Cartera ='$codigo_cartea'");     
+    if ($query) {
+    return $query -> result_array();
+   } else {
+    return false;
+   }
+   
+
+   
 }
 
 
+//trae nombre de los campos
+function get_field($table)
+{
+    $query =$this->db->get($table);
+
+return $query->result_array();
 
 }
 
+
+function get_simply($table,$id)
+{
+    $query =$this->db->get_where($table, array('Cod_cliente' => $id));
+
+    return $query->row_array();
+
+}
+
+
+function get_complete($table,$id,$codigo)
+{
+    $query =$this->db->get_where($table, array($codigo => $id));
+
+    return $query->result_array();
+
+}
+
+
+}
 

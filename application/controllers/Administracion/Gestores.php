@@ -74,11 +74,12 @@ class Gestores extends MY_Controller
 
         public function destroy($id=null)
         {
-            if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null ) {
+            if ($id==null or $this->Administracion_model->Dependency($this->table,$id,$this->codigo_table)>0 ) {
+                $this->session->set_flashdata('err','No se puede eliminar'); 
                 redirect('gestores');
             } else {
               $this->Administracion_model->destroy_element('catag_gestores','Cod_Gestores',$id);
-              
+              $this->session->set_flashdata('item','Usuario Eliminado');
               redirect('gestores');
             }
         }

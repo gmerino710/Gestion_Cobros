@@ -19,7 +19,7 @@ class inicio extends CI_Controller
 
         $data['error'] = '';
         $this->form_validation->set_rules('usuario', 'Usuario', 'required');
-       // $this->form_validation->set_rules('clave', 'Clave', 'required');
+       $this->form_validation->set_rules('clave', 'Clave', 'required');
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
         if ($this->form_validation->run() == true) {
             $post   = $this->input->post();

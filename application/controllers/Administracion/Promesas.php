@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Promesas extends MY_Controller
 {
-    public $table = 'promesa_pago';
+    public $table = 'catag_promesa_pago';
 
     public $codigo_table = 'id';
 
@@ -11,7 +11,7 @@ class Promesas extends MY_Controller
         {
             $this->titulo = 'Administración de Promesas de Pago';
             $this->vista = 'admin/Promesas_view';
-            $data['administracion'] = $this->Administracion_model->obter_datos_adminitracion(null,null,null,$this->table ,'promesa_pago.Estado');
+            $data['administracion'] = $this->Administracion_model->get_field($this->table);
           
             $this->load->view('plantilla/plantilla',$data);
 
@@ -42,15 +42,14 @@ class Promesas extends MY_Controller
 
         public function new_element()
         {
-            $name =$this->input->post('nombre');
-
+            
             $desc =$this->input->post('descrip');
             
             $estado= $this->input->post('estado');
 
             $id =$this->input->post('id');
 
-            $this->form_validation->set_rules('nombre', 'Nombre', 'required|regex_match[/^([a-zA-Z]|\s)+$/]',
+            $this->form_validation->set_rules('estado', 'Estado', 'required|regex_match[/^([a-zA-Z]|\s)+$/]',
             array( 'regex_match' => 'Debe tener minimo 4 caracteres y contener letras sin caracteres especiales',
         ));
         
@@ -61,7 +60,7 @@ class Promesas extends MY_Controller
         
 
 
-            $this->form_validation->set_rules('estado','Estado','required');
+            
             $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
             //si entra
@@ -70,9 +69,9 @@ class Promesas extends MY_Controller
 
              if ($this->input->post('update')) {
                 $data = array(
-                    'Nombre'=>$name,
+                    
                     'Estado'=>$estado,
-                    'descripcion'=>$desc,
+                    'Descripcion'=>$desc,
                     'modificado_por'=>obtener_usuario()['usuario']
                    );
 
@@ -84,12 +83,12 @@ class Promesas extends MY_Controller
              }
              else{
                 $data1 = array(
-                    'Nombre'=>$name,
+                    
                     'Estado'=>$estado,
-                    'descripcion'=>$desc,
+                    'Descripcion'=>$desc,
                     'creado_por'=>obtener_usuario()['usuario']
                    );
-                $this->Administracion_model->new_insert('promesa_pago',$data1);
+                $this->Administracion_model->new_insert('catag_promesa_pago',$data1);
                 $this->session->set_flashdata('item','Elemento Añadido');
                 redirect('Promesas');
              }

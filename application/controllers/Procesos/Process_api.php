@@ -14,22 +14,57 @@ class Process_api extends REST_Controller
     
      }
 
-    public function index_get($criterio,$id)
+    public function index_get($criterio,$id=null)
     { 
+        /*
+        echo $criterio;
+        echo '<br>';
+        echo $id;*/
 
-        $carteras= $this->Administracion_model->get_client($criterio,$id);
+        if (empty($id)) {
+            $this->response(array('status' => 'Porfavor ingrese un valor para la busqueda '));
 
-        if ($carteras == null) {
+        } else{
+            $carteras= $this->Administracion_model->get_client($criterio,$id);
 
-            //$respuesta  = "{'error':'sin data'}";
+            if ($carteras == null) {
+    
+                //$respuesta  = "{'error':'sin data'}";
+                
+                $this->response(array('status' => 'Cliente no encontrado'));
+            }
+            else{
+    
+                $this->response($carteras, REST_Controller::HTTP_OK);
+    
+            }
+        }
             
-            $this->response(array('status' => 'Cliente no encontrado'));
-        }
-        else{
+        
+        
+        /*
+        if (empty($id)) {
+            $this->response(array('status' => 'Porfavor ingresa un valor '));
 
-            $this->response($carteras, REST_Controller::HTTP_OK);
+        } 
+        
+        else {
+            $carteras= $this->Administracion_model->get_client($criterio,$id);
 
-        }
+            if ($carteras == null) {
+    
+                //$respuesta  = "{'error':'sin data'}";
+                
+                $this->response(array('status' => 'Cliente no encontrado'));
+            }
+            else{
+    
+                $this->response($carteras, REST_Controller::HTTP_OK);
+    
+            }
+        }*/
+        
+        
     }
 /*
     public function index_get()ww

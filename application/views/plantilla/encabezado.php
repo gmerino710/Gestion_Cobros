@@ -24,7 +24,7 @@
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?=base_url();?>asset/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?=base_url();?>asset/plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <!-- summernote -->
   <link rel="stylesheet" href="<?=base_url();?>asset/plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
@@ -58,7 +58,7 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+ 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

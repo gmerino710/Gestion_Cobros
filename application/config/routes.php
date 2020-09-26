@@ -71,7 +71,7 @@ $route['usuarios/actualizar'] = 'Usuarios/update';
 $route['gestores'] = 'Administracion/Gestores';
 $route['gestores/nuevo'] = 'Administracion/Gestores/new';
 $route['gestores/nuevo_elemento'] = 'Administracion/Gestores/new_element';
-$route['gestores/eliminar/(:num)'] = 'Administracion/Gestores/destroy/$1';
+$route['gestores/eliminar/(:any)'] = 'Administracion/Gestores/destroy/$1';
 $route['gestores/editar'] = 'Administracion/Gestores/edit_user/';
 $route['gestores/editar/(:num)'] = 'Administracion/Gestores/edit_user/$1';
 $route['gestores/actualizar'] = 'Administracion/Gestores/update';
@@ -187,6 +187,8 @@ $route['distribucion'] ='Procesos/Distribucion';
 //obtener los usuarios de forma dinamica como es el index
 $route['criterios/cliente/(:any)/(:any)'] ='Procesos/Process_api/$1/$2';
 
+$route['criterios/cliente/(:any)'] ='Procesos/Process_api/$1/';
+
 //$route['criterios'] ='Procesos/Process_api/index_get';
 
 //$route['import/error']='Procesos/Import/generate_err';
@@ -195,6 +197,13 @@ $route["busqueda"] ='Busqueda';
 
 
 
+// gestion-de-cartera
+$route["cobros"] ="Cobros";
+$route["cobros/comentario/(:num)"] ="Cobros/comentario/$1";
+$route["cobros/crear-promesa/(:num)"] ="Cobros/cpromesa/$1";
+$route["cobros/crear-promesa"] ="Cobros/cpromesa/";
+$route["cobros/crear-promesa-upt"] ="Cobros/uptpromesa";
+//$route["cobros/urls"] ="Cobros/urls";
 //---------------------------------------------------------------------------------------------------------
 $route['404_override'] = 'Errors404';
 $route['translate_uri_dashes'] = FALSE;

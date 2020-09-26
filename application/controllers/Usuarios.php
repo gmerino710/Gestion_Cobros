@@ -10,12 +10,12 @@ class Usuarios extends MY_Controller
   public $rules =array(
     array(
       'field' => 'usuario',
-      'label' => 'Usuario',
+      'label' => 'usuario',
       'rules' => 'required|regex_match[/^([a-zA-Z]|\s)+$/]|max_length[10]|min_length[4]|is_unique[catag_usuarios.usuario]'
   ),
   array(
       'field' => 'clave',
-      'label' => 'Clave',
+      'label' => 'contraseña',
       'rules' => 'required|max_length[40]|min_length[3]',
   ),
   array(
@@ -25,7 +25,7 @@ class Usuarios extends MY_Controller
   ),
   array(
       'field' => 'conf',
-      'label' => 'Confirmacion',
+      'label' => 'confirmacion',
       'rules' => 'required|matches[clave]'
   )
 );
@@ -37,17 +37,17 @@ class Usuarios extends MY_Controller
   public $rules2 =array(
     array(
       'field' => 'usuario',
-      'label' => 'Usuario',
+      'label' => 'usuario',
       'rules' => 'regex_match[/^([a-zA-Z]|\s)+$/]|max_length[40]|min_length[3]'
   ),
   array(
       'field' => 'clave',
-      'label' => 'Clave',
+      'label' => 'contraseña',
       'rules' => 'max_length[40]|min_length[3]',
   ),
   array(
       'field' => 'nombre',
-      'label' => 'Nombre',
+      'label' => 'nombre',
       'rules' => 'regex_match[/^[][a-zA-Z-@# ,().]+$/]|max_length[40]|min_length[3]'
   ),
  /* array(
