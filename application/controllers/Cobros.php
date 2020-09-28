@@ -19,6 +19,7 @@ class Cobros extends MY_Controller
     
         
         $data['estados'] = $this->Administracion_model->get_field('catag_carteras');
+        $data['gestores'] = $this->Administracion_model->get_field('catag_gestores');
         // $data['names_cl'] =$this->Administracion_model->get_field('catag_cliente');
 
        $this->load->view('plantilla/plantilla',$data);
@@ -74,18 +75,27 @@ class Cobros extends MY_Controller
                 $data['id']=$id;
                 
                 $data['filtrado']=  $this->Administracion_model->get_client_espc('Cod_cliente',$id);
-        
+                
+                
+                
                 $this->load->view('plantilla/plantilla',$data);
 
             } else {
+
+
+                
+
+
                 $this->titulo = 'Comentario cliente';   
                 $this->vista = 'gestion_cobros/comentario_view';
                 
         
                 $data['id']=$id;
         
+                $this->session->set_flashdata('errr','Porfavor ingrese el comentario del cliente , no se podra modificar');
                 $data['filtrado']=  $this->Administracion_model->get_client_espc('Cod_cliente',$id);
 
+                
         
                 $this->load->view('plantilla/plantilla',$data);
             }
@@ -137,7 +147,7 @@ class Cobros extends MY_Controller
                 //Le das el formato que necesitas a la fecha
                 $newformat = date('Y-m-d',$fechas );
 
-        if ($newformat >= $fecha_comparacion) {
+                 if ($newformat >= $fecha_comparacion and is_numeric($monto)) {
                 
                    
                         $data = array('Cod_cliente'=>$id,
@@ -155,15 +165,14 @@ class Cobros extends MY_Controller
 
                 } else {
 
-                    echo $fecha.'<br>';
-                    echo gettype($fecha).'<br>';
-                    echo 'fallo la fecha no puede ser menor a la actual'.'<br>';
+                    $this->session->set_flashdata('errr','Datos invalidos');
+                    redirect('cobros/crear-promesa/'.$id);
                    
                 }
                 
 
             }
-           
+            
             else {
                
                     
@@ -173,7 +182,8 @@ class Cobros extends MY_Controller
                 $data['id']=$id;
         
                 $data['filtrado']=  $this->Administracion_model->get_complete('all_promesas',$id,'Cod_cliente');
-
+                // tabla , campo buscado, orderar
+                $data['ultimo']=$this->Administracion_model->get_error_desc('all_promesas','Estado','F_ingreso');
         
                 $this->load->view('plantilla/plantilla',$data);
 
@@ -188,44 +198,86 @@ class Cobros extends MY_Controller
 
     }
 
+    public function find_gestor_empresa($gestor,$estado)
+    {
+        
+        $gestor_data =$this->Administracion_model->get_especifict_gestion($gestor,$estado);
+        if($gestor_data != null){
+                $this->titulo = 'Promesa de cliente';   
+                $this->vista = 'gestion_cobros/especific_promesa_view';
+                $data['filtrado']= $gestor_data;
+                $data['ultimo']=$this->Administracion_model->get_error_desc('all_promesas','Estado','F_ingreso');
+
+                $this->load->view('plantilla/plantilla',$data);
+        }else{
+            redirect('/');
+        }
+           
+    }
 
 
-    public function uptpromesa()
+    public function uptpromesa($codigo =null)
     {
         //fecha que ingreso
         $fecha=$this->input->post('birthday');
         // botn
-        $estado= $this->input->post('upt');
+       // $estado= $this->input->post('upt');
         // id
         $id =$this->input->post('id');
-        //fecha 
-        //fecha del sistema
-                // fecha  comrpacion
-        $fecha_comparacion=date('Y-m-d');
-        //trasnformamos convertida
-        $remplazada = str_replace('/','-',$fecha);
-                
-        $fechas = strtotime($remplazada);
-        //Le das el formato que necesitas a la fecha
-        $newformat = date('Y-m-d',$fechas );
 
-        if ($newformat >= $fecha_comparacion) {
+        // actualizas la fecha de la promesa
+        if ($codigo == null) {
+                
+            
+            
+          
+                //fecha 
+                //fecha del sistema
+                        // fecha  comrpacion
+                $fecha_comparacion=date('Y-m-d');
+                //trasnformamos convertida
+                $remplazada = str_replace('/','-',$fecha);
+                        
+                $fechas = strtotime($remplazada);
+                //Le das el formato que necesitas a la fecha
+                $newformat = date('Y-m-d',$fechas );
+
+                if ($newformat >= $fecha_comparacion) {
+                    $data = array(
+                        'id_estado' =>2,    
+                        'F_pago' =>$newformat,
+                        'creado_por'=>obtener_usuario()['usuario']
+                        );
+
+
+                    $this->Administracion_model->Update_user($data,'Cod_cliente',$id,'detalle_promesa_pago');
+                    $this->session->set_flashdata('item','Datos Actualizados');
+                    redirect('cobros/crear-promesa/'.$id);
+                }
+                else{
+                    
+                    $this->session->set_flashdata('errr','La fecha no puede ser menor a la actual');
+                    redirect('cobros/crear-promesa/'.$id);
+                }
+
+        }
+        // con este actualizas si esta cumplida
+        else {
+
             $data = array(
-                               
-                'F_pago' =>$newformat,
+                                    
+                'id_estado' =>2,
                 'creado_por'=>obtener_usuario()['usuario']
                 );
 
 
-            $this->Administracion_model->Update_user($data,'Cod_cliente',$id,'detalle_promesa_pago');
-            $this->session->set_flashdata('item','Datos Actualizados');
-            redirect('cobros/crear-promesa/'.$id);
+            $this->Administracion_model->Update_user($data,'Cod_cliente',$codigo,'detalle_promesa_pago');
+          $this->session->set_flashdata('item','Promesa completada');
+            redirect('cobros/crear-promesa/'.$codigo);
+            
         }
-        else{
-               
-            $this->session->set_flashdata('errr','La fecha no puede ser menor a la actual');
-            redirect('cobros/crear-promesa/'.$id);
-        }
+        
+        
 /*
      //-----
         if ($fecha >= $referencia) {

@@ -52,65 +52,70 @@ function charcountupdate(str) {
 
 
 
-
-
-$buscar.addEventListener('click',(e)=>{
-//$tabla.innerHTML = '';
-//criterio
-const spinner = document.getElementById("spinner");
-let html = '';
-let criterio = $input_busqueda_select.value;
-let busqueda = $input_busqueda.value;
-let url2 =`http://localhost/app/criterios/cliente/${criterio}/${busqueda}`
-
-const $hilera = document.createElement("tr");
-spinner.removeAttribute('hidden');
-fetch(url2)
-        .then(response=>{
-           // console.log(response.url)
-            return response.json();
-        }).then(data =>{
-            var html = "";
-                console.log(typeof(data));
-
+if ($buscar) {
+    $buscar.addEventListener('click',(e)=>{
+        //$tabla.innerHTML = '';
+        //criterio
+        const spinner = document.getElementById("spinner");
+        let html = '';
+        let criterio = $input_busqueda_select.value;
+        let busqueda = $input_busqueda.value;
+        let url2 =`http://localhost/app/criterios/cliente/${criterio}/${busqueda}`
         
-            if (data.status) {
-                alertify
-                .alert("Error",data.status, function(){
-                    alertify.error('OK');
-                });
-                busqueda = $input_busqueda.value ='';
-                $tabla.innerHTML = "";
+        const $hilera = document.createElement("tr");
+        spinner.removeAttribute('hidden');
+        fetch(url2)
+                .then(response=>{
+                   // console.log(response.url)
+                    return response.json();
+                }).then(data =>{
+                    var html = "";
+                        console.log(typeof(data));
+        
+                
+                    if (data.status) {
+                        alertify
+                        .alert("Error",data.status, function(){
+                            alertify.error('OK');
+                        });
+                        busqueda = $input_busqueda.value ='';
+                        $tabla.innerHTML = "";
+        
+                        spinner.setAttribute('hidden', '');
+                    }
+                    else{
+                        // console.log(data)
+                        spinner.setAttribute('hidden', '');
+                        $tabla.innerHTML = "";
+                        data.forEach(element => {
+                            html = `<tr>
+                            <td>${element.Cod_cliente}</td>
+                            <td>${element.Dui}</td>
+                            <td>${element.Nombre_cliente}</td>
+                            <td>${element.Cartera}</td>
+                            </tr>`
+                            $tabla.innerHTML +=html;
+                        }
+                       
+                    )
+                    busqueda = $input_busqueda.value ='';
+                    }
+                       
+                       
+                    
+                    
+                }).catch(err=>{
+        
+                    console.log(err)
+                })
+        
+                })
+        
 
-                spinner.setAttribute('hidden', '');
-            }
-            else{
-                // console.log(data)
-                spinner.setAttribute('hidden', '');
-                $tabla.innerHTML = "";
-                data.forEach(element => {
-                    html = `<tr>
-                    <td>${element.Cod_cliente}</td>
-                    <td>${element.Dui}</td>
-                    <td>${element.Nombre_cliente}</td>
-                    <td>${element.Cartera}</td>
-                    </tr>`
-                    $tabla.innerHTML +=html;
-                }
-               
-            )
-            busqueda = $input_busqueda.value ='';
-            }
-               
-               
-            
-            
-        }).catch(err=>{
 
-            console.log(err)
-        })
 
-        })
+}
+
 
 
 

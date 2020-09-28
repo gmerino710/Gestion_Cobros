@@ -5,6 +5,16 @@
         <section class="content  ">
               <div class="row">
                 <div class="col-md-12">
+                <?php if($this->session->flashdata('errr')):?>
+
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $this->session->flashdata('errr'); ?>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>   
+                </div>
+                <?php endif;?>
+                
                   <div class="card " >
                   
 
@@ -12,6 +22,7 @@
                             <div class="card-header text-white bg-primary mb-1"> Nombre de cliente :<?=$item['Nombre_cliente']?>- Codigo de cliente: <?=$item['Cod_cliente'];?> <i class="fa fa-user" aria-hidden="true"></i> </div> 
                             <!-- /.card-header -->
                             <div class="card-body ">
+                          
                             <H3>Añadir comentario <i class="fa fa-edit"></i></H3>
                             <?=form_open('cobros/comentario/'.$id);?>
                             

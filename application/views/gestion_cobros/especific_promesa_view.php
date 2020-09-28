@@ -1,8 +1,5 @@
-
-   <?php if($filtrado and $ultimo['Estado'] != 'Completada'):?>
-
    <!-- Main content -->
-<section class="content ">
+   <section class="content ">
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -146,89 +143,3 @@
         </div>
       </div> 
     </section>  
-
-
-    <!--Model -->
-  
-    <?php else: ?>
-   <!-- Main content -->
-    <section class="content h-100 ">
-      <div class="row  h-100 justify-content-center align-items-center">
-        <div class="col-md-10 col-sm-12">
-            <?php if($this->session->flashdata('errr')):?>
-                <div id="timer"  class="alert alert-danger alert-dismissible fade show" role="alert">
-                <?php echo $this->session->flashdata('errr'); ?>
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>   
-              </div>
-              
-              <?php endif;?> 
-        
-          <div class="card">
-        
-             
-
-                <div class="card-header">
-
-                <h4>Añadir <i class="fa fa-edit"></i>  </h4>              
-                </div>
-                <!-- /.card-header -->
-                    <div class="card-body ">
-                        <?=form_open('cobros/crear-promesa/'.$id);?>
-
-                        <div class="form-group row mt-1">          
-                        <label for="pago" class="col-sm-3 col-form-label">Monto promesa</label>      
-                            <div class="col-sm-12">
-                            <?php echo form_error('monto'); ?>  
-                        
-                            <input type="text" class="form-control"   id="pago" name="monto" placeholder="Ingresar monto">
-                        
-                        </div>
-                    
-
-                        </div>
-
-                        <div class="form-group row mt-1">          
-                        <label for="fecha" class="col-sm-2 col-form-label">Fecha de pago</label>      
-                            <div class="col-sm-12">
-                            <?php echo form_error('fecha'); ?>  
-                        
-                            <input class="form-control"   type="text" name="birthday"  />
-                        
-                        </div>
-
-
-                        </div>
-
-                        
-                        <div class="row mt-4">
-                            <div class="col col-md-6 col-sm-6">
-                            <button type="submit" class="btn btn-primary  btn-block">Agregar</button>
-
-                            </div>
-                            <div class="col col-md-6 col-sm-6">
-
-                        <a class="btn btn-danger  btn-block" href="<?=base_url()?>cobros" >Cancelar  </a>  
-
-                            </div>
-                        </div>   
-
-
-                    
-
-                    
-                        <?= form_close();?>    
-                    </div>
-                    <!-- /.card-body -->
-
-            <?php endif;?>   
-
-          
-        
-        
-        
-        </div>
-        </div>
-      </div> 
-    </section>   

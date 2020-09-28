@@ -1,7 +1,7 @@
 <?php
 
 defined('BASEPATH') or exit('No direct script access allowed');
-
+// Solo procesamiento
 class Process_model extends CI_Model
 {
 //select*from bitacora_gestion  order by fecha_de_creacion desc limit 2;
@@ -226,6 +226,9 @@ class Process_model extends CI_Model
 
 
         }
+
+
+     
 
 
 

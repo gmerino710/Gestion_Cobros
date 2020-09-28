@@ -73,7 +73,7 @@ $route['gestores/nuevo'] = 'Administracion/Gestores/new';
 $route['gestores/nuevo_elemento'] = 'Administracion/Gestores/new_element';
 $route['gestores/eliminar/(:any)'] = 'Administracion/Gestores/destroy/$1';
 $route['gestores/editar'] = 'Administracion/Gestores/edit_user/';
-$route['gestores/editar/(:num)'] = 'Administracion/Gestores/edit_user/$1';
+$route['gestores/editar/(:any)'] = 'Administracion/Gestores/edit_user/$1';
 $route['gestores/actualizar'] = 'Administracion/Gestores/update';
 //---------------------------Acciones--------------------------------------------------------
 $route['acciones'] = 'Administracion/Acciones';
@@ -200,8 +200,13 @@ $route["busqueda"] ='Busqueda';
 // gestion-de-cartera
 $route["cobros"] ="Cobros";
 $route["cobros/comentario/(:num)"] ="Cobros/comentario/$1";
+//**********CRear comnetario y ver  */
 $route["cobros/crear-promesa/(:num)"] ="Cobros/cpromesa/$1";
+// busqueda con criterio paraa las promsas
+$route["cobros/crear-promesa/(:any)/(:any)"] ="Cobros/find_gestor_empresa/$1/$2";
 $route["cobros/crear-promesa"] ="Cobros/cpromesa/";
+// actualizacion de fecha
+$route["cobros/crear-promesa-upt/(:num)"] ="Cobros/uptpromesa/$1";
 $route["cobros/crear-promesa-upt"] ="Cobros/uptpromesa";
 //$route["cobros/urls"] ="Cobros/urls";
 //---------------------------------------------------------------------------------------------------------

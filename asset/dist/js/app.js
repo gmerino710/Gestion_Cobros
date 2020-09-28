@@ -1,6 +1,28 @@
 $(document).ready(function() {
 
 
+     var $filtro_gestor= $('#filtro_gestor_select');
+     
+     const $tb_gestor= $('.tb_gestor').DataTable({
+      language :{
+            lengthMenu: "Total _MENU_ ",
+            zeroRecords: "Sin Informacion",
+            info: "Mostrando pagina _PAGE_ de _PAGES_",
+            infoEmpty: "Vacio",
+            infoFiltered: "(filtered from _MAX_ total records)"
+        }
+       
+      
+});
+
+
+     $filtro_gestor.change(function() {
+      let gestor = $(this).val();
+      serach_by_id($tb_gestor,9,gestor);
+    });
+
+
+
       $('input[name="birthday"]').daterangepicker({
             singleDatePicker: true,
             showDropdowns: false,
@@ -74,7 +96,7 @@ $(document).ready(function() {
       $('.tb').DataTable({
             language :{
                   lengthMenu: "Total _MENU_ ",
-                  zeroRecords: "Ningu dato disponel",
+                  zeroRecords: "Sin Informacion",
                   info: "Mostrando pagina _PAGE_ de _PAGES_",
                   infoEmpty: "Vacio",
                   infoFiltered: "(filtered from _MAX_ total records)"
@@ -82,6 +104,9 @@ $(document).ready(function() {
              
             
       });
+
+   
+
 
 
 
@@ -106,7 +131,7 @@ $(document).ready(function() {
         lengthMenu: [[5,10],[5,10]],
         language :{
             lengthMenu: "Total _MENU_ ",
-            zeroRecords: "Ningu dato disponel",
+            zeroRecords: "Sin informacion",
             info: "Mostrando pagina _PAGE_ de _PAGES_",
             infoEmpty: "Vacio",
             infoFiltered: "(filtered from _MAX_ total records)"
@@ -118,6 +143,12 @@ $(document).ready(function() {
       // con eso buscas
       table.column( 0 ).search(id).draw();
   }  
+
+  // formular parapintar
+  function serach_by_id(table,index,id) {
+      // con eso buscas
+      table.column( index ).search(id).draw();
+  } 
 
   var tb_sub_actividad = $('#tb_sub').DataTable({  // pagincion
       pagingType: "simple_numbers",
@@ -152,8 +183,11 @@ $(document).ready(function() {
       //filstros
 
       $('#tb_sub_filter').css('display','none');
+
+
+      
   
-    
+     
           
 
 });

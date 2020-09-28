@@ -244,12 +244,69 @@ function get_simply($table,$id)
 
 }
 
+/*******************************  Gestores **************************/
+function get_gestor($id)
+{
+    $query =$this->db->get_where('catag_gestores', array('Cod_Gestores' => $id));
+    if ($query != null) {
+        return $query ->row_array();
+    } else {
+        return false;    
+    }
+    
+}
+
+public function get_conunt_gestion($codigo_gestor)
+{
+    $query =$this->db->query("SELECT Estado,count(Estado) as 'Cantidad' FROM all_promesas WHERE Cod_Gestores ='$codigo_gestor' group by Estado");     
+    if ($query) {
+    return $query -> result_array();
+   } else {
+    return false;
+   }
+   
+
+}
+
+public function get_especifict_gestion($codigo_gestor,$estatus)
+{
+    $decoficado =rawurldecode($estatus);
+    $query =$this->db->query("SELECT * FROM all_promesas WHERE Cod_Gestores ='$codigo_gestor' and Estado= '$decoficado'");     
+    if ($query) {
+    return $query -> result_array();
+   } else {
+    return false;
+   }
+   
+
+}
+//******************************************************************* */
+
 
 function get_complete($table,$id,$codigo)
 {
     $query =$this->db->get_where($table, array($codigo => $id));
 
     return $query->result_array();
+
+}
+
+// el ultimo completado
+public function get_error_desc($table,$campo_buscado,$campo_ordenar ){
+          
+    $this->db->select($campo_buscado);
+    $this->db->from($table);
+    $this->db->order_by($campo_ordenar,'desc');
+    $this->db->limit(1);
+    $query = $this->db->get();
+    if ($query !=null) { 
+        return $query->row_array();
+    } else {
+        return false;
+    }
+    
+    
+
 
 }
 

@@ -10,7 +10,7 @@
 
             <div class="input-group">
                
-                    <select  id="busqueda_select" name="filtro_cartera_select" class="ml-3  browser-default custom-select form-control">
+                    <select  id="filtro_cartera_select" name="filtro_cartera_select" class="ml-3  browser-default custom-select form-control">
                         
                         <?php foreach($estados as $item):?>
                           <option value="" selected disabled hidden>Selecione una cartera</option>
@@ -18,14 +18,20 @@
                                   <?=$item['Nombre_Cartera'];?>
 
                             </option>
-                                <?php endforeach;?>  
+                          <?php endforeach;?>  
 
                         </select>
 
                        
-                        <select id="busqueda" class="ml-3  browser-default custom-select form-control ">
+                        <select id="filtro_gestor_select" class="ml-3  browser-default custom-select form-control ">
                         
+                        <?php foreach($gestores as $item):?>
+                          <option value="" selected disabled hidden>Selecione una gestor</option>
+                                <option value="<?=$item['Cod_Gestores'];?>">
+                                  <?=$item['Cod_Gestores'];?>
 
+                            </option>
+                          <?php endforeach;?>  
                         </select>
                         
                         <button class="btn btn-primary form-control ml-3 " >Buscar </button>   
@@ -51,7 +57,7 @@
             <div class="card-body">
              <div class="table-responsive text-nowrap">
 
-             <table  class="tb table table-bordered  table-striped">
+             <table  class="tb_gestor table table-bordered  table-striped">
                 <thead>
                 <tr>
                 										
@@ -91,10 +97,14 @@
 
                               <td> <?=$item['Cartera']?></td>
                               <td>        
+                              <?php if($this->usuario['usuario']==$item['Gestor'] or $this->usuario['usuario'] == 'admin'):?>
+                                  <a class="btn btn-primary"  href="<?=base_url();?>cobros/comentario/<?=$item['Cod_cliente']?>" title="Hacer comentario" ><i class="fa fa-edit"></i></a>
+                                  <a class="btn btn-primary"  href="<?=base_url();?>cobros/crear-promesa/<?=$item['Cod_cliente']?>" title="Hacer promesa de pago" ><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                                  <?php else:?>
+                                    <a class="btn btn-primary disabled" title="Hacer comentario" ><i class="fa fa-edit"></i></a>
+                                  <a class="btn btn-primary disabled" title="Hacer promesa de pago" ><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                              <?php endif;?>     
 
-                              <a class="btn btn-primary"  href="<?=base_url();?>cobros/comentario/<?=$item['Cod_cliente']?>" title="Hacer comentario" ><i class="fa fa-edit"></i></a>
-                              <a class="btn btn-primary"  href="<?=base_url();?>cobros/crear-promesa/<?=$item['Cod_cliente']?>" title="Hacer promesa de pago" ><i class="fa fa-calendar" aria-hidden="true"></i></a>
-  
                             </td>
                            </tr>
                             <?php endforeach;?> 
