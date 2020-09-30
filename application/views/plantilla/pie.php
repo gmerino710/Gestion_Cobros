@@ -67,7 +67,20 @@
 <script src="<?php echo base_url(); ?>asset/dist/js/app.js"></script>
 <script src="<?php echo base_url(); ?>asset/dist/js/validate.js"></script>
 
+<script type="text/javascript">
+  $('.mostrar_iframe').click(function(event) {
+    event.preventDefault();
+    $('#modal-iframe').find('.modal-title').html($(this).attr('titulo-modal'));
+    $('#modal-iframe').find('iframe').attr('src',$(this).attr('href'));
 
+    $('#modal-iframe').on('hidden.bs.modal', function (e) {
+      $('#modal-iframe').find('iframe').attr('src','');
+    });
+    $('#modal-iframe').modal();
+  });
+
+</script>
+<?php echo $this->load->view('plantilla/modal_iframe', array(), true); ?>
 
 </body>
 </html>

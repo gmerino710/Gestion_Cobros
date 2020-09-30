@@ -100,6 +100,15 @@
                               <?php if($this->usuario['usuario']==$item['Gestor'] or $this->usuario['usuario'] == 'admin'):?>
                                   <a class="btn btn-primary"  href="<?=base_url();?>cobros/comentario/<?=$item['Cod_cliente']?>" title="Hacer comentario" ><i class="fa fa-edit"></i></a>
                                   <a class="btn btn-primary"  href="<?=base_url();?>cobros/crear-promesa/<?=$item['Cod_cliente']?>" title="Hacer promesa de pago" ><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                                      <?php
+                                            echo anchor('cobros/operaciones_cliente/' . $item['Cartera'] . "/" . $item['Cod_cliente'] . "", '<i class="fa fa-info-circle"></i>',
+                                                array(
+                                                    'class'        => 'btn btn-primary mostrar_iframe',
+                                                    'title'        => 'Informacion General',
+                                                    'titulo-modal' => 'Información y Gestiones del Cliente',
+                                                )
+                                            );
+                                   ?>
                                   <?php else:?>
                                     <a class="btn btn-primary disabled" title="Hacer comentario" ><i class="fa fa-edit"></i></a>
                                   <a class="btn btn-primary disabled" title="Hacer promesa de pago" ><i class="fa fa-calendar" aria-hidden="true"></i></a>

@@ -21,8 +21,18 @@ $(document).ready(function() {
       serach_by_id($tb_gestor,9,gestor);
     });
 
+    $('.fecha').daterangepicker({
+      singleDatePicker: true,
+      showDropdowns: false,
+      locale: {
+            format: 'YYYY-MM-DD'
+      }
+      
+    }, function(start, end, label) {
+    
+    });
 
-
+    
       $('input[name="birthday"]').daterangepicker({
             singleDatePicker: true,
             showDropdowns: false,

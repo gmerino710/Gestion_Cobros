@@ -135,7 +135,7 @@ class Usuarios extends MY_Controller
           foreach ($row as $s) {
 
             if ($id==null or $this->Administracion_model->validate_existencia_id($this->codigo_table,$this->table,$this->codigo_table,$id)==null or $s['id_estado_usuario'] ==1 ){
-              $this->session->set_flashdata('err','No se puede eliminar'); 
+              $this->session->set_flashdata('err','No se puede eliminar, el usuario debe estar inactivo'); 
               redirect('Usuarios');
                   
               } else {

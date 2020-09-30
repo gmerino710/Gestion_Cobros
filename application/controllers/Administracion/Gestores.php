@@ -74,7 +74,7 @@ class Gestores extends MY_Controller
 
         public function destroy($id=null)
         {
-            if ($id==null or $this->Administracion_model->Dependency($this->table,$id,$this->codigo_table)>0 ) {
+            if ($id==null or $this->Administracion_model->Dependency($this->table,$id,$this->codigo_table)) {
                 $this->session->set_flashdata('err','No se puede eliminar'); 
                 redirect('gestores');
             } else {

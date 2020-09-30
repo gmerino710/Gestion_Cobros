@@ -111,10 +111,11 @@ class Import extends MY_Controller
                         }
 
                         //print_r($encabezados);
-                        $cabezera_csv =['IDCLIENTE','SEXO','FECHA DE NACIMIENTO','NOMBRE','DUI','E-MAIL','CARTERA','GESTOR','DOMICILIO','REFERENCIA OPERACION','SALDO CAPITAL','SALDO INTERES','SALDO VENCIDO','SALDO TOTAL','DIAS MORA','DESCRIPCION DE PRODUCTO','TRABAJO','DIRECCION DE TRABAJO','TEL CASA','TEL TRABAJO','TEL CELULAR','TEL FAMILIAR','NOMBRE FAMILIAR','TEL FIADOR','NOMBRE FIADOR','TEL REF 1','NOMBRE REF 1','TEL REF 2','NOMBRE REF 2','COMENTARIO DE CUENTA','FACTURA','SUCURSAL','ASESOR','DIA ASIGNACION','MES ASIGNACION','AÑO ASIGNACION','MONTO OTORGADO','PLAZO','DIA APERTURA','MES APERTURA','AÑO APERTURA','DIA VENCIMIENTO','MES VENCIMIENTO','AÑO VENCIMIENTO','CUOTA','DIA ULTIMO PAGO','MES ULTIMO PAGO','AÑO ULTIMO PAGO','MONTO ULTIMO PAGO','CUOTAS PAGADAS','GARANTIA','TIPO DE CARTERA','DIA SEPARACION','MES SEPARACION','AÑO SEPARACION','SALARIO CLIENTE'];
+                        $cabezera_csv =['IDCLIENTE','SEXO','FECHA DE NACIMIENTO','NOMBRE','DUI','E-MAIL','CARTERA','GESTOR','DOMICILIO','REFERENCIA  OPERACION','SALDO CAPITAL','SALDO INTERES','SALDO VENCIDO','SALDO TOTAL','DIAS MORA','DESCRIPCION DE PRODUCTO','TRABAJO','DIRECCION DE TRABAJO','TEL CASA','TEL TRABAJO','TEL CELULAR','TEL FAMILIAR','NOMBRE FAMILIAR','TEL FIADOR','NOMBRE FIADOR','TEL REF 1','NOMBRE REF 1','TEL REF 2','NOMBRE REF 2','COMENTARIO DE CUENTA','FACTURA','SUCURSAL','ASESOR','DIA ASIGNACION','MES ASIGNACION','AÑO ASIGNACION','MONTO OTORGADO','PLAZO','DIA APERTURA','MES APERTURA','AÑO APERTURA','DIA VENCIMIENTO','MES VENCIMIENTO','AÑO VENCIMIENTO','CUOTA','DIA ULTIMO PAGO','MES ULTIMO PAGO','AÑO ULTIMO PAGO','MONTO ULTIMO PAGO','CUOTAS PAGADAS','GARANTIA','TIPO DE CARTERA','DIA SEPARACION','MES SEPARACION','AÑO SEPARACION','SALARIO CLIENTE'];
 
                         $comparacion = array_diff($encabezados,$cabezera_csv);
 
+                        
                         if (count($comparacion)==0) 
                         {
                             foreach($csvData as $row )
@@ -142,7 +143,7 @@ class Import extends MY_Controller
                                                 'Cartera' => $row['CARTERA'],
                                                 'Gestor' => $row['GESTOR'],
                                                 'domicilio' => $row['DOMICILIO'],
-                                                'id_operacion' => $row['REFERENCIA OPERACION'],
+                                                'id_operacion' => $row['REFERENCIA  OPERACION'],
                                                 'saldo_capital' => $row['SALDO CAPITAL'],
                                                 'saldo_interes' => $row['SALDO INTERES'],
                                                 'saldo_vencido' => $row['SALDO VENCIDO'],
@@ -220,7 +221,7 @@ class Import extends MY_Controller
                                                 'Cartera' => $row['CARTERA'],
                                                 'Gestor' => $row['GESTOR'],
                                                 'domicilio' => $row['DOMICILIO'],
-                                                'id_operacion' => $row['REFERENCIA OPERACION'],
+                                                'id_operacion' => $row['REFERENCIA  OPERACION'],
                                                 'saldo_capital' => $row['SALDO CAPITAL'],
                                                 'saldo_interes' => $row['SALDO INTERES'],
                                                 'saldo_vencido' => $row['SALDO VENCIDO'],
@@ -348,6 +349,8 @@ class Import extends MY_Controller
                             $comparacion = array_diff($encabezados,$cabezera_csv);
                              
                                 // contas la comparacion
+                               // return print_r(count($comparacion));
+
                                 if (count($comparacion)==0) 
                                 {
                                     foreach ($csvData as $row ) 
@@ -445,6 +448,7 @@ class Import extends MY_Controller
                              $comparacion = array_diff($encabezados,$cabezera_csv);
                               
                                  // contas la comparacion
+                                // return print(count($comparacion));
                                  if (count($comparacion)==0) 
                                  {
                                      foreach ($csvData as $row ) 
@@ -592,7 +596,8 @@ class Import extends MY_Controller
                         $cabezera_csv =['ID CLIENTE','CARTERA','AÑO ALARMA','MES ALARMA','DIA ALARMA','HORA','COMENTARIO','USUARIO'];
 
                         $comparacion = array_diff($encabezados,$cabezera_csv);
-                         
+                            //return print(count($comparacion));
+
                             // contas la comparacion
                             if (count($comparacion)==0) 
                             {
